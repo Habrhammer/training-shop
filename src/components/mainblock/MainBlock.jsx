@@ -23,8 +23,8 @@ const MainBlock = () => {
               </div>
             </div>
           </div>
-          <div className="slider__navigation-prev"></div>
-          <div className="slider__navigation-next"></div>
+          {/* <div className="slider__navigation-prev"></div>
+          <div className="slider__navigation-next"></div> */}
         </div>
         <div className="mainblock__content card-category">
           <div className="card-category__column">
