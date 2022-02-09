@@ -1,5 +1,4 @@
 import "./Header.scss";
-import { Link } from "react-router-dom";
 import globeImg from "../../assets/images/header/header_nav/globe.svg";
 import searchImg from "../../assets/images/header/header_nav/search.svg";
 import userImg from "../../assets/images/header/header_nav/user.svg";
