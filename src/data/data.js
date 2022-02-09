@@ -156,7 +156,7 @@ let data = {
         text: "Contact us 24 hours a day, 7 days a week",
       },
     ],
-    womenClothes: [
+    women: [
       {
         id: 1,
         image: suit_with_trousers,
@@ -214,7 +214,7 @@ let data = {
         rating: 4,
       },
     ],
-    menClothes: [
+    men: [
       {
         id: 1,
         image: hoodie,
@@ -274,16 +274,19 @@ let data = {
     ],
     blog: [
       {
+        id:1,
         image: way,
         title: "The Easiest Way to Break",
         text: "But I must explain to you how all this mistaken idea of denouncing pleas and praising pain was bor",
       },
       {
+        id:2,
         image: wedding,
         title: "Wedding Season",
         text: "But I must explain to you how all this mistaken idea of denouncing pleas and praising pain was bor",
       },
       {
+        id:3,
         image: favorites,
         title: "Recent Favorites On Repeat",
         text: "But I must explain to you how all this mistaken idea of denouncing pleas and praising pain was bor",

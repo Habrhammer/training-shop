@@ -7,13 +7,13 @@ import ProductPage from "./views/product/ProductPage";
 import CategoriesPage from "./views/categories/CategoriesPage";
 
 function App({data}) {
-  console.log(data.header);
+  console.log(data);
   return (
     <Router>
       <div className="app" data-set-id="app">
         <Header headerData={data.header} />
         <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={()=><MainPage data={data.mainPage}/>} />
           <Route exact path="/product" component={ProductPage} />
           <Route path="/category" component={CategoriesPage} />
         </Switch>

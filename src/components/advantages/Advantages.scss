@@ -1,0 +1,48 @@
+.advantages {
+  padding: 16px 0;
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -15px;
+    flex-wrap: wrap;
+  }
+
+  &__column {
+    // flex: 1 0 33.333%;
+    padding: 16px 15px;
+  
+  }
+
+  &__item {
+  }
+}
+
+.item-advantages {
+  display: flex;
+  align-items: center;
+  &__content {
+  }
+
+  &__title {
+    font-family: "Spartan-SemiBold";
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  &__text {
+    font-family: "Spartan-Medium";
+    font-size: 12px;
+    line-height: 22px;
+    color: #121212;
+    opacity: 0.9;
+  }
+}
+.item-davantages {
+  &__icon {
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }
+}
