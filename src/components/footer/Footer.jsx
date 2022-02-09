@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import NavColumn from "../footer-nav/NavColumn";
 import "./Footer.scss";
 

@@ -12,7 +12,7 @@ const News = () => {
                   <div className="news__item item-news">
                      <img src={season} alt="" className="item-news__image" />
                      <div className="item-news__content">
-                        <a href="" className="item-news__link">
+                        <a href="/#" className="item-news__link">
                            <div className="item-news__title">New Season</div>
                            <div className="item-news__text">lookbook collection</div>
                         </a>
@@ -23,7 +23,7 @@ const News = () => {
                   <div className="news__item item-news">
                      <img src={sale} alt="" className="item-news__image" />
                      <div className="item-news__content">
-                        <a href="" className="item-news__link">
+                        <a href="/#" className="item-news__link">
                            <div className="item-news__title">Sale</div>
                            <div className="item-news__text">Get UP to <span>50% off</span></div>
                         </a>

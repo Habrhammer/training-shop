@@ -16,7 +16,7 @@ const MainBlock = () => {
                 <img src={slide} alt="" />
               </div>
               <div className="slider__content content-slider">
-                <a href="#" className="content-slider__link">
+                <a href="/#" className="content-slider__link">
                   <div className="content-slider__title">BANNER</div>
                   <div className="content-slider__text">your title text</div>
                 </a>
@@ -31,7 +31,7 @@ const MainBlock = () => {
             <div className="card-category__item">
               <img className="card-category__image" src={women} alt="" />
               <div className="card-category__wrapper">
-                <a href="#" className="card-category__link">
+                <a href="/#" className="card-category__link">
                   WOMEN
                 </a>
               </div>
@@ -41,7 +41,7 @@ const MainBlock = () => {
             <div className="card-category__item">
               <img className="card-category__image" src={men} alt="" />
               <div className="card-category__wrapper">
-                <a href="#" className="card-category__link">
+                <a href="/#" className="card-category__link">
                   MEN
                 </a>
               </div>
@@ -51,7 +51,7 @@ const MainBlock = () => {
             <div className="card-category__item">
               <img className="card-category__image" src={accessories} alt="" />
               <div className="card-category__wrapper">
-                <a href="#" className="card-category__link">
+                <a href="/#" className="card-category__link">
                   ACCESSORIES
                 </a>
               </div>
