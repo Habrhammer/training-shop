@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import stars from "./../../assets/images/rating/stars.svg";
 import "./Clothes.scss";
 
 const clothesMenu = [
@@ -37,23 +37,28 @@ const Clothes = ({ productType, data }) => {
                   className="cards__item cards-item"
                   data-test-id={`clothes-card-${productType}`}
                 >
-              <div className="cards-item__image">
-                 <img src={image} alt={title}/>
-              </div>
-              <div className="cards-item__title">{title}</div>
-              
-              <div className="cards-item__info">
-                 <div className="cards-item__price">{`${price} $`}</div>
-                 <div className="cards-item__rating">{rating}</div>
-              </div>
+                  <div className="cards-item__image">
+                    <img src={image} alt={title} />
+                  </div>
+                  <div className="cards-item__title">{title}</div>
+
+                  <div className="cards-item__info">
+                    <div className="cards-item__price">{`${price} $`}</div>
+                    <div className="cards-item__rating">
+                      <img src={stars} alt="" />
+                    </div>
+                  </div>
                 </Link>
               </div>
             );
           })}
-          <div className="cards__column">
-          </div>
+         
         </div>
       </div>
+          <div className="clothes__footer _container">
+            <Link to={`${productType}`}className="clothes__link">See all</Link>
+          </div>
+
     </section>
   );
 };

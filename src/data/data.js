@@ -34,17 +34,17 @@ import way from "./../assets/images/blog_section/way.jpg";
 import wedding from "./../assets/images/blog_section/wedding.jpg";
 import favorites from "./../assets/images/blog_section/favorites.jpg";
 
-import locationImg from "./../assets/images/footer_nav/location.svg";
-import phoneImg from "./../assets/images/footer_nav/phone.svg";
-import clockImg from "./../assets/images/footer_nav/clock.svg";
-import mailImg from "./../assets/images/footer_nav/mail.svg";
+import locationImg from "./../assets/images/footer/footer_nav/location.svg";
+import phoneImg from "./../assets/images/footer/footer_nav/phone.svg";
+import clockImg from "./../assets/images/footer/footer_nav/clock.svg";
+import mailImg from "./../assets/images/footer/footer_nav/mail.svg";
 
-import stripe from "./../assets/images/payment_icons/stripe.svg";
-import aes from "./../assets/images/payment_icons/aes.svg";
-import paypal from "./../assets/images/payment_icons/paypal.svg";
-import mastercard from "./../assets/images/payment_icons/mastercard.svg";
-import discover from "./../assets/images/payment_icons/discover.svg";             
-import american_express from "./../assets/images/payment_icons/american-express.svg";
+import stripe from "./../assets/images/footer/payment_icons/stripe.svg";
+import aes from "./../assets/images/footer/payment_icons/aes.svg";
+import paypal from "./../assets/images/footer/payment_icons/paypal.svg";
+import mastercard from "./../assets/images/footer/payment_icons/mastercard.svg";
+import discover from "./../assets/images/footer/payment_icons/discover.svg";             
+import american_express from "./../assets/images/footer/payment_icons/american-express.svg";
 
 let data = {
   header: {
@@ -302,19 +302,19 @@ let data = {
         link: "#",
       },
       {
-        id: 1,
+        id: 2,
         name: "twitter",
         image: twitter,
         link: "#",
       },
       {
-        id: 1,
+        id: 3,
         name: "instagram",
         image: instagram,
         link: "#",
       },
       {
-        id: 1,
+        id: 4,
         name: "pinterest",
         image: pinterest,
         link: "#",
@@ -324,112 +324,112 @@ let data = {
       {
         category: "Categories",
         id: 1,
-        link: "#",
+        path: "men",
         title: "Men",
         image: null,
       },
       {
         category: "Categories",
         id: 2,
-        link: "#",
+        path: "women",
         title: "Women",
         image: null,
       },
       {
         category: "Categories",
         id: 3,
-        link: "#",
+        path: "accessories",
         title: "Accessories",
         image: null,
       },
       {
         category: "Categories",
         id: 4,
-        link: "#",
+        path: "beauty",
         title: "Beauty",
         image: null,
       },
       {
         category: "Information",
         id: 5,
-        link: "#",
+        path: "about_us",
         title: "About Us",
         image: null,
       },
       {
         category: "Information",
         id: 6,
-        link: "#",
+        path: "contact_us",
         title: "Contact Us",
         image: null,
       },
       {
         category: "Information",
         id: 7,
-        link: "#",
+        path: "blog",
         title: "Blog",
         image: null,
       },
       {
         category: "Information",
         id: 8,
-        link: "#",
+        path: "faqs",
         title: "FAQs",
         image: null,
       },
       {
         category: "Useful links",
         id: 9,
-        link: "#",
+        path: "#",
         title: "Terms & Conditions",
         image: null,
       },
       {
         category: "Useful links",
         id: 10,
-        link: "#",
+        path: "#",
         title: "Returns & Exchanges",
         image: null,
       },
       {
         category: "Useful links",
         id: 11,
-        link: "#",
+        path: "#",
         title: "Shipping & Delivery",
         image: null,
       },
       {
         category: "Useful links",
         id: 12,
-        link: "#",
+        path: "#",
         title: "Privacy Policy",
         image: null,
       },
       {
         category: "Contact us",
-        id: 11,
-        link: "#",
+        id: 13,
+        path: "#",
         title: "Belarus, Gomel, Lange 17",
         image: locationImg,
       },
       {
         category: "Contact us",
-        id: 11,
-        link: "tel:+375291002030",
+        id: 14,
+        path: "tel:+375291002030",
         title: "+375 29 100 20 30",
         image: phoneImg,
       },
       {
         category: "Contact us",
-        id: 11,
-        link: "#",
+        id: 15,
+        path: "#",
         title: "All week 24/7",
         image: clockImg,
       },
       {
         category: "Contact us",
-        id: 11,
-        link: "#",
+        id: 16,
+        path: "#",
         title: "info@clevertec.ru",
         image: mailImg,
       },

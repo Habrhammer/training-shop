@@ -17,7 +17,7 @@ function App({data}) {
           <Route exact path="/product" component={ProductPage} />
           <Route path="/category" component={CategoriesPage} />
         </Switch>
-        <Footer />
+        <Footer data={data.footer} />
       </div>
     </Router>
   );
