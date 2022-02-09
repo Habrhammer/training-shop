@@ -1,0 +1,144 @@
+.footer {
+  &__top {
+    padding: 12px 0;
+    background: #121212;
+  }
+
+  &__body {
+     padding: 40px 0;
+  }
+
+  &__menu {
+  }
+
+  &__bottom {
+  }
+}
+.footer-top {
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-family: "Spartan-SemiBold";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-right: 132px;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    font-family: "Spartan-Medium";
+    font-size: 13px;
+    line-height: 18px;
+    color: #ffffff;
+    padding: 0 16px;
+    min-height: 32px;
+    background-color: #414141;
+    margin-right: 12px;
+    width: 400px;
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Spartan-SemiBold";
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    opacity: 0.9;
+    border: 1px solid #ffffff;
+    padding: 6px 24px;
+  }
+
+  &__social {
+     a{
+       margin-left: 12px; 
+     }
+  }
+}
+
+.footer-menu {
+  display: flex;
+  justify-content: space-between;
+  &__column {
+
+   li{
+      display: flex;
+      align-items: center;
+   }
+   img{
+      margin-right: 8px;
+      margin-bottom: 2px;
+   }
+
+  }
+
+  &__title {
+    font-family: "Spartan-SemiBold";
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #121212;
+    margin-bottom: 8px;
+  }
+  &__link {
+    font-family: "Spartan-Regular";
+
+    font-size: 12px;
+    line-height: 34px;
+    color: #121212;
+    opacity: 0.8;
+  }
+}
+.footer-bottom {
+   background: #F8F8F8;
+   padding: 9px 0;
+  &__body {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+  }
+
+  &__copyright {
+   font-family: "Spartan-Medium";
+   font-size: 11px;
+   line-height: 22px;
+   color: #121212;
+   opacity: 0.8;
+  }
+
+  &__payments {
+     img{
+        margin: 0 6px;
+     }
+  }
+
+  &__link {
+     a{
+      font-family: "Spartan-Medium";
+      font-size: 11px;
+      line-height: 22px;
+      text-decoration-line: underline;
+      color: #121212;
+      opacity: 0.8;
+     }
+
+  }
+}

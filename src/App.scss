@@ -1,0 +1,17 @@
+.app {
+  width: 100%;
+	min-height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.page {
+	flex: 1 1 auto;
+}
+
+
+img {
+	max-width: 100%;
+
+}

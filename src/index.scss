@@ -1,0 +1,14 @@
+@import "./scss/constants.scss";
+@import "./scss/fonts.scss";
+@import "./scss/null.scss";
+
+
+body {
+	color: $mainColor;
+}
+
+._container {
+	max-width: $maxWidthContainer + px;
+	margin: 0 auto;
+	padding: 0 15px;
+}

@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import { Route, Switch, HashRouter as Router } from "react-router-dom";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import MainPage from "./views/main/MainPage";
+import ProductPage from "./views/product/ProductPage";
+import CategoriesPage from "./views/categories/CategoriesPage";
 
-function App() {
+function App({data}) {
+  console.log(data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app" data-set-id="app">
+        <Header headerData={data.header} />
+        <Switch>
+          <Route exact path="/" component={()=><MainPage data={data.mainPage}/>} />
+          <Route exact path="/product" component={ProductPage} />
+          <Route path="/category" component={CategoriesPage} />
+        </Switch>
+        <Footer data={data.footer} />
+      </div>
+    </Router>
   );
 }
 
