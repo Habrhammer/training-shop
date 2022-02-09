@@ -64,6 +64,7 @@
 
   &__link {
     display: block;
+    text-align: center;
     padding: 24px 32px;
     background-color: #fff;
     border-radius: 4px;
@@ -76,6 +77,7 @@
     text-transform: uppercase;
     margin-bottom: 14px;
     color: #121212;
+    opacity: 0.4;
   }
 
   &__text {
