@@ -9,7 +9,7 @@ const News = () => {
          <div className="news__body _container">
             <div className="news__content">
                <div className="news__column">
-                  <div className="news__item item-news">
+                  <div className="news__item item-news _ibg">
                      <img src={season} alt="" className="item-news__image" />
                      <div className="item-news__content">
                         <a href="/#" className="item-news__link">
@@ -20,7 +20,7 @@ const News = () => {
                   </div>
                </div>
                <div className="news__column">
-                  <div className="news__item item-news">
+                  <div className="news__item item-news _ibg">
                      <img src={sale} alt="" className="item-news__image" />
                      <div className="item-news__content">
                         <a href="/#" className="item-news__link">
