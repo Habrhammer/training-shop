@@ -18,7 +18,7 @@ const Blog = ({ data }) => {
             return (
               <div className="blog__column" key={id}>
                 <div className="blog__item blog-item">
-                  <div className="blog-item__image">
+                  <div className="blog-item__image _ibg">
                     <img src={image} alt={title} />
                   </div>
                   <div className="blog-item__content">
@@ -30,7 +30,7 @@ const Blog = ({ data }) => {
             );
           })}
 
-          <div className="blog__column">
+          {/* <div className="blog__column">
             <div className="blog__item blog-item">
               <div className="blog-item__image">
                 <img src="img" alt="" />
@@ -40,7 +40,7 @@ const Blog = ({ data }) => {
                 <div className="blog-item__text"></div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

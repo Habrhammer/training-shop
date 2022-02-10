@@ -92,11 +92,12 @@
 .actions-header {
   display: flex;
   gap: 24px;
-//   .action-header {
+  .action-header {
   
-//   &__item {
-
-//   }
-// }
+  &__item {
+      width: 18px;
+      height: 18px;
+  }
+}
 }
 

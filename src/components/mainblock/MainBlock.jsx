@@ -28,7 +28,7 @@ const MainBlock = () => {
         </div>
         <div className="mainblock__content card-category">
           <div className="card-category__column">
-            <div className="card-category__item">
+            <div className="card-category__item _ibg">
               <img className="card-category__image" src={women} alt="" />
               <div className="card-category__wrapper">
                 <a href="/#" className="card-category__link">
@@ -38,7 +38,7 @@ const MainBlock = () => {
             </div>
           </div>
           <div className="card-category__column">
-            <div className="card-category__item">
+            <div className="card-category__item _ibg">
               <img className="card-category__image" src={men} alt="" />
               <div className="card-category__wrapper">
                 <a href="/#" className="card-category__link">
@@ -48,7 +48,7 @@ const MainBlock = () => {
             </div>
           </div>
           <div className="card-category__column">
-            <div className="card-category__item">
+            <div className="card-category__item _ibg">
               <img className="card-category__image" src={accessories} alt="" />
               <div className="card-category__wrapper">
                 <a href="/#" className="card-category__link">

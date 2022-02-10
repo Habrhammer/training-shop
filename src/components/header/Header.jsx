@@ -22,16 +22,16 @@ const Header = ({ headerData }) => {
         <HeaderLogo />
         <Menu menu={menu}/>
         <div className="header-nav__actions actions-header">
-          <div className="action-header__item">
+          <div className="action-header__item _ibg">
             <img src={searchImg} alt="" />
           </div>
-          <div className="action-header__item">
+          <div className="action-header__item _ibg">
             <img src={globeImg} alt="" />
           </div>
-          <div className="action-header__item">
+          <div className="action-header__item _ibg">
             <img src={userImg} alt="" />
           </div>
-          <div className="action-header__item">
+          <div className="action-header__item _ibg">
             <img src={cartImg} alt="" />
           </div>
         </div>

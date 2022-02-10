@@ -1,10 +1,10 @@
 .blog {
-   padding: 70px 0;
+  padding: 70px 0;
   &__header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     margin-bottom: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
   }
 
   &__maintitle {
@@ -17,62 +17,69 @@
   }
 
   &__mainlink {
-   font-family: "Spartan-Medium";
-   font-size: 12px;
-   line-height: 13px;
-   text-align: right;
-   letter-spacing: 0.06em;
-   color: #121212;
-   text-transform: uppercase;
-   opacity: 0.6;
+    font-family: "Spartan-Medium";
+    font-size: 12px;
+    line-height: 13px;
+    text-align: right;
+    letter-spacing: 0.06em;
+    color: #121212;
+    text-transform: uppercase;
+    opacity: 0.6;
   }
 
-//   &__body {
-//   }
+  //   &__body {
+  //   }
 
   &__content {
-     display: flex;
-     margin: 0 -15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 -15px;
   }
 
   &__column {
-     padding: 0 15px;
-     flex: 1 0 33.333%;
+    padding: 0 15px;
+      // flex: 1 0 350px;
+      margin-bottom: 20px;
   }
 
   &__item {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
+    display: flex;
+    flex-direction: column;
+    //   align-items: center;
+    max-width: 350px;
   }
 }
 
 .blog-item {
-//   &__image {
-//   }
+  &__image {
+    padding: 0 0 276px 0;
+  }
 
   &__content {
-     margin-top: -55px;
-     padding: 24px 16px;
-     background-color: #fff;
-     max-width: 88%;
+    margin-top: -55px;
+    padding: 24px 16px;
+    background-color: #fff;
+    max-width: 88%;
+    align-self: center;
+    z-index: 10;
   }
 
   &__title {
-   font-family: "Spartan-SemiBold";
-   font-size: 14px;
-   line-height: 22px;
-   letter-spacing: 0.06em;
-   text-transform: uppercase;
-   color: #121212;
-   margin-bottom: 12px;
+    font-family: "Spartan-SemiBold";
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #121212;
+    margin-bottom: 12px;
   }
 
   &__text {
-   font-family: "Spartan-Regular";
-   font-size: 14px;
-   line-height: 22px;
-   color: #121212;
-   opacity: 0.8;
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+    opacity: 0.8;
   }
 }

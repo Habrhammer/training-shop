@@ -103,8 +103,12 @@
 
   &__item {
     display: flex;
-
+    padding: 0 0 200px 0;
     position: relative;
+  }
+
+  &__column:nth-child(3) &__item {
+    padding: 0 0 260px 0;
   }
 
   &__image {
