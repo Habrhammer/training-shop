@@ -5,7 +5,7 @@ import "./FilterBlock.scss";
 
 const FilterBlock = ({ dataFilter }) => {
   console.log(dataFilter);
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
   const toggleShow = () => setIsShow(!isShow);
   return (
     <div className="filter">
