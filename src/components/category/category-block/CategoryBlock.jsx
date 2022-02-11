@@ -5,13 +5,6 @@ import CategoryHeader from "../category-header/CategoryHeader";
 import stars from "./../../../assets/images/rating/stars.svg";
 import "./CategoryBlock.scss";
 
-const clothesMenu = [
-  "NEW ARRIVALS",
-  "SPECIALS",
-  "BESTSELLERS",
-  "MOST VIEWED",
-  "FEATURED PRODUCTS",
-];
 
 const CategoryBlock = ({ productType, data, dataFilter }) => {
   console.log(data[productType]);
