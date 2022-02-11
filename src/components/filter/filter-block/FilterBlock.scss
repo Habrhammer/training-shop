@@ -1,0 +1,21 @@
+@use "src" as *;
+.filter {
+  &__body {
+  }
+
+  &__container {
+   //  padding: 24px 42px;
+    background: #f8f8f8;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    @include adaptiv-value("padding-top",24,15,1);
+    @include adaptiv-value("padding-right",42,10,1);
+    @include adaptiv-value("padding-bottom",24,15,1);
+    @include adaptiv-value("padding-left",42,10,1);
+  }
+
+
+}
+

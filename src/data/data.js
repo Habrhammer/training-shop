@@ -2,7 +2,6 @@ import phone from "./../assets/images/header/header_top/phone.svg";
 import location from "./../assets/images/header/header_top/location.svg";
 import clock from "./../assets/images/header/header_top/clock.svg";
 
-
 import facebook from "./../assets/images/social_network_icon/facebook.svg";
 import twitter from "./../assets/images/social_network_icon/twitter.svg";
 import instagram from "./../assets/images/social_network_icon/instagram.svg";
@@ -43,7 +42,7 @@ import stripe from "./../assets/images/footer/payment_icons/stripe.svg";
 import aes from "./../assets/images/footer/payment_icons/aes.svg";
 import paypal from "./../assets/images/footer/payment_icons/paypal.svg";
 import mastercard from "./../assets/images/footer/payment_icons/mastercard.svg";
-import discover from "./../assets/images/footer/payment_icons/discover.svg";             
+import discover from "./../assets/images/footer/payment_icons/discover.svg";
 import american_express from "./../assets/images/footer/payment_icons/american-express.svg";
 
 let data = {
@@ -274,19 +273,19 @@ let data = {
     ],
     blog: [
       {
-        id:1,
+        id: 1,
         image: way,
         title: "The Easiest Way to Break",
         text: "But I must explain to you how all this mistaken idea of denouncing pleas and praising pain was bor",
       },
       {
-        id:2,
+        id: 2,
         image: wedding,
         title: "Wedding Season",
         text: "But I must explain to you how all this mistaken idea of denouncing pleas and praising pain was bor",
       },
       {
-        id:3,
+        id: 3,
         image: favorites,
         title: "Recent Favorites On Repeat",
         text: "But I must explain to you how all this mistaken idea of denouncing pleas and praising pain was bor",
@@ -461,7 +460,119 @@ let data = {
       },
     ],
   },
+  filter: {
+    color: [
+      {
+        id: "1",
+        color: "Black",
+        hex: "#000000",
+      },
+      {
+        id: "2",
+        color: "Cyan",
+        hex: "#26BDB0",
+      },
+      {
+        id: "3",
+        color: "Green",
+        hex: "#8EDB7B",
+      },
+      {
+        id: "4",
+        color: "Grey",
+        hex: "#C4C4C4",
+      },
+      {
+        id: "5",
+        color: "Pink",
+        hex: "#E64A8C",
+      },
+      {
+        id: "6",
+        color: "White",
+        hex: "#FFFFFF",
+      },
+      {
+        id: "7",
+        color: "Blue",
+        hex: "#4095E3",
+      },
+    ],
+    size: [
+      {
+        id: "1",
+        size: "XL",
+      },
+      {
+        id: "2",
+        size: "L",
+      },
+      {
+        id: "3",
+        size: "M",
+      },
+      {
+        id: "4",
+        size: "S",
+      },
+      {
+        id: "5",
+        size: "Xs",
+      },
+    ],
+    brand: [
+      {
+        id: "1",
+        brand: "Ck",
+      },
+      {
+        id: "2",
+        brand: "H&M",
+      },
+      {
+        id: "3",
+        brand: "Kalles",
+      },
+      {
+        id: "4",
+        brand: "Levi's",
+      },
+      {
+        id: "5",
+        brand: "Monki",
+      },
+      {
+        id: "6",
+        brand: "Nike",
+      },
+    ],
+    price: [
+      {
+        id: "1",
+        price: "$1200+",
+      },
+      {
+        id: "2",
+        price: "$600-$1200",
+      },
+      {
+        id: "3",
+        price: "$300-$600",
+      },
+      {
+        id: "4",
+        price: "$150-$300",
+      },
+      {
+        id: "5",
+        price: "$50-$150",
+      },
+      {
+        id: "6",
+        price: "$7-$50",
+      },
+    ],
+  },
 };
-
 
 export default data;

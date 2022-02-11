@@ -1,0 +1,52 @@
+@use "src" as *;
+
+.filter {
+  &__body {
+  }
+
+  &__column {
+    flex: 1 0 20%;
+    @media(max-width:($md3+px)){
+       flex: 1 0 40%;
+    }
+  }
+
+  &__title {
+    font-family: "Spartan-SemiBold";
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #121212;
+    margin-bottom: 12px;
+  }
+
+  &__item {
+  }
+}
+
+.filter-item {
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    input {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__name {
+    font-family: "Spartan-Regular";
+    font-size: 13px;
+    line-height: 34px;
+    color: #121212;
+    opacity: 0.8;
+  }
+
+  &__circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+}
