@@ -1,0 +1,117 @@
+@use "src" as *;
+
+.category {
+  padding: 0 0 35px;
+
+
+
+  &__maintitle {
+    font-family: "Spartan-SemiBold";
+
+    font-size: 22px;
+    line-height: 25px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #121212;
+  }
+
+  // &__menu {
+  // }
+
+  // &__body {
+  // }
+
+  // &__footer {
+  // }
+
+  &__link {
+    display: block;
+    font-family: "Spartan-Medium";
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #121212;
+    width: 100%;
+    background: #f8f8f8;
+    border: 2px solid #f8f8f8;
+    opacity: 0.8;
+    padding: 18px 0;
+  }
+
+  // &__cards {
+  // }
+}
+
+.clothes-menu {
+  display: flex;
+  @media (max-width: ($md3+px)) {
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__item {
+    font-family: "Spartan-Regular";
+    font-size: 12px;
+    line-height: 13px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #121212;
+    opacity: 0.6;
+    margin: 0 16px;
+  }
+  @media (min-width: ($md3+px)) {
+    &__item:first-child {
+      margin-left: 0;
+    }
+    &__item:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+  &__column {
+    flex: 1 0 255px;
+    display: flex;
+    justify-content: center;
+    padding: 0 15px;
+    margin-bottom: 30px;
+  }
+
+  // &__item {
+  // }
+}
+.cards-item {
+  &__image {
+    margin-bottom: 16px;
+    // padding: 0 0 318px 0;
+  }
+
+  &__title {
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 16px;
+    color: #121212;
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price {
+    font-family: "Spartan-Bold";
+    font-size: 14px;
+    line-height: 16px;
+    color: #121212;
+  }
+
+  // &__rating {
+  // }
+}

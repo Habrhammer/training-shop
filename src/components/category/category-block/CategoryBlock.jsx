@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import stars from "./../../assets/images/rating/stars.svg";
-import "./Clothes.scss";
+import FilterBlock from "../../filter/filter-block/FilterBlock";
+import CategoryHeader from "../category-header/CategoryHeader";
+import stars from "./../../../assets/images/rating/stars.svg";
+import "./CategoryBlock.scss";
 
 const clothesMenu = [
   "NEW ARRIVALS",
@@ -11,25 +13,15 @@ const clothesMenu = [
   "FEATURED PRODUCTS",
 ];
 
-const Clothes = ({ productType, data }) => {
+const CategoryBlock = ({ productType, data, dataFilter }) => {
   console.log(data[productType]);
   return (
-    <section className="clothes" data-test-id={`clothes-${productType}`}>
-      <div className="clothes__header _container">
-        <h2 className="clothes__maintitle">{`${productType}'s`}</h2>
-        <div className="clothes__menu clothes-menu">
-          {clothesMenu.map((title, index) => {
-            return (
-              <div className="clothes-menu__item" key={index}>
-                {title}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="clothes__body _container">
-        <div className="clothes__cards cards">
+    <section className="category" data-test-id={`clothes-${productType}`}>
+ 
+      <CategoryHeader productType={productType}/>
+      <FilterBlock dataFilter={dataFilter}/>
+      <div className="category__body _container">
+        <div className="category__cards cards">
           {data[productType].map(({ id, image, title, price, rating }) => {
             return (
               <div className="cards__column" key={id}>
@@ -55,13 +47,13 @@ const Clothes = ({ productType, data }) => {
           })}
         </div>
       </div>
-      <div className="clothes__footer _container">
+      {/* <div className="clothes__footer _container">
         <Link to={`${productType}`} className="clothes__link">
           See all
         </Link>
-      </div>
+      </div> */}
     </section>
   );
 };
 
-export default Clothes;
+export default CategoryBlock;
