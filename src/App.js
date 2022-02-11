@@ -6,6 +6,7 @@ import MainPage from "./views/main/MainPage";
 import ProductPage from "./views/product/ProductPage";
 import CategoriesPage from "./views/categories/CategoriesPage";
 
+
 function App({data}) {
   console.log(data);
   return (

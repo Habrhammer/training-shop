@@ -1,3 +1,4 @@
+@use "src" as *;
 .subscribe {
   //   padding: 60px 0;
   //   position: relative;
@@ -19,6 +20,14 @@
     display: flex;
     flex-direction: column;
     padding: 80px 96px 96px;
+  
+
+    @media(max-width:($md4+px)){
+      @include adaptiv-value("padding-top",80,30,1);
+      @include adaptiv-value("padding-right",96,25,1);
+      @include adaptiv-value("padding-bottom",96,30,1);
+      @include adaptiv-value("padding-left",96,25,1);
+    }
   }
 
   &__title {
@@ -56,7 +65,7 @@
     // left: 72px;
     left: calc(50% - 499px);
     top: 35px;
-    @media (max-width: 700px) {
+    @media (max-width: ($md3+px)) {
       display: none;
     }
   }
@@ -66,7 +75,7 @@
     bottom: 11px;
     right: calc(50% - 439px);
     // right: 127px;
-    @media (max-width: 700px) {
+    @media (max-width: ($md3+px)) {
  
       display: none;
     }
