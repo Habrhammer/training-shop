@@ -1,3 +1,4 @@
+@use "src" as *;
 .news {
   padding: 35px 0;
   // &__body {
@@ -6,6 +7,10 @@
   &__content {
     display: flex;
     margin: 0 -15px;
+    @media(max-width:($md3+px)){
+      flex-direction: column;
+      @include adaptiv-value("gap", 30, 15, 1);
+    }
   }
 
   &__column {
@@ -61,8 +66,7 @@
     text-transform: uppercase;
     color: #121212;
     span {
-      color: #E91E63;
-
+      color: #e91e63;
     }
   }
 }

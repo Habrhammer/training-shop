@@ -1,12 +1,21 @@
+@use "src" as *;
+
 .mainblock {
   padding: 32px 0 0;
   &__body {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
   }
 
   &__slider {
     flex: 1 0 50%;
+    // height: 100%;
+    @include adaptiv-value("height", 490, 400, 1);
+    @media (max-width: ($md2 + px)) {
+      flex: 1 0 100%;
+    }
   }
 
   &__content {
@@ -26,7 +35,8 @@
   }
 
   &__image {
-    padding: 0 calc(100% - 30px) 0 0;
+    padding: 0 100% 0 0;
+    // padding: 0 calc(100% - 30px) 0 0;
     overflow: hidden;
     position: relative;
 
@@ -59,7 +69,8 @@
   right: 0;
   bottom: 0;
   z-index: 100;
-  width: calc(100% - 30px);
+  width: 100%;
+  // width: calc(100% - 30px);
 
   &__link {
     display: block;
@@ -92,9 +103,19 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 -15px;
+
   &__column {
     padding: 0 15px;
     flex: 1 0 50%;
+    @media (max-width: ($md2+px)) {
+      flex: 1 0 33.333%;
+    }
+    @media (max-width: ($md3+px)) {
+      flex: 1 0 50%;
+    }
+    @media (max-width: ($md4+px)) {
+      flex: 1 0 100%;
+    }
   }
 
   &__column:not(:last-child) {
@@ -107,8 +128,10 @@
     position: relative;
   }
 
-  &__column:nth-child(3) &__item {
-    padding: 0 0 260px 0;
+  @media (min-width: ($md2+px)) {
+    &__column:nth-child(3) &__item {
+      padding: 0 0 260px 0;
+    }
   }
 
   &__image {

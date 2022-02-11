@@ -1,36 +1,4 @@
 @import "./scss/constants.scss";
 @import "./scss/fonts.scss";
 @import "./scss/null.scss";
-
-
-body {
-	color: $mainColor;
-}
-
-._container {
-	max-width: $maxWidthContainer + px;
-	margin: 0 auto;
-	padding: 0 15px;
-	// @media (max-width: ($md1 + px)) {
-	// 	max-width: 970px;
-	// }
-	// @media (max-width: ($md2 + px)) {
-	// 	max-width: 750px;
-	// }
-	// @media (max-width: ($md3 + px)) {
-	// 	max-width: none;
-	// 	padding: 0 10px;
-	// }
-}
-
-._ibg {
-	position: relative;
-	img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		object-fit: cover;
-	}
-}
+@import "./scss/mixins.scss";

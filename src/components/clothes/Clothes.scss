@@ -1,10 +1,18 @@
+@use "src" as *;
+
 .clothes {
   padding: 35px 0;
+
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 48px;
+    @media (max-width: ($md2+px)) {
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+    }
   }
 
   &__maintitle {
@@ -48,21 +56,27 @@
 
 .clothes-menu {
   display: flex;
+  @media (max-width: ($md3+px)) {
+    flex-direction: column;
+    gap: 20px;
+  }
   &__item {
     font-family: "Spartan-Regular";
     font-size: 12px;
     line-height: 13px;
-    text-align: right;
+    text-align: center;
     letter-spacing: 0.06em;
     color: #121212;
     opacity: 0.6;
     margin: 0 16px;
   }
-  &__item:first-child {
-    margin-left: 0;
-  }
-  &__item:last-child {
-    margin-right: 0;
+  @media (min-width: ($md3+px)) {
+    &__item:first-child {
+      margin-left: 0;
+    }
+    &__item:last-child {
+      margin-right: 0;
+    }
   }
 }
 .cards {
@@ -70,7 +84,6 @@
   flex-wrap: wrap;
   margin: 0 -15px;
   &__column {
-    
     flex: 1 0 255px;
     display: flex;
     justify-content: center;

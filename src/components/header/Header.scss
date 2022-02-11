@@ -1,3 +1,4 @@
+@use "src" as *;
 .header {
   border-bottom: 2px solid #f8f8f8;
   &__top {
@@ -8,6 +9,13 @@
 .top-header {
   display: flex;
   justify-content: space-between;
+  @media (max-width: ($md3+px)) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
   &__column {
     display: flex;
     align-items: center;
@@ -15,7 +23,13 @@
 }
 .header-info {
   display: flex;
-
+  @media (max-width: ($md3+px)) {
+    @include adaptiv-value("gap", 18, 15, 1);
+  }
+  @media (max-width: ($md4+px)) {
+    flex-direction: column;
+    align-items: center;
+  }
   a {
     display: flex;
     align-items: center;
@@ -29,11 +43,19 @@
     display: flex;
     align-items: center;
     margin-right: 30px;
+    @media (max-width: ($md3+px)) {
+      margin-right: 0;
+    }
     span {
       font-family: "Spartan-Medium";
       font-size: 11px;
       line-height: 12px;
       color: #ffffff;
+
+      @media (max-width: ($md4+px)) {
+        font-size: 14px;
+        line-height: 15px;
+      }
     }
   }
 }
@@ -46,16 +68,24 @@
   }
 }
 
-// .header-social {
-//   &__item {
-//   }
-// }
+.header-social {
+  &__item {
+    a {
+      img {
+        @include adaptiv-value("width", 14, 30, 1);
+      }
+    }
+  }
+}
 .header-nav {
   display: flex;
   align-items: center;
   min-height: 66px;
+  @media(max-width:($md2+px)){
+    flex-direction: column;
+    gap: 30px;
+  }
   &__logo {
-
     font-family: "PlayfairDisplaySC-Regular";
     font-size: 24px;
     line-height: 32px;
@@ -76,10 +106,12 @@
   &__list {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   &__item {
     margin: 0px 16px;
+    padding: 5px 0;
   }
 
   &__link {
@@ -93,11 +125,9 @@
   display: flex;
   gap: 24px;
   .action-header {
-  
-  &__item {
+    &__item {
       width: 18px;
       height: 18px;
+    }
   }
 }
-}
-
