@@ -4,7 +4,6 @@ import CategoryBlock from "../../components/category/category-block/CategoryBloc
 const CategoryPage = ({category,data,dataFilter}) => {
    return (
     <main className="page">
-
        <CategoryBlock dataFilter={dataFilter} productType={category} data={data} />
     </main>
    )

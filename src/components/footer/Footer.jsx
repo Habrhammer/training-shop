@@ -3,7 +3,6 @@ import "./Footer.scss";
 
 const Footer = ({ data }) => {
   let { navigation, socialLinks, payments } = data;
-  console.log(socialLinks);
   return (
     <footer className="footer" data-test-id="footer">
       <div className="footer__top footer-top">

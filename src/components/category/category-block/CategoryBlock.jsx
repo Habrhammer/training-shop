@@ -7,9 +7,8 @@ import "./CategoryBlock.scss";
 
 
 const CategoryBlock = ({ productType, data, dataFilter }) => {
-  console.log(data[productType]);
   return (
-    <section className="category" data-test-id={`clothes-${productType}`}>
+    <section className="category products-page" data-test-id={`products-page-${productType}`}>
  
       <CategoryHeader productType={productType}/>
       <FilterBlock dataFilter={dataFilter}/>

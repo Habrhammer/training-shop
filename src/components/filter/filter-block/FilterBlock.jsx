@@ -4,7 +4,6 @@ import FilterHeader from "../filter-header/FilterHeader";
 import "./FilterBlock.scss";
 
 const FilterBlock = ({ dataFilter }) => {
-  console.log(dataFilter);
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => setIsShow(!isShow);
   return (
