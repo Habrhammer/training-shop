@@ -500,75 +500,75 @@ let data = {
     ],
     size: [
       {
-        id: "1",
+        id: "8",
         size: "XL",
       },
       {
-        id: "2",
+        id: "9",
         size: "L",
       },
       {
-        id: "3",
+        id: "10",
         size: "M",
       },
       {
-        id: "4",
+        id: "11",
         size: "S",
       },
       {
-        id: "5",
+        id: "12",
         size: "Xs",
       },
     ],
     brand: [
       {
-        id: "1",
+        id: "13",
         brand: "Ck",
       },
       {
-        id: "2",
+        id: "14",
         brand: "H&M",
       },
       {
-        id: "3",
+        id: "15",
         brand: "Kalles",
       },
       {
-        id: "4",
+        id: "16",
         brand: "Levi's",
       },
       {
-        id: "5",
+        id: "17",
         brand: "Monki",
       },
       {
-        id: "6",
+        id: "18",
         brand: "Nike",
       },
     ],
     price: [
       {
-        id: "1",
+        id: "19",
         price: "$1200+",
       },
       {
-        id: "2",
+        id: "20",
         price: "$600-$1200",
       },
       {
-        id: "3",
+        id: "21",
         price: "$300-$600",
       },
       {
-        id: "4",
+        id: "22",
         price: "$150-$300",
       },
       {
-        id: "5",
+        id: "23",
         price: "$50-$150",
       },
       {
-        id: "6",
+        id: "24",
         price: "$7-$50",
       },
     ],
