@@ -9,7 +9,7 @@ const ProductBody = ({ productType, data }) => {
    const [product, setProduct] = useState([]);
    useEffect(()=>{
       setProduct(...data[productType].filter((prod)=>{return prod.id === +id}))
-   },[])
+   },[data,id,productType])
 
 
   return (
