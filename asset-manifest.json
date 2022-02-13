@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/training-shop/static/css/main.33eb3ba6.css",
-    "main.js": "/training-shop/static/js/main.79819a93.js",
+    "main.css": "/training-shop/static/css/main.6856905c.css",
+    "main.js": "/training-shop/static/js/main.e29849a4.js",
     "static/js/787.bf500a13.chunk.js": "/training-shop/static/js/787.bf500a13.chunk.js",
     "static/media/Inter-Regular.ttf": "/training-shop/static/media/Inter-Regular.2391725004ae05a27e8e.ttf",
     "static/media/woman.png": "/training-shop/static/media/woman.4152b783e591f01bafb6.png",
@@ -66,13 +66,17 @@
     "static/media/shopping_bag.svg": "/training-shop/static/media/shopping_bag.cddc071bd5dc6b49753aabb593ec8cec.svg",
     "static/media/arrow.svg": "/training-shop/static/media/arrow.9f4dd338b481a943c89e0ee673f34fe5.svg",
     "static/media/view-list.svg": "/training-shop/static/media/view-list.f1d242843fc15f61cc5abf04d2079f81.svg",
+    "static/media/arrow_prev.svg": "/training-shop/static/media/arrow_prev.34f90d2018aeaaff76632eabc96a9a84.svg",
+    "static/media/arrow_up.svg": "/training-shop/static/media/arrow_up.56bc9cd660679bdd0011dd2f5533496e.svg",
+    "static/media/arrow_down.svg": "/training-shop/static/media/arrow_down.00c9144ab235b9958a420117323d7892.svg",
+    "static/media/arrow_next.svg": "/training-shop/static/media/arrow_next.6a871d585953b3e789bd0c0fea717ae1.svg",
     "static/media/close.svg": "/training-shop/static/media/close.c1acda466a6f57fc13cc7c251b46df83.svg",
-    "main.33eb3ba6.css.map": "/training-shop/static/css/main.33eb3ba6.css.map",
-    "main.79819a93.js.map": "/training-shop/static/js/main.79819a93.js.map",
+    "main.6856905c.css.map": "/training-shop/static/css/main.6856905c.css.map",
+    "main.e29849a4.js.map": "/training-shop/static/js/main.e29849a4.js.map",
     "787.bf500a13.chunk.js.map": "/training-shop/static/js/787.bf500a13.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.33eb3ba6.css",
-    "static/js/main.79819a93.js"
+    "static/css/main.6856905c.css",
+    "static/js/main.e29849a4.js"
   ]
 }
