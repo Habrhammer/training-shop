@@ -72,6 +72,7 @@ const ProductBody = ({ productType, data }) => {
       })
     );
   }, [data, id, productType]);
+  
   const [imagesNavSlider, setImagesNavSlider] = useState(null);
   return (
     <section
@@ -97,6 +98,7 @@ const ProductBody = ({ productType, data }) => {
                   spaceBetween={18}
                   slidesPerView={4}
                   direction="vertical"
+
                   loop={true}
                   navigation={{
                     nextEl: ".images-navslider__down",
@@ -247,8 +249,8 @@ const ProductBody = ({ productType, data }) => {
                   <div className="product-checkout__body">
                     {checkout.map(({ id, image }) => {
                       return (
-                        <div className="product-checkout__item">
-                          <img src={image} alt="" key={id} />
+                        <div className="product-checkout__item" key={id}>
+                          <img src={image} alt=""  />
                         </div>
                       );
                     })}
@@ -367,12 +369,31 @@ const ProductBody = ({ productType, data }) => {
                   }}
                   className="slider-related__slides"
                   modules={[FreeMode, Navigation]}
+                  breakpoints={{ 
+                    0: { 
+                      slidesPerView:1,
+                      slidesPerGroup:1
+                    },
+                    480: { // при 768px и выше
+                      slidesPerView:2,
+                      slidesPerGroup:2
+                    },
+                    768: { 
+                      slidesPerView:3,
+                      slidesPerGroup:3
+                    },
+                    992: { 
+                      slidesPerView:4,
+                      slidesPerGroup:4
+                    },
+               
+                  }} 
                 >
                   {data[productType].map(
                     ({ id, image, title, price, rating }) => {
                       return (
-                        <SwiperSlide>
-                          <div className="cards__column" key={id}>
+                        <SwiperSlide key={id}>
+                          <div className="cards__column" >
                             <Link
                               to={`${id}`}
                               className="cards__item cards-item"

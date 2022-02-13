@@ -1,3 +1,5 @@
+@use "src" as *;
+
 .product {
   &__body {
     margin-top: 32px;
@@ -9,6 +11,9 @@
   &__content {
     display: flex;
     gap: 30px;
+    @media(max-width:($md3+px)){
+      flex-direction: column;
+    }
   }
 
   &__images {
@@ -38,6 +43,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  @media(max-width: ($md2+px)){
+    display: none;
+     }
   &__control {
     display: flex;
     justify-content: space-around;
@@ -70,7 +78,7 @@
 .images-mainslider {
   user-select: none;
   position: relative;
-  flex: 0 0 448px;
+  flex: 1 1 448px;
 
   &__control {
     position: absolute;
@@ -114,6 +122,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media(max-width:($md3+px)){
+      min-height: auto;
+    }
     img {
       width: 100%;
       max-width: 448px;
@@ -150,12 +161,16 @@
   overflow: hidden;
   max-height: 504px;
 
-  //.swiper-wrapper
+  
   .swiper-wrapper {
     width: 94px;
     box-sizing: content-box;
     display: flex;
     height: 100vh;
+    // @media(max-width: ($md2+px)){
+    //   flex-direction: row;
+    //   justify-content: flex-start;
+    // }
   }
   .swiper-slide {
     opacity: 0.4;
@@ -238,31 +253,7 @@
   &__actions {
   }
 }
-.product-actions {
-  &__container {
-  }
 
-  &__color {
-  }
-
-  &__size {
-  }
-
-  &__pay {
-  }
-
-  &__include {
-  }
-
-  &__checkout {
-  }
-
-  &__description {
-  }
-
-  &__reviews {
-  }
-}
 .product-color {
   margin-bottom: 32px;
   &__header {
@@ -361,6 +352,7 @@
     line-height: 36px;
     text-transform: uppercase;
     color: #121212;
+    white-space: nowrap;
   }
 
   &__btn {
@@ -393,15 +385,17 @@
   padding: 32px 0;
   &__body {
     display: flex;
-    justify-content: space-between;
-    margin: 0 -10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  gap: 13px;
+    // margin: 0 -10px;
   }
 }
 .product-iclude {
   &__item {
     display: flex;
     align-items: center;
-    padding: 0 10px;
+    // padding: 0 10px;
     img {
       margin-bottom: 2px;
       margin-right: 6px;
@@ -432,6 +426,8 @@
   &__body {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 }
 .product-description {
