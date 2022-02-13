@@ -9,7 +9,7 @@ import CategoryPage from "./views/category/CategoryPage";
 function App({ data }) {
   console.log(data);
   return (
-    <div className="app" data-set-id="app">
+    <div className="app" data-test-id="app">
       <Header headerData={data.header} />
       <Switch>
         <Route

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Menu = ({ menu }) => {
+  console.log(menu);
   return (
     <div className="header-nav__menu menu" data-test-id="menu">
       <nav className="menu__body">
@@ -9,7 +10,7 @@ const Menu = ({ menu }) => {
             return (
               <li className="menu__item" key={id}>
                 <Link
-                  to={path}
+                  to={`/${path}`}
                   className="menu__link menu-item"
                   data-test-id={`menu-link-${path}`}
                 >
