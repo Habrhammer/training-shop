@@ -20,6 +20,11 @@ const ProductHeader = ({ productType, product }) => {
               <span>
                 {productType.charAt(0).toUpperCase() + productType.slice(1)}
               </span>
+              <img src={arrow} alt="" />
+              <span>
+                {`${product.title}`.charAt(0).toUpperCase() +
+                  `${product.title}`.slice(1)}
+              </span>
             </div>
           </div>
           <div className="product-header__share">
@@ -32,7 +37,8 @@ const ProductHeader = ({ productType, product }) => {
         </div>
         <div className="product-header__bottom">
           <div className="product-header__rating product-rating">
-            <img src={stars} alt="stars" /><span>2 Reviews</span>
+            <img src={stars} alt="stars" />
+            <span>2 Reviews</span>
           </div>
           <div className="product-header__accounting product-accounting">
             <div className="product-accounting__sku">
