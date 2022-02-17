@@ -23,10 +23,46 @@
   }
 }
 
-.slider {
+.mainblock-slider {
+  position: relative;
+
   &__body {
     height: 100%;
     position: relative;
+    max-width: 555px;
+  }
+
+  &__arrow-left {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 10;
+    background-color: #fff;
+    margin-top: -20px;
+    top: 50%;
+    left: 24px;
+  }
+  &__arrow-right {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 10;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -20px;
+    right: 24px;
+  }
+
+  .swiper-wrapper {
+    width: 0;
   }
 
   &__item {
