@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Menu = ({ menu, active, setActive }) => {
-
   console.log(menu);
   return (
     <div className="header-nav__menu menu" data-test-id="menu">
@@ -10,7 +9,7 @@ const Menu = ({ menu, active, setActive }) => {
           {menu.map(({ id, name, path }) => {
             return (
               <li className="menu__item" key={id}>
-                <Link onClick={()=>{setActive(!active)}}
+                <Link
                   to={`/${path}`}
                   className="menu__link menu-item"
                   data-test-id={`menu-link-${path}`}

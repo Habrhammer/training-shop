@@ -36,7 +36,7 @@ const Header = ({ headerData }) => {
       </div>
       <div className="header-nav _container">
         <HeaderLogo />
-        <Menu menu={menu} active={menuActive} setActive={setMenuActive} />
+        <Menu menu={menu}  active={menuActive} setActive={setMenuActive} />
         <div className="header-nav__actions actions-header">
           <div className="action-header__item _ibg">
             <img src={searchImg} alt="" />
@@ -53,7 +53,7 @@ const Header = ({ headerData }) => {
         </div>
         <button
           className={menuActive ? "burger-btn active" : "burger-btn"}
-          onClick={() => {
+          onClick={(e) => {
             setMenuActive(!menuActive);
           }}
         >
