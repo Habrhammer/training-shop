@@ -8,11 +8,16 @@ import HeaderSocial from "../header-social/HeaderSocial";
 import HeaderLogo from "../header-logo/HeaderLogo";
 import Menu from "../menu/Menu";
 import { useEffect, useState } from "react";
+import useScrollBlock from "../../hooks/useScrollBlock";
 
 const Header = ({ headerData }) => {
+  const [blockScroll, allowScroll] = useScrollBlock();
   let { info, socialLinks, menu } = headerData;
   const [menuActive, setMenuActive] = useState(false);
   const [scroll, setScroll] = useState(false);
+  useEffect(() => {
+    menuActive ? blockScroll() : allowScroll();
+  });
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > 50);
@@ -31,7 +36,7 @@ const Header = ({ headerData }) => {
       </div>
       <div className="header-nav _container">
         <HeaderLogo />
-        <Menu menu={menu} active={menuActive} setActive={setMenuActive}  />
+        <Menu menu={menu} active={menuActive} setActive={setMenuActive} />
         <div className="header-nav__actions actions-header">
           <div className="action-header__item _ibg">
             <img src={searchImg} alt="" />
