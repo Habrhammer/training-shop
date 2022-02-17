@@ -14,7 +14,6 @@ const Header = ({ headerData }) => {
   const [blockScroll, allowScroll] = useScrollBlock();
   let { info, socialLinks, menu } = headerData;
   const [menuActive, setMenuActive] = useState(false);
-  const [enableMenu, setEnableMenu] = useState(false);
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     menuActive ? blockScroll() : allowScroll();
