@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { Navigation } from "swiper";
 import "swiper/css";
 
 import "./MainBlock.scss";
