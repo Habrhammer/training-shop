@@ -1,6 +1,12 @@
 @use "src" as *;
 .header {
   border-bottom: 2px solid #f8f8f8;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 250;
+ background-color: #fff;
   &__top {
     padding: 4px 0;
     background: #121212;
@@ -15,20 +21,27 @@
     align-items: center;
     gap: 15px;
   }
+  @media (max-width: ($md4+px)) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
 
   &__column {
     display: flex;
     align-items: center;
   }
 }
+
 .header-info {
   display: flex;
   @media (max-width: ($md3+px)) {
-    @include adaptiv-value("gap", 18, 15, 1);
+    @include adaptiv-value("gap", 18, 7, 1);
   }
   @media (max-width: ($md4+px)) {
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
   }
   a {
     display: flex;
@@ -53,8 +66,8 @@
       color: #ffffff;
 
       @media (max-width: ($md4+px)) {
-        font-size: 14px;
-        line-height: 15px;
+        font-size: 9px;
+        line-height: 12px;
       }
     }
   }
@@ -72,7 +85,7 @@
   &__item {
     a {
       img {
-        @include adaptiv-value("width", 14, 30, 1);
+        @include adaptiv-value("width", 14, 20, 1);
       }
     }
   }
@@ -81,22 +94,42 @@
   display: flex;
   align-items: center;
   min-height: 66px;
-  @media(max-width:($md2+px)){
+  background-color: #fff;
+  @media (max-width: ($md2+px)) {
     flex-direction: column;
     gap: 30px;
+  }
+  @media (max-width: ($md3+px)) {
+    flex-direction: row;
+    row-gap: normal;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: auto;
+    padding: 10px ;
   }
   &__logo {
     font-family: "PlayfairDisplaySC-Regular";
     font-size: 24px;
     line-height: 32px;
+  
     color: #121212;
+@media(max-width:($md3+px)){
+  @include adaptiv-value("font-size",24,18,1);
+  @include adaptiv-value("line-height",24,18,1);
+}
+
+
   }
 
   // &__menu {
   // }
 
-  // &__actions {
-  // }
+  &__actions {
+    @media (max-width: ($md3+px)) {
+      margin-left: auto;
+      margin-right: 20px;
+    }
+  }
 }
 .menu {
   flex: 1 1 auto;
@@ -123,11 +156,115 @@
 }
 .actions-header {
   display: flex;
-  gap: 24px;
+  @include adaptiv-value("gap",24,10,1);
   .action-header {
     &__item {
       width: 18px;
       height: 18px;
     }
+  }
+}
+
+@media (max-width: ($md3+px)) {
+  .header-nav {
+    &__menu {
+      // position: fixed;
+      // width: 100vw;
+      // height: 100vh;
+      // top: 0px;
+      // left: 0;
+      // // transform: translateX(-130%);
+      // transition: transform 0.3s ease-in;
+      // z-index: 100;
+    }
+  }
+  .menu {
+    position: relative;
+    flex: 0 1 420px;
+    order: 1;
+    margin-left: -10px;
+   
+
+    &__body {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      left: -100vw;
+      background-color: #fff;
+      transition: left 0.3s ease 0s;
+      padding: 70px 15px 30px 15px;
+      z-index: 250;
+      &.active {
+        left: 0;
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: 0px 3px;
+      padding: 5px 0px;
+      position: relative;
+    }
+
+    &__link {
+    }
+  }
+  .menu-item {
+  }
+
+  .burger-btn {
+    position: relative;
+    display: block;
+    flex: 0 0 20px;
+    height: 18px;
+  
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  .burger-btn.active {
+    justify-content: center;
+  }
+
+  .burger-btn > span {
+    transition: all 0.3s ease 0s;
+    top: calc(50% - 1px);
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+  }
+  .burger-btn span:first-child {
+    top: 0px;
+  }
+  .burger-btn span:last-child {
+    top: auto;
+    bottom: 0px;
+  }
+
+  .burger-btn.active span:first-child {
+    transform: rotate(-45deg);
+    top: calc(50% - 1px);
+  }
+
+  .burger-btn.active span:nth-child(2) {
+    transform: scale(0);
+  }
+
+  .burger-btn.active span:last-child {
+    transform: rotate(45deg);
+    bottom: calc(50% - 1px);
   }
 }
