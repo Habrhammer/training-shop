@@ -26,9 +26,12 @@ const Header = ({ headerData }) => {
   return (
     <header
       className={scroll ? "header _scroll" : "header"}
+      onClick={() => {
+        setMenuActive(false);
+      }}
       data-test-id="header"
     >
-      <div className="header__top">
+      <div className="header__top" >
         <div className="top-header _container">
           <HeaderInfo info={info} />
           <HeaderSocial socialLinks={socialLinks} />
@@ -54,6 +57,7 @@ const Header = ({ headerData }) => {
         <button
           className={menuActive ? "burger-btn active" : "burger-btn"}
           onClick={(e) => {
+            e.stopPropagation()
             setMenuActive(!menuActive);
           }}
         >
