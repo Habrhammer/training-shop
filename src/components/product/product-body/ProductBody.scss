@@ -58,6 +58,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   &__down {
@@ -66,6 +67,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   &__slides {
@@ -96,6 +98,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   &__next {
@@ -110,6 +113,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   &__slides {
@@ -616,6 +620,7 @@
     align-items: center;
     width: 40px;
     height: 40px;
+    cursor: pointer;
   }
 
   &__next {
@@ -624,6 +629,7 @@
     align-items: center;
     width: 40px;
     height: 40px;
+    cursor: pointer;
   }
 
   &__slides {

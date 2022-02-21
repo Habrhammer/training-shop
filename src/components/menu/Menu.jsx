@@ -5,6 +5,7 @@ const Menu = ({ menu, active, setActive }) => {
   return (
     <div className="header-nav__menu menu" data-test-id="menu">
       <nav className={active ? "menu__body active" : "menu__body"} 
+      data-test-id="burger-menu"
       onClick={(e)=>{
         e.stopPropagation()
       }}

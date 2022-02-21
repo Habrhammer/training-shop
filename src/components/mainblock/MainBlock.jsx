@@ -24,6 +24,7 @@ const MainBlock = () => {
             <img src={arrow_right} alt="" />
           </div>
           <Swiper
+            data-test-id="main-slider"
             slidesPerView={1}
             navigation={{
               nextEl: ".mainblock-slider__arrow-right",
@@ -33,7 +34,7 @@ const MainBlock = () => {
             className="mainblock-slider__body"
           >
             <SwiperSlide className="mainblock-slider__item">
-              {/* <div className="mainblock-slider__item"> */}
+          
               <div className="mainblock-slider__image">
                 <img src={slide} alt="" />
               </div>
@@ -43,10 +44,10 @@ const MainBlock = () => {
                   <div className="content-slider__text">your title text</div>
                 </a>
               </div>
-              {/* </div> */}
+            
             </SwiperSlide>
             <SwiperSlide className="mainblock-slider__item">
-              {/* <div className="mainblock-slider__item"> */}
+          
               <div className="mainblock-slider__image">
                 <img src={slide} alt="" />
               </div>
@@ -56,10 +57,10 @@ const MainBlock = () => {
                   <div className="content-slider__text">your title text</div>
                 </a>
               </div>
-              {/* </div> */}
+             
             </SwiperSlide>
             <SwiperSlide className="mainblock-slider__item">
-              {/* <div className="mainblock-slider__item"> */}
+         
               <div className="mainblock-slider__image">
                 <img src={slide} alt="" />
               </div>
@@ -69,7 +70,7 @@ const MainBlock = () => {
                   <div className="content-slider__text">your title text</div>
                 </a>
               </div>
-              {/* </div> */}
+           
             </SwiperSlide>
           </Swiper>
           {/* <div className="mainblock-slider__body">
