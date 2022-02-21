@@ -4,7 +4,12 @@ const Menu = ({ menu, active, setActive }) => {
 
   return (
     <div className="header-nav__menu menu" data-test-id="menu">
-      <nav className={active ? "menu__body active" : "menu__body"}>
+      <nav className={active ? "menu__body active" : "menu__body"} 
+      data-test-id="burger-menu"
+      onClick={(e)=>{
+        e.stopPropagation()
+      }}
+      >
         <ul className="menu__list">
           {menu.map(({ id, name, path }) => {
             return (
@@ -22,13 +27,6 @@ const Menu = ({ menu, active, setActive }) => {
               </li>
             );
           })}
-          {/* 
-          <li className="menu__item">
-            <a href="" className="menu__link">
-              Women
-            </a>
-          </li>
-          */}
         </ul>
       </nav>
     </div>

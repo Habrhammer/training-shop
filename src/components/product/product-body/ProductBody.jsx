@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { Navigation, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./ProductBody.scss";
@@ -105,7 +105,7 @@ const ProductBody = ({ productType, data }) => {
                     prevEl: ".images-navslider__up ",
                   }}
                   className="images-navslider__slides"
-                  modules={[FreeMode, Navigation, Thumbs]}
+                  modules={[Navigation, Thumbs]}
                 >
                   <SwiperSlide>
                     <div className="images-navslider__slide _ibg">
@@ -131,6 +131,7 @@ const ProductBody = ({ productType, data }) => {
               </div>
               <div className="product-images__mainslider images-mainslider">
                 <Swiper
+                  data-test-id="product-slider"
                   slidesPerView={1}
                   direction="horizontal"
                   // loop={true}
@@ -140,7 +141,7 @@ const ProductBody = ({ productType, data }) => {
                     prevEl: ".images-mainslider__prev ",
                   }}
                   className="images-mainslider__slides"
-                  modules={[FreeMode, Navigation, Thumbs]}
+                  modules={[Navigation, Thumbs]}
                 >
                   <div className="images-mainslider__prev">
                     <img src={prev} alt="prev" />
@@ -359,32 +360,29 @@ const ProductBody = ({ productType, data }) => {
             <div className="category__body">
               <div className="category__cards cards">
                 <Swiper
+                  data-test-id="related-slider"
                   slidesPerView={4}
                   direction="horizontal"
                   loop={true}
-                  slidesPerGroup={4}
+                  slidesPerGroup={1}
                   navigation={{
                     nextEl: ".slider-related__next",
                     prevEl: ".slider-related__prev ",
                   }}
                   className="slider-related__slides"
-                  modules={[FreeMode, Navigation]}
+                  modules={[Navigation]}
                   breakpoints={{ 
                     0: { 
                       slidesPerView:1,
-                      slidesPerGroup:1
                     },
                     480: { // при 768px и выше
                       slidesPerView:2,
-                      slidesPerGroup:2
                     },
                     768: { 
                       slidesPerView:3,
-                      slidesPerGroup:3
                     },
                     992: { 
                       slidesPerView:4,
-                      slidesPerGroup:4
                     },
                
                   }} 

@@ -14,21 +14,25 @@ const Header = ({ headerData }) => {
   const [blockScroll, allowScroll] = useScrollBlock();
   let { info, socialLinks, menu } = headerData;
   const [menuActive, setMenuActive] = useState(false);
-  const [scroll, setScroll] = useState(false);
+  // const [scroll, setScroll] = useState(false);
   useEffect(() => {
     menuActive ? blockScroll() : allowScroll();
   });
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > 50);
-    });
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     setScroll(window.scrollY > 50);
+  //   });
+  // }, []);
   return (
     <header
-      className={scroll ? "header _scroll" : "header"}
+      // className={scroll ? "header _scroll" : "header"}
+      className="header"
+      onClick={() => {
+        setMenuActive(false);
+      }}
       data-test-id="header"
     >
-      <div className="header__top">
+      <div className="header__top" >
         <div className="top-header _container">
           <HeaderInfo info={info} />
           <HeaderSocial socialLinks={socialLinks} />
@@ -53,7 +57,9 @@ const Header = ({ headerData }) => {
         </div>
         <button
           className={menuActive ? "burger-btn active" : "burger-btn"}
+          data-test-id="burger-menu-btn"
           onClick={(e) => {
+            e.stopPropagation()
             setMenuActive(!menuActive);
           }}
         >

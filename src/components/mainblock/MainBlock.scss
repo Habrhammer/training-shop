@@ -45,6 +45,8 @@
     margin-top: -20px;
     top: 50%;
     left: 24px;
+    cursor: pointer;
+    user-select: none; 
   }
   &__arrow-right {
     position: absolute;
@@ -59,6 +61,12 @@
     top: 50%;
     margin-top: -20px;
     right: 24px;
+    cursor: pointer;
+    user-select: none; 
+  }
+
+  .swiper-button-disabled{
+    opacity:0.6
   }
 
   .swiper-wrapper {
