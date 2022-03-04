@@ -6,8 +6,9 @@ import MainPage from "./views/main/MainPage";
 import ProductPage from "./views/product/ProductPage";
 import CategoryPage from "./views/category/CategoryPage";
 
-function App({ data }) {
-  console.log(data);
+function App({ data, goods }) {
+  // console.log(data);
+  // console.log(goods);
   return (
     <div className="app" data-test-id="app">
       <Header headerData={data.header} />
@@ -25,6 +26,7 @@ function App({ data }) {
               dataFilter={data.filter}
               category="women"
               data={data.mainPage}
+              goods={goods}
             />
           )}
         />
@@ -36,19 +38,20 @@ function App({ data }) {
               dataFilter={data.filter}
               category="men"
               data={data.mainPage}
+              goods={goods}
             />
           )}
         />
         <Route
           path="/women/:id"
           component={() => (
-            <ProductPage data={data.mainPage} productType="women" />
+            <ProductPage data={data.mainPage} goods={goods} productType="women" />
           )}
         />
         <Route
           path="/men/:id"
           component={() => (
-            <ProductPage data={data.mainPage} productType="men" />
+            <ProductPage data={data.mainPage} goods={goods} productType="men" />
           )}
         />
       </Switch>

@@ -3,8 +3,6 @@
 .category {
   padding: 0 0 35px;
 
-
-
   &__maintitle {
     font-family: "Spartan-SemiBold";
 
@@ -74,11 +72,22 @@
   flex-wrap: wrap;
   margin: 0 -15px;
   &__column {
-    flex: 1 0 255px;
+    // flex: 1 0 255px;
+    flex: 0 1 25%;
     display: flex;
     justify-content: center;
     padding: 0 15px;
     margin-bottom: 30px;
+    @media(max-width:($md2+px)){
+      flex: 0 1 33.333%;
+    }
+    @media(max-width:($md3+px)){
+      flex: 0 1 50%;
+    }
+    @media(max-width:($md4+px)){
+      flex: 0 1 100%;
+    }
+
   }
 
   // &__item {
@@ -114,4 +123,55 @@
 
   // &__rating {
   // }
+}
+
+.category {
+  &__counter {
+  }
+}
+.goods-counter {
+  padding: 0 0 32px;
+  &__container {
+  }
+
+  &__body {
+    display: flex;
+    gap: 32px;
+    @media(max-width:($md2+px)){
+      flex-direction: column;
+    }
+  }
+
+  &__column {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__found {
+    font-family: "Spartan-Bold";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+  }
+
+  &__title {
+    font-family: "Spartan-Bold";
+margin-right: 5px;
+font-size: 14px;
+line-height: 22px;
+color: #121212;
+
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+   margin-right: 10px;
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+    opacity: 0.6;
+  }
 }

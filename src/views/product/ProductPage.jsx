@@ -1,9 +1,9 @@
 import ProductBody from "../../components/product/product-body/ProductBody";
 
-const ProductPage = ({productType, data}) => {
+const ProductPage = ({productType, data, goods}) => {
    return (
     <main className="page">
-       <ProductBody data={data} productType={productType}/>
+       <ProductBody data={data} goods={goods} productType={productType}/>
     </main>
    )
 }
