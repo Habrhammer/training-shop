@@ -3,7 +3,6 @@ import "./FilterHeader.scss";
 import adjustments from "./../../../assets/images/filter/adjustments.svg";
 import list from "./../../../assets/images/filter/view-list.svg";
 import grid from "./../../../assets/images/filter/view-grid.svg";
-import arrow from "./../../../assets/images/filter/arrow.svg";
 import close from "./../../../assets/images/filter/close.svg";
 
 const FilterHeader = ({ isShow, toggleShow }) => {
