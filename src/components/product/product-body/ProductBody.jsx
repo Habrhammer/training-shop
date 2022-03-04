@@ -61,7 +61,7 @@ const checkout = [
   },
 ];
 
-const ProductBody = ({ productType, data }) => {
+const ProductBody = ({ productType, data, goods }) => {
   console.log(data);
   const { id } = useParams();
   const [product, setProduct] = useState([]);

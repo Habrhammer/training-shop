@@ -34,10 +34,6 @@ const FilterHeader = ({ isShow, toggleShow }) => {
             <img src={grid} alt="list-grid" />
           </button>
         </div>
-        <div className="filter-header__column filter-select">
-          BESTSELLERS
-          <img src={arrow} alt="" />
-        </div>
       </div>
     </div>
   );
