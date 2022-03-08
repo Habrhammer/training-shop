@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
@@ -62,18 +62,61 @@ const checkout = [
 ];
 
 const ProductBody = ({ productType, data, goods }) => {
-  console.log(data);
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const [imagesNavSlider, setImagesNavSlider] = useState(null);
+
+  const [productMainSlider, setProductMainSlider] = useState({});
+  const [productNavSlider, setProductNavSlider] = useState({});
+
+  const [product, setProduct] = useState({
+    name: "",
+    category: "",
+    brand: "",
+    material: "",
+    rating: null,
+    price: null,
+    sizes: [""],
+    discount: null,
+    reviews: [
+      {
+        name: "",
+        text: "",
+        rating: null,
+        id: "",
+      },
+    ],
+    images: [
+      {
+        color: "",
+        url: "",
+        id: "",
+      },
+    ],
+    id: "",
+  });
+  console.log(product);
+
   useEffect(() => {
     setProduct(
-      ...data[productType].filter((prod) => {
-        return prod.id === +id;
+      ...goods[productType].filter((prod) => {
+        return prod.id === id;
       })
     );
-  }, [data, id, productType]);
-  
-  const [imagesNavSlider, setImagesNavSlider] = useState(null);
+  }, [goods, id, productType]);
+
+  let sizeItem = useRef();
+  let [size = product.sizes[0], setSize] = useState();
+
+
+
+  const [isBeginning, setBeginning] = useState();
+  const [isEnd, setEnd] = useState();
+
+  useEffect(() => {
+    setBeginning(productMainSlider.isBeginning);
+    setEnd(productMainSlider.isEnd);
+  });
+
   return (
     <section
       className="product product-page"
@@ -86,90 +129,111 @@ const ProductBody = ({ productType, data, goods }) => {
             <div className="product__images product-images">
               <div className="product-images__navslider images-navslider">
                 <div className="images-navslider__control">
-                  <div className="images-navslider__up ">
+                  <div
+                    className="images-navslider__up "
+                    onClick={() => {
+                      productNavSlider.slidePrev();
+                      setBeginning(productMainSlider.isBeginning);
+                      setEnd(productMainSlider.isEnd);
+                    }}
+                  >
                     <img src={up} alt="up" />
                   </div>
-                  <div className="images-navslider__down">
+                  <div
+                    className="images-navslider__down"
+                    onClick={() => {
+                      productNavSlider.slideNext();
+                      setBeginning(productMainSlider.isBeginning);
+                      setEnd(productMainSlider.isEnd);
+                    }}
+                  >
                     <img src={down} alt="down" />
                   </div>
                 </div>
+
                 <Swiper
                   onSwiper={setImagesNavSlider}
+                  onInit={(ev) => {
+                    setProductNavSlider(ev);
+                  }}
                   spaceBetween={18}
                   slidesPerView={4}
                   direction="vertical"
-
-                  loop={true}
-                  navigation={{
-                    nextEl: ".images-navslider__down",
-                    prevEl: ".images-navslider__up ",
-                  }}
                   className="images-navslider__slides"
                   modules={[Navigation, Thumbs]}
                 >
-                  <SwiperSlide>
-                    <div className="images-navslider__slide _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="images-navslider__slide _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="images-navslider__slide _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="images-navslider__slide _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
+                  {product.images.map((e) => {
+                    return (
+                      <SwiperSlide key={e.id}>
+                        <div className="images-navslider__slide _ibg">
+                          <img
+                            src={`https://training.cleverland.by/shop${e.url}`}
+                            alt={""}
+                          />
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
               </div>
               <div className="product-images__mainslider images-mainslider">
                 <Swiper
                   data-test-id="product-slider"
+                  className="images-mainslider__slides"
                   slidesPerView={1}
                   direction="horizontal"
-                  // loop={true}
                   thumbs={{ swiper: imagesNavSlider }}
-                  navigation={{
-                    nextEl: ".images-mainslider__next",
-                    prevEl: ".images-mainslider__prev ",
+                  onInit={(ev) => {
+                    setProductMainSlider(ev);
                   }}
-                  className="images-mainslider__slides"
+                  navigation={{
+                    nextEl: ".images-navslider__down",
+                    prevEl: ".images-navslider__up ",
+                  }}
                   modules={[Navigation, Thumbs]}
                 >
-                  <div className="images-mainslider__prev">
+                  <div
+                    className={
+                      isBeginning
+                        ? `images-mainslider__prev swiper-button-disabled`
+                        : `images-mainslider__prev `
+                    }
+                    onClick={() => {
+                      productMainSlider.slidePrev();
+                      productNavSlider.slidePrev();
+                      setBeginning(productMainSlider.isBeginning);
+                      setEnd(productMainSlider.isEnd);
+                    }}
+                  >
                     <img src={prev} alt="prev" />
                   </div>
-                  <div className="images-mainslider__next">
+                  <div
+                    className={
+                      isEnd
+                        ? `images-mainslider__next swiper-button-disabled`
+                        : `images-mainslider__next `
+                    }
+                    onClick={() => {
+                      productMainSlider.slideNext();
+                      productNavSlider.slideNext();
+                      setBeginning(productMainSlider.isBeginning);
+                      setEnd(productMainSlider.isEnd);
+                    }}
+                  >
                     <img src={next} alt="next" />
                   </div>
-
-                  <SwiperSlide>
-                    <div className="images-mainslider__slide">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="images-mainslider__slide">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="images-mainslider__slide">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="images-mainslider__slide">
-                      <img src={product.image} alt="" />
-                    </div>
-                  </SwiperSlide>
+                  {product.images.map((e) => {
+                    return (
+                      <SwiperSlide key={e.id}>
+                        <div className="images-mainslider__slide">
+                          <img
+                            src={`https://training.cleverland.by/shop${e.url}`}
+                            alt={""}
+                          />
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
               </div>
             </div>
@@ -181,30 +245,37 @@ const ProductBody = ({ productType, data, goods }) => {
                     <span>Blue</span>
                   </div>
                   <div className="product-color__body color-option">
-                    <div className="color-option__item _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                    <div className="color-option__item _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                    <div className="color-option__item _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
-                    <div className="color-option__item _ibg">
-                      <img src={product.image} alt="" />
-                    </div>
+                    {product.images.map((e) => {
+                      return (
+                        <div className="color-option__item _ibg">
+                          <img
+                            src={`https://training.cleverland.by/shop${e.url}`}
+                            alt=""
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="product-actions__size product-size">
                   <div className="product-size__header">
                     <span>SIZE: </span>
-                    <span>S</span>
+                    <span>{size}</span>
                   </div>
                   <div className="product-size__body size-option">
-                    <div className="size-option__item">XS</div>
-                    <div className="size-option__item">S</div>
-                    <div className="size-option__item">M</div>
-                    <div className="size-option__item">L</div>
+                    {product.sizes.map((e) => {
+                      return (
+                        <div
+                          ref={sizeItem}
+                          className="size-option__item"
+                          onClick={() => {
+                            setSize(e);
+                          }}
+                        >
+                          {e}
+                        </div>
+                      );
+                    })}
                   </div>
                   <div className="product-size__guide">
                     <img src={clothes_hanger} alt="" />
@@ -251,7 +322,7 @@ const ProductBody = ({ productType, data, goods }) => {
                     {checkout.map(({ id, image }) => {
                       return (
                         <div className="product-checkout__item" key={id}>
-                          <img src={image} alt=""  />
+                          <img src={image} alt="" />
                         </div>
                       );
                     })}
@@ -273,15 +344,17 @@ const ProductBody = ({ productType, data, goods }) => {
                       <div className="description-item__content">
                         <p>
                           <span>Color: </span>
-                          <span>Blue, White, Black, Grey</span>
+                          <span>
+                            {new Set(product.images.map((e) => `${e.color}, `))}
+                          </span>
                         </p>
                         <p>
                           <span>Size: </span>
-                          <span>XS, S, M, L</span>
+                          <span>{product.sizes.map((e) => `${e}, `)}</span>
                         </p>
                         <p>
                           <span>Material: </span>
-                          <span>100% Polyester</span>
+                          <span>{product.material}</span>
                         </p>
                       </div>
                     </div>
@@ -295,7 +368,8 @@ const ProductBody = ({ productType, data, goods }) => {
                     <div className="product-reviews__action">
                       <div className="product-reviews__rating">
                         <img src={stars} alt="" />
-                        <span>2 Reviews</span>
+                        {product.rating}
+                        <span>{product.reviews.length} Reviews</span>
                       </div>
                       <button className="product-reviews__write">
                         <img src={annotation} alt="" />
@@ -304,7 +378,29 @@ const ProductBody = ({ productType, data, goods }) => {
                     </div>
                   </div>
                   <div className="product-reviews__body">
-                    <div className="product-reviews__item reviews-item">
+                    {product.reviews.map((e) => {
+                      return (
+                        <div
+                          className="product-reviews__item reviews-item"
+                          key={e.id}
+                        >
+                          <div className="reviews-item__header">
+                            <div className="reviews-item__author">{e.name}</div>
+                            <div className="reviews-item__info">
+                              <div className="reviews-item__date">
+                                3 months ago
+                              </div>
+                              <div className="reviews-item__rating">
+                                <img src={stars} alt="stars" />
+                                {e.rating}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="reviews-item__text">{e.text}</div>
+                        </div>
+                      );
+                    })}
+                    {/* <div className="product-reviews__item reviews-item">
                       <div className="reviews-item__header">
                         <div className="reviews-item__author">
                           Oleh Chabanov
@@ -338,7 +434,7 @@ const ProductBody = ({ productType, data, goods }) => {
                         At vero eos et accusamus et iusto odio dignissimos
                         ducimus qui blanditiis praesentium voluptatum deleniti
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <hr />
@@ -371,27 +467,27 @@ const ProductBody = ({ productType, data, goods }) => {
                   }}
                   className="slider-related__slides"
                   modules={[Navigation]}
-                  breakpoints={{ 
-                    0: { 
-                      slidesPerView:1,
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 1,
                     },
-                    480: { // при 768px и выше
-                      slidesPerView:2,
+                    480: {
+                      // при 768px и выше
+                      slidesPerView: 2,
                     },
-                    768: { 
-                      slidesPerView:3,
+                    768: {
+                      slidesPerView: 3,
                     },
-                    992: { 
-                      slidesPerView:4,
+                    992: {
+                      slidesPerView: 4,
                     },
-               
-                  }} 
+                  }}
                 >
                   {data[productType].map(
                     ({ id, image, title, price, rating }) => {
                       return (
                         <SwiperSlide key={id}>
-                          <div className="cards__column" >
+                          <div className="cards__column">
                             <Link
                               to={`${id}`}
                               className="cards__item cards-item"

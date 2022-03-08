@@ -11,7 +11,7 @@
   &__content {
     display: flex;
     gap: 30px;
-    @media(max-width:($md3+px)){
+    @media (max-width: ($md3+px)) {
       flex-direction: column;
     }
   }
@@ -42,10 +42,21 @@
   user-select: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  @media(max-width: ($md2+px)){
+  // gap: 16px;
+
+
+  &__slides {
+    width: 100%;
+    height: 100%;
+  }
+  &__slide {
+    // min-height: 114px;
+    padding: 0 0 114px 0;
+  }
+
+  @media (max-width: ($md2+px)) {
     display: none;
-     }
+  }
   &__control {
     display: flex;
     justify-content: space-around;
@@ -59,6 +70,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-bottom: 16px;
   }
 
   &__down {
@@ -68,14 +80,25 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-bottom: 16px;
   }
 
-  &__slides {
+ 
+
+  element.style {
+    transition-duration: 0ms;
+    transform: translate3d(0px, -261px, 0px);
   }
-  &__slide {
-    // min-height: 114px;
-    padding: 0 0 114px 0;
+  .images-navslider__slides .swiper-wrapper {
+    width: 94px;
+    box-sizing: content-box;
+    display: flex;
+    height: 100vh;
   }
+  // .swiper-vertical>.swiper-wrapper {
+  //   flex-direction: column-reverse;
+  //   justify-content: flex-end;
+  // }
 }
 .images-mainslider {
   user-select: none;
@@ -126,7 +149,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @media(max-width:($md3+px)){
+    @media (max-width: ($md3+px)) {
       min-height: auto;
     }
     img {
@@ -165,7 +188,6 @@
   overflow: hidden;
   max-height: 504px;
 
-  
   .swiper-wrapper {
     width: 94px;
     box-sizing: content-box;
@@ -220,7 +242,7 @@
     // position: relative;
   }
   .swiper-button-disabled {
-    opacity: 0.6;
+    opacity: 0.4;
   }
   &.swiper-container-vertical {
     .swiper-wrapper {
@@ -391,7 +413,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-  gap: 13px;
+    gap: 13px;
     // margin: 0 -10px;
   }
 }
