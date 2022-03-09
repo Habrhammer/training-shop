@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import FilterBlock from "../../filter/filter-block/FilterBlock";
+import StarRating from "../../rating/StarRating";
 import CategoryHeader from "../category-header/CategoryHeader";
-import stars from "./../../../assets/images/rating/stars.svg";
 import "./CategoryBlock.scss";
 
-const CategoryBlock = ({ productType, data, goods }) => {
+const CategoryBlock = ({ productType, goods }) => {
   const colors = useMemo(
     () => [
       ...new Set(
@@ -45,24 +45,23 @@ const CategoryBlock = ({ productType, data, goods }) => {
     [goods, productType]
   );
   const prices = ["$500+", "$200-500", "$100-200", "$50-100", "$0-50"];
-  const dataFilter = {
-    brand: brands,
-    color: colors,
-    price: prices,
-    size: sizes,
-  };
-
-
+  // const dataFilter = {
+  //   brand: brands,
+  //   color: colors,
+  //   price: prices,
+  //   size: sizes,
+  // };
 
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState([]);
 
-  const isShowCounter = (color.length !== 0 ||
+  const isShowCounter =
+    color.length !== 0 ||
     brand.length !== 0 ||
     size.length !== 0 ||
-    price.length !== 0)
+    price.length !== 0;
 
   const onColorChange = ({ target: { checked, value } }) => {
     setColor(
@@ -130,8 +129,8 @@ const CategoryBlock = ({ productType, data, goods }) => {
       data-test-id={`products-page-${productType}`}
     >
       <CategoryHeader productType={productType} />
-      <FilterBlock
-        dataFilter={dataFilter}
+      <FilterBlock data-test-id={`filters-${productType}`}
+        // dataFilter={dataFilter}
         onColorChange={onColorChange}
         colors={colors}
         color={color}
@@ -146,75 +145,75 @@ const CategoryBlock = ({ productType, data, goods }) => {
         price={price}
       />
 
-
-{
-  isShowCounter &&  <div className="category__counter goods-counter">
-  <div className="goods-counter__container _container">
-    <div className="goods-counter__body">
       {isShowCounter && (
-        <div className="goods-counter__column">
-          <div className="goods-counter__found">
-            {filteredGoods.length} items Found
+        <div className="category__counter goods-counter">
+          <div className="goods-counter__container _container">
+            <div className="goods-counter__body">
+              {isShowCounter && (
+                <div className="goods-counter__column">
+                  <div className="goods-counter__found">
+                    {filteredGoods.length} items Found
+                  </div>
+                </div>
+              )}
+              {color.length !== 0 && (
+                <div className="goods-counter__column">
+                  <span className="goods-counter__title">Color: </span>
+                  {color.map((e, i) => {
+                    return (
+                      <span className="goods-counter__item" key={i}>
+                        {e}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+              {brand.length !== 0 && (
+                <div className="goods-counter__column">
+                  <span className="goods-counter__title">Brand:</span>
+                  {brand.map((e, i) => {
+                    return (
+                      <span className="goods-counter__item" key={i}>
+                        {e}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+              {size.length !== 0 && (
+                <div className="goods-counter__column">
+                  <span className="goods-counter__title">Size: </span>
+                  {size.map((e, i) => {
+                    return (
+                      <span className="goods-counter__item" key={i}>
+                        {e}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+              {price.length !== 0 && (
+                <div className="goods-counter__column">
+                  <span className="goods-counter__title">Price:</span>
+                  {price.map((e, i) => {
+                    return (
+                      Array.isArray(e) && (
+                        <span className="goods-counter__item" key={i}>
+                          {e[0]}
+                        </span>
+                      )
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
-      {color.length !== 0 && (
-        <div className="goods-counter__column">
-          <span className="goods-counter__title">Color: </span>
-          {color.map((e, i) => {
-            return (
-              <span className="goods-counter__item" key={i}>
-                {e}
-              </span>
-            );
-          })}
-        </div>
-      )}
-      {brand.length !== 0 && (
-        <div className="goods-counter__column">
-          <span className="goods-counter__title">Brand:</span>
-          {brand.map((e, i) => {
-            return (
-              <span className="goods-counter__item" key={i}>
-                {e}
-              </span>
-            );
-          })}
-        </div>
-      )}
-      {size.length !== 0 && (
-        <div className="goods-counter__column">
-          <span className="goods-counter__title">Size: </span>
-          {size.map((e, i) => {
-            return (
-              <span className="goods-counter__item" key={i}>
-                {e}
-              </span>
-            );
-          })}
-        </div>
-      )}
-      {price.length !== 0 && (
-        <div className="goods-counter__column">
-          <span className="goods-counter__title">Price:</span>
-          {price.map((e, i) => {
-            return (
-              Array.isArray(e) && <span className="goods-counter__item" key={i}>{e[0]}
-              </span>
-            );
-          })}
-        </div>
-      )}
-     
-    </div>
-  </div>
-</div>
-}
-     
 
       <div className="category__body _container">
         <div className="category__cards cards">
-          {filteredGoods.map(({ id, image, images, name, price, rating }) => {
+          {filteredGoods.map(({ id, images, name, price, rating, discount }) => {
             return (
               <div className="cards__column" key={id}>
                 <Link
@@ -223,6 +222,7 @@ const CategoryBlock = ({ productType, data, goods }) => {
                   data-test-id={`clothes-card-${productType}`}
                 >
                   <div className="cards-item__image">
+                    {discount && <span>{discount}</span>}
                     <img
                       src={`https://training.cleverland.by/shop${images[0].url}`}
                       alt={name}
@@ -233,7 +233,7 @@ const CategoryBlock = ({ productType, data, goods }) => {
                   <div className="cards-item__info">
                     <div className="cards-item__price">{`${price} $`}</div>
                     <div className="cards-item__rating">
-                      <img src={stars} alt="" />
+                      <StarRating ratingCount={rating}/>
                     </div>
                   </div>
                 </Link>

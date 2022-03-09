@@ -16,7 +16,7 @@ function App({ data, goods }) {
         <Route
           exact
           path="/"
-          component={() => <MainPage data={data.mainPage} />}
+          component={() => <MainPage goods={goods} data={data.mainPage} />}
         />
         <Route
           exact
@@ -45,7 +45,11 @@ function App({ data, goods }) {
         <Route
           path="/women/:id"
           component={() => (
-            <ProductPage data={data.mainPage} goods={goods} productType="women" />
+            <ProductPage
+              data={data.mainPage}
+              goods={goods}
+              productType="women"
+            />
           )}
         />
         <Route

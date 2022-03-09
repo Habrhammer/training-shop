@@ -78,16 +78,15 @@
     justify-content: center;
     padding: 0 15px;
     margin-bottom: 30px;
-    @media(max-width:($md2+px)){
+    @media (max-width: ($md2+px)) {
       flex: 0 1 33.333%;
     }
-    @media(max-width:($md3+px)){
+    @media (max-width: ($md3+px)) {
       flex: 0 1 50%;
     }
-    @media(max-width:($md4+px)){
+    @media (max-width: ($md4+px)) {
       flex: 0 1 100%;
     }
-
   }
 
   // &__item {
@@ -95,8 +94,20 @@
 }
 .cards-item {
   &__image {
+    position: relative;
     margin-bottom: 16px;
     // padding: 0 0 318px 0;
+    span {
+      position: absolute;
+      font-family: "Spartan-Bold";
+      display: inline-block;
+      padding: 9px 8px;
+      font-size: 12px;
+      line-height: 13px;
+      text-align: center;
+      color: #ffffff;
+      background: #e91e63;
+    }
   }
 
   &__title {
@@ -137,7 +148,7 @@
   &__body {
     display: flex;
     gap: 32px;
-    @media(max-width:($md2+px)){
+    @media (max-width: ($md2+px)) {
       flex-direction: column;
     }
   }
@@ -157,17 +168,16 @@
 
   &__title {
     font-family: "Spartan-Bold";
-margin-right: 5px;
-font-size: 14px;
-line-height: 22px;
-color: #121212;
-
+    margin-right: 5px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
   }
 
   &__item {
     display: flex;
     align-items: center;
-   margin-right: 10px;
+    margin-right: 10px;
     font-family: "Spartan-Regular";
     font-size: 14px;
     line-height: 22px;

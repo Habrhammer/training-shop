@@ -1,23 +1,24 @@
 import React from "react";
 import "./FilterColumn.scss";
 
-const FilterColumn = ({ values, value, onValueChange, dataFilter, title }) => {
+const FilterColumn = ({ values, value, onValueChange, type }) => {
   return (
     <div className="filter__column">
-      <div className="filter__title">{title}</div>
+      <div className="filter__title">{type}</div>
       <div className="filter__list">
-        {values.map((e, ind) => {
+        {values.map((text, ind) => {
           return (
             <div className="filter__item filter-item" key={ind}>
               <label className="filter-item__label">
                 <input
+                  data-test-id={`filter-${type}-${text}`}
                   type="checkbox"
                   id={ind}
-                  value={e}
-                  checked={value.includes(e)}
+                  value={text}
+                  checked={value.includes(text)}
                   onChange={onValueChange}
                 />
-                <span className="filter-item__name">{e}</span>
+                <span className="filter-item__name">{text}</span>
               </label>
             </div>
           );

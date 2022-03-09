@@ -60,16 +60,31 @@
     flex-direction: column;
     gap: 20px;
   }
-  &__item {
-    font-family: "Spartan-Regular";
-    font-size: 12px;
-    line-height: 13px;
-    text-align: center;
-    letter-spacing: 0.06em;
-    color: #121212;
-    opacity: 0.6;
-    margin: 0 16px;
+  &__item:has(input[type="radio"]:checked) {
+    color: red;
   }
+  &__item {
+    margin: 0 16px;
+    cursor: pointer;
+    span {
+      font-family: "Spartan-Regular";
+      font-size: 12px;
+      line-height: 13px;
+      text-align: center;
+      letter-spacing: 0.06em;
+      color: #1A1A1A;
+    
+    }
+    input {
+      display: none;
+    }
+    :checked + span {
+      font-family:"Spartan-SemiBold";
+      color: #121212;
+    
+    }
+  }
+
   @media (min-width: ($md3+px)) {
     &__item:first-child {
       margin-left: 0;

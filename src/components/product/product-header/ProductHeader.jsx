@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ProductHeader.scss";
-import stars from "./../../../assets/images/rating/stars.svg";
+
 import arrow from "./../../../assets/images/category_header/arrow.svg";
 import share from "./../../../assets/images/category_header/share.svg";
+import StarRating from "../../rating/StarRating.jsx";
 
 const ProductHeader = ({ productType, product }) => {
-  console.log(product);
   return (
     <div className="product__header product-header">
       <div className="product-header__container _container">
@@ -22,8 +22,8 @@ const ProductHeader = ({ productType, product }) => {
               </span>
               <img src={arrow} alt="" />
               <span>
-                {`${product.title}`.charAt(0).toUpperCase() +
-                  `${product.title}`.slice(1)}
+                {`${product.name}`.charAt(0).toUpperCase() +
+                  `${product.name}`.slice(1)}
               </span>
             </div>
           </div>
@@ -33,12 +33,14 @@ const ProductHeader = ({ productType, product }) => {
           </div>
         </div>
         <div className="product-header__title">
-          <h2>{product.title}</h2>
+          <h2>{product.name}</h2>
         </div>
         <div className="product-header__bottom">
           <div className="product-header__rating product-rating">
-            <img src={stars} alt="stars" />
-            <span>2 Reviews</span>
+           <span>
+             <StarRating ratingCount={product.rating} isChange={false} /> 
+           </span>
+            <span>{product.reviews ? product.reviews.length : ""} Reviews</span>
           </div>
           <div className="product-header__accounting product-accounting">
             <div className="product-accounting__sku">
