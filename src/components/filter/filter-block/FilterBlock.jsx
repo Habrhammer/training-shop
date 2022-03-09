@@ -28,29 +28,30 @@ const FilterBlock = ({
         <div className="filter__body _container">
           <div className="filter__container" data-test-id={`filters-${productType}`} >
             <FilterColumn
-              data-test-id='filters-color'
+             
               type="color"
               onValueChange={onColorChange}
               values={colors}
               value={color}
               // dataFilter={dataFilter}
             />
-            <FilterColumn
-            data-test-id='filters-brand'
-              type="brand"
-              onValueChange={onBrandChange}
-              values={brands}
-              value={brand}
-              // dataFilter={dataFilter}
-            />
-            <FilterColumn
-            data-test-id='filters-size'
+              <FilterColumn
+          
               type="size"
               onValueChange={onSizeChange}
               values={sizes}
               value={size}
               // dataFilter={dataFilter}
             />
+            <FilterColumn
+        
+              type="brand"
+              onValueChange={onBrandChange}
+              values={brands}
+              value={brand}
+              // dataFilter={dataFilter}
+            />
+          
             <FilterColumn
               type="price"
               onValueChange={onPriceChange}
