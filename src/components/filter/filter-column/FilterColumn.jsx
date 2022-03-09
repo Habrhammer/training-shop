@@ -5,7 +5,7 @@ const FilterColumn = ({ values, value, onValueChange, type }) => {
   return (
     <div className="filter__column">
       <div className="filter__title">{type}</div>
-      <div className="filter__list">
+      <div className="filter__list"  data-test-id={`filters-${type}`}>
         {values.map((text, ind) => {
           return (
             <div className="filter__item filter-item" key={ind}>
