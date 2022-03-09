@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
@@ -28,7 +28,8 @@ import discover from "../../../assets/images/product-options/checkout/discover.s
 import american_express from "../../../assets/images/product-options/checkout/american-express.svg";
 
 import annotation from "../../../assets/images/product-options/checkout/annotation.svg";
-import stars from "../../../assets/images/product-options/checkout/stars.svg";
+
+import StarRating from "../../rating/StarRating";
 
 const checkout = [
   {
@@ -94,7 +95,6 @@ const ProductBody = ({ productType, data, goods }) => {
     ],
     id: "",
   });
-  console.log(product);
 
   useEffect(() => {
     setProduct(
@@ -104,10 +104,18 @@ const ProductBody = ({ productType, data, goods }) => {
     );
   }, [goods, id, productType]);
 
-  let sizeItem = useRef();
+  console.log(product);
+
+  const filteredColors = (array, propertyName) => {
+    return array.filter(
+      (e, i) =>
+        array.findIndex((a) => a[propertyName] === e[propertyName]) === i
+    );
+  };
+  let [color = filteredColors(product.images, "color")[0].color, setColor] =
+    useState();
+
   let [size = product.sizes[0], setSize] = useState();
-
-
 
   const [isBeginning, setBeginning] = useState();
   const [isEnd, setEnd] = useState();
@@ -115,7 +123,7 @@ const ProductBody = ({ productType, data, goods }) => {
   useEffect(() => {
     setBeginning(productMainSlider.isBeginning);
     setEnd(productMainSlider.isEnd);
-  });
+  }, [productMainSlider.isBeginning, productMainSlider.isEnd]);
 
   return (
     <section
@@ -242,17 +250,27 @@ const ProductBody = ({ productType, data, goods }) => {
                 <div className="product-actions__color product-color">
                   <div className="product-color__header">
                     <span>COLOR: </span>
-                    <span>Blue</span>
+                    <span>{color}</span>
                   </div>
                   <div className="product-color__body color-option">
-                    {product.images.map((e) => {
+                    {filteredColors(product.images, "color").map((e, i) => {
                       return (
-                        <div className="color-option__item _ibg">
+                        <label className="color-option__item _ibg" key={e.id}>
+                          <input
+                            type="radio"
+                            name="color"
+                            defaultChecked={i === 0}
+                            value={e.color}
+                            id={e.id}
+                            onClick={() => {
+                              setColor(e.color);
+                            }}
+                          />
                           <img
                             src={`https://training.cleverland.by/shop${e.url}`}
                             alt=""
                           />
-                        </div>
+                        </label>
                       );
                     })}
                   </div>
@@ -263,17 +281,20 @@ const ProductBody = ({ productType, data, goods }) => {
                     <span>{size}</span>
                   </div>
                   <div className="product-size__body size-option">
-                    {product.sizes.map((e) => {
+                    {product.sizes.map((e, i) => {
                       return (
-                        <div
-                          ref={sizeItem}
-                          className="size-option__item"
-                          onClick={() => {
-                            setSize(e);
-                          }}
-                        >
-                          {e}
-                        </div>
+                        <label className="size-option__item" key={i}>
+                          <input
+                            type="radio"
+                            defaultChecked={i === 0}
+                            name="size"
+                            onClick={() => {
+                              setSize(e);
+                            }}
+                          />
+
+                          <span>{e}</span>
+                        </label>
                       );
                     })}
                   </div>
@@ -367,8 +388,13 @@ const ProductBody = ({ productType, data, goods }) => {
 
                     <div className="product-reviews__action">
                       <div className="product-reviews__rating">
-                        <img src={stars} alt="" />
-                        {product.rating}
+                        <span>
+                          <StarRating
+                            ratingCount={product.rating}
+                            isChange={false}
+                          />
+                        </span>
+
                         <span>{product.reviews.length} Reviews</span>
                       </div>
                       <button className="product-reviews__write">
@@ -391,8 +417,10 @@ const ProductBody = ({ productType, data, goods }) => {
                                 3 months ago
                               </div>
                               <div className="reviews-item__rating">
-                                <img src={stars} alt="stars" />
-                                {e.rating}
+                                <StarRating
+                                  ratingCount={e.rating}
+                                  isChange={false}
+                                />
                               </div>
                             </div>
                           </div>
@@ -400,41 +428,6 @@ const ProductBody = ({ productType, data, goods }) => {
                         </div>
                       );
                     })}
-                    {/* <div className="product-reviews__item reviews-item">
-                      <div className="reviews-item__header">
-                        <div className="reviews-item__author">
-                          Oleh Chabanov
-                        </div>
-                        <div className="reviews-item__info">
-                          <div className="reviews-item__date">3 months ago</div>
-                          <div className="reviews-item__rating">
-                            <img src={stars} alt="stars" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="reviews-item__text">
-                        On the other hand, we denounce with righteous
-                        indignation and like men who are so beguiled and
-                        demoralized by the charms of pleasure of the moment
-                      </div>
-                    </div>
-                    <div className="product-reviews__item reviews-item">
-                      <div className="reviews-item__header">
-                        <div className="reviews-item__author">
-                          ShAmAn design
-                        </div>
-                        <div className="reviews-item__info">
-                          <div className="reviews-item__date">3 months ago</div>
-                          <div className="reviews-item__rating">
-                            <img src={stars} alt="stars" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="reviews-item__text">
-                        At vero eos et accusamus et iusto odio dignissimos
-                        ducimus qui blanditiis praesentium voluptatum deleniti
-                      </div>
-                    </div> */}
                   </div>
                 </div>
                 <hr />
@@ -472,7 +465,6 @@ const ProductBody = ({ productType, data, goods }) => {
                       slidesPerView: 1,
                     },
                     480: {
-                      // при 768px и выше
                       slidesPerView: 2,
                     },
                     768: {
@@ -483,8 +475,8 @@ const ProductBody = ({ productType, data, goods }) => {
                     },
                   }}
                 >
-                  {data[productType].map(
-                    ({ id, image, title, price, rating }) => {
+                  {goods[productType].map(
+                    ({ id, images, name, price, rating }) => {
                       return (
                         <SwiperSlide key={id}>
                           <div className="cards__column">
@@ -492,16 +484,23 @@ const ProductBody = ({ productType, data, goods }) => {
                               to={`${id}`}
                               className="cards__item cards-item"
                               data-test-id={`clothes-card-${productType}`}
+                            
                             >
                               <div className="cards-item__image">
-                                <img src={image} alt={title} />
+                                <img
+                                  src={`https://training.cleverland.by/shop${images[0].url}`}
+                                  alt={name}
+                                />
                               </div>
-                              <div className="cards-item__title">{title}</div>
+                              <div className="cards-item__title">{name}</div>
 
                               <div className="cards-item__info">
                                 <div className="cards-item__price">{`${price} $`}</div>
                                 <div className="cards-item__rating">
-                                  <img src={stars} alt="" />
+                                  <StarRating
+                                    ratingCount={rating}
+                                    isChange={false}
+                                  />
                                 </div>
                               </div>
                             </Link>

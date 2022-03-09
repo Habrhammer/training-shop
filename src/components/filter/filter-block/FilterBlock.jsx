@@ -16,7 +16,7 @@ const FilterBlock = ({
   prices,
   price,
   onPriceChange,
-  dataFilter,
+  // dataFilter,
 }) => {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => setIsShow(!isShow);
@@ -25,34 +25,37 @@ const FilterBlock = ({
       <FilterHeader isShow={isShow} toggleShow={toggleShow} />
       {isShow && (
         <div className="filter__body _container">
-          <div className="filter__container">
+          <div className="filter__container" >
             <FilterColumn
-              title="color"
+              data-test-id='filters-color'
+              type="color"
               onValueChange={onColorChange}
               values={colors}
               value={color}
-              dataFilter={dataFilter}
+              // dataFilter={dataFilter}
             />
             <FilterColumn
-              title="brand"
+            data-test-id='filters-brand'
+              type="brand"
               onValueChange={onBrandChange}
               values={brands}
               value={brand}
-              dataFilter={dataFilter}
+              // dataFilter={dataFilter}
             />
             <FilterColumn
-              title="size"
+            data-test-id='filters-size'
+              type="size"
               onValueChange={onSizeChange}
               values={sizes}
               value={size}
-              dataFilter={dataFilter}
+              // dataFilter={dataFilter}
             />
             <FilterColumn
-              title="price"
+              type="price"
               onValueChange={onPriceChange}
               values={prices}
               value={price}
-              dataFilter={dataFilter}
+              // dataFilter={dataFilter}
             />
           </div>
         </div>

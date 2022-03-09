@@ -14,6 +14,7 @@ const FilterHeader = ({ isShow, toggleShow }) => {
       <div className="filter-header__container _container">
         <div className="filter-header__column filter-adjustments">
           <button
+            data-test-id="filter-button"
             onClick={toggleShowHandler}
             className="filter-adjusments__btn"
           >

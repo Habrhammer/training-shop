@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ProductHeader.scss";
-import stars from "./../../../assets/images/rating/stars.svg";
+
 import arrow from "./../../../assets/images/category_header/arrow.svg";
 import share from "./../../../assets/images/category_header/share.svg";
+import StarRating from "../../rating/StarRating.jsx";
 
 const ProductHeader = ({ productType, product }) => {
   return (
@@ -36,8 +37,9 @@ const ProductHeader = ({ productType, product }) => {
         </div>
         <div className="product-header__bottom">
           <div className="product-header__rating product-rating">
-            <img src={stars} alt="stars" />
-            {product.rating}
+           <span>
+             <StarRating ratingCount={product.rating} isChange={false} /> 
+           </span>
             <span>{product.reviews ? product.reviews.length : ""} Reviews</span>
           </div>
           <div className="product-header__accounting product-accounting">
