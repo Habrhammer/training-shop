@@ -16,6 +16,7 @@ const FilterBlock = ({
   prices,
   price,
   onPriceChange,
+  productType
   // dataFilter,
 }) => {
   const [isShow, setIsShow] = useState(false);
@@ -25,7 +26,7 @@ const FilterBlock = ({
       <FilterHeader isShow={isShow} toggleShow={toggleShow} />
       {isShow && (
         <div className="filter__body _container">
-          <div className="filter__container" >
+          <div className="filter__container" data-test-id={`filters-${productType}`} >
             <FilterColumn
               data-test-id='filters-color'
               type="color"

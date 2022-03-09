@@ -38,7 +38,7 @@ const Clothes = ({ productType, goods, data }) => {
                   defaultChecked={index === 0}
                   type="radio"
                   name={`particular-${productType}`}
-                  onChange={onParticularChange}
+                  onClick={onParticularChange}
                   value={e.particularName}
                   id={e.particularName}
                 />
