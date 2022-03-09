@@ -129,8 +129,9 @@ const CategoryBlock = ({ productType, goods }) => {
       data-test-id={`products-page-${productType}`}
     >
       <CategoryHeader productType={productType} />
-      <FilterBlock data-test-id={`filters-${productType}`}
+      <FilterBlock
         // dataFilter={dataFilter}
+        productType={productType}
         onColorChange={onColorChange}
         colors={colors}
         color={color}
