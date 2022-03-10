@@ -32,7 +32,7 @@ const Clothes = ({ productType, goods, data }) => {
         <div className="clothes__menu clothes-menu">
           {clothesMenu.map((e, index) => {
             return (
-              <label className="clothes-menu__item" key={index}>
+              <label className="clothes-menu__item" key={index} >
                 <input
                   data-test-id={`clothes-${productType}-${e.particularName}`}
                   defaultChecked={index === 0}
