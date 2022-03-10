@@ -17,9 +17,11 @@ const ProductHeader = ({ productType, product }) => {
                 <span>Home</span>
               </Link>
               <img src={arrow} alt="" />
-              <span>
-                {productType.charAt(0).toUpperCase() + productType.slice(1)}
-              </span>
+              <Link to={`/${productType}`}>
+                <span>
+                  {productType.charAt(0).toUpperCase() + productType.slice(1)}
+                </span>
+              </Link>
               <img src={arrow} alt="" />
               <span>
                 {`${product.name}`.charAt(0).toUpperCase() +
@@ -37,9 +39,9 @@ const ProductHeader = ({ productType, product }) => {
         </div>
         <div className="product-header__bottom">
           <div className="product-header__rating product-rating">
-           <span>
-             <StarRating ratingCount={product.rating} isChange={false} /> 
-           </span>
+            <span>
+              <StarRating ratingCount={product.rating} isChange={false} />
+            </span>
             <span>{product.reviews ? product.reviews.length : ""} Reviews</span>
           </div>
           <div className="product-header__accounting product-accounting">

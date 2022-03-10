@@ -102,7 +102,7 @@ const ProductBody = ({ productType, data, goods }) => {
         return prod.id === id;
       })
     );
-  }, [goods, id, productType]);
+  }, [goods, id, productType, product]);
 
   console.log(product);
 
@@ -115,7 +115,11 @@ const ProductBody = ({ productType, data, goods }) => {
   let [color = filteredColors(product.images, "color")[0].color, setColor] =
     useState();
 
-  let [size = product.sizes[0], setSize] = useState();
+  let [size, setSize] = useState();
+
+  useEffect(() => {
+    setSize(product.sizes[0]);
+  }, [product]);
 
   const [isBeginning, setBeginning] = useState();
   const [isEnd, setEnd] = useState();
@@ -283,10 +287,11 @@ const ProductBody = ({ productType, data, goods }) => {
                   <div className="product-size__body size-option">
                     {product.sizes.map((e, i) => {
                       return (
-                        <label className="size-option__item" key={i}>
+                        <label className="size-option__item" key={i + id}>
                           <input
                             type="radio"
                             defaultChecked={i === 0}
+                            value={e}
                             name="size"
                             onClick={() => {
                               setSize(e);
@@ -482,9 +487,12 @@ const ProductBody = ({ productType, data, goods }) => {
                           <div className="cards__column">
                             <Link
                               to={`${id}`}
+                              onClick={() => {
+                                productMainSlider.slideTo(0, false);
+                                productNavSlider.slideTo(0, false);
+                              }}
                               className="cards__item cards-item"
                               data-test-id={`clothes-card-${productType}`}
-                            
                             >
                               <div className="cards-item__image">
                                 <img
