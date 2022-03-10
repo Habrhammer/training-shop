@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import StarRating from "../../rating/StarRating";
 
 const ClothesBody = ({ particularGoods, productType }) => {
-  console.log(particularGoods);
+  // console.log(particularGoods);
   return (
     <div className="clothes__body _container">
       <div className="clothes__cards cards">
