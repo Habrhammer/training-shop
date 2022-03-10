@@ -32,13 +32,13 @@ const Clothes = ({ productType, goods, data }) => {
         <div className="clothes__menu clothes-menu">
           {clothesMenu.map((e, index) => {
             return (
-              <label className="clothes-menu__item" key={index} onClick={onParticularChange}>
+              <label className="clothes-menu__item" key={index}>
                 <input
                   data-test-id={`clothes-${productType}-${e.particularName}`}
                   defaultChecked={index === 0}
                   type="radio"
                   name={`particular-${productType}`}
-                 
+                  onClick={onParticularChange}
                   value={e.particularName}
                   id={e.particularName}
                 />
