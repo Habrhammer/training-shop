@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/training-shop/static/css/main.71af6e9e.css",
-    "main.js": "/training-shop/static/js/main.d45d4ae8.js",
+    "main.css": "/training-shop/static/css/main.49b8ebb9.css",
+    "main.js": "/training-shop/static/js/main.04720dc0.js",
     "static/js/787.bf500a13.chunk.js": "/training-shop/static/js/787.bf500a13.chunk.js",
     "static/media/Inter-Regular.ttf": "/training-shop/static/media/Inter-Regular.2391725004ae05a27e8e.ttf",
     "static/media/woman.png": "/training-shop/static/media/woman.4152b783e591f01bafb6.png",
@@ -81,12 +81,12 @@
     "static/media/arrow_right.svg": "/training-shop/static/media/arrow_right.6a871d585953b3e789bd0c0fea717ae1.svg",
     "static/media/close.svg": "/training-shop/static/media/close.c1acda466a6f57fc13cc7c251b46df83.svg",
     "static/media/arrow.svg": "/training-shop/static/media/arrow.9f4dd338b481a943c89e0ee673f34fe5.svg",
-    "main.71af6e9e.css.map": "/training-shop/static/css/main.71af6e9e.css.map",
-    "main.d45d4ae8.js.map": "/training-shop/static/js/main.d45d4ae8.js.map",
+    "main.49b8ebb9.css.map": "/training-shop/static/css/main.49b8ebb9.css.map",
+    "main.04720dc0.js.map": "/training-shop/static/js/main.04720dc0.js.map",
     "787.bf500a13.chunk.js.map": "/training-shop/static/js/787.bf500a13.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.71af6e9e.css",
-    "static/js/main.d45d4ae8.js"
+    "static/css/main.49b8ebb9.css",
+    "static/js/main.04720dc0.js"
   ]
 }
