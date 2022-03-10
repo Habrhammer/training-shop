@@ -195,13 +195,15 @@
     height: 100vh;
     // @media(max-width: ($md2+px)){
     //   flex-direction: row;
-    //   justify-content: flex-start;
+    
+    //   justify-content: flex-start;.swiper-slide-active+.swiper-slide-next
     // }
+
   }
   .swiper-slide {
     opacity: 0.4;
   }
-  .swiper-slide-thumb-active {
+  .swiper-slide-thumb-active  {
     opacity: 1;
   }
   &.swiper-container-vertical {
@@ -383,7 +385,7 @@
       padding: 14px 15px;
     }
     input:checked + span{
-      border: 2px solid #121212;
+      outline: 2px solid #121212;
     }
 
  
