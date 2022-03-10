@@ -11,6 +11,7 @@ import arrow_right from "../../assets/images/main_slider/arrow_right.svg";
 import accessories from "./../../assets/images/category_nav/accessories.jpg";
 import men from "./../../assets/images/category_nav/men.jpg";
 import women from "./../../assets/images/category_nav/women.jpg";
+import { Link } from "react-router-dom";
 
 const MainBlock = () => {
   return (
@@ -73,33 +74,16 @@ const MainBlock = () => {
            
             </SwiperSlide>
           </Swiper>
-          {/* <div className="mainblock-slider__body">
-
-            <div className="mainblock-slider__item">
-              <div className="mainblock-slider__image">
-                <img src={slide} alt="" />
-              </div>
-              <div className="mainblock-slider__content content-slider">
-                <a href="/#" className="content-slider__link">
-                  <div className="content-slider__title">BANNER</div>
-                  <div className="content-slider__text">your title text</div>
-                </a>
-              </div>
-            </div>
-
-          </div> */}
-
-          {/* <div className="slider__navigation-prev"></div>
-          <div className="slider__navigation-next"></div> */}
+     
         </div>
         <div className="mainblock__content card-category">
           <div className="card-category__column">
             <div className="card-category__item _ibg">
               <img className="card-category__image" src={women} alt="" />
               <div className="card-category__wrapper">
-                <a href="/#" className="card-category__link">
+                <Link to="/women" className="card-category__link">
                   WOMEN
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -107,9 +91,9 @@ const MainBlock = () => {
             <div className="card-category__item _ibg">
               <img className="card-category__image" src={men} alt="" />
               <div className="card-category__wrapper">
-                <a href="/#" className="card-category__link">
+                <Link to="/men" className="card-category__link">
                   MEN
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -117,9 +101,9 @@ const MainBlock = () => {
             <div className="card-category__item _ibg">
               <img className="card-category__image" src={accessories} alt="" />
               <div className="card-category__wrapper">
-                <a href="/#" className="card-category__link">
+                <Link to="/accessories" className="card-category__link">
                   ACCESSORIES
-                </a>
+                </Link>
               </div>
             </div>
           </div>
