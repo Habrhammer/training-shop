@@ -64,10 +64,13 @@ const checkout = [
 
 const ProductBody = ({ productType, data, goods }) => {
   const { id } = useParams();
-  const [imagesNavSlider, setImagesNavSlider] = useState(null);
 
-  const [productMainSlider, setProductMainSlider] = useState({});
-  const [productNavSlider, setProductNavSlider] = useState({});
+  const [productNavSlider, setProductNavSlider] = useState(null);
+  const [productMainSlider, setProductMainSlider] = useState(null);
+
+  useEffect(()=>{
+    productMainSlider && productMainSlider.update()
+  },[productMainSlider])
 
   const [product, setProduct] = useState({
     name: "",
@@ -121,14 +124,6 @@ const ProductBody = ({ productType, data, goods }) => {
     setSize(product.sizes[0]);
   }, [product]);
 
-  const [isBeginning, setBeginning] = useState();
-  const [isEnd, setEnd] = useState();
-
-  useEffect(() => {
-    setBeginning(productMainSlider.isBeginning);
-    setEnd(productMainSlider.isEnd);
-  }, [productMainSlider.isBeginning, productMainSlider.isEnd]);
-
   return (
     <section
       className="product product-page"
@@ -142,11 +137,9 @@ const ProductBody = ({ productType, data, goods }) => {
               <div className="product-images__navslider images-navslider">
                 <div className="images-navslider__control">
                   <div
-                    className="images-navslider__up "
+                    className="images-navslider__up"
                     onClick={() => {
-                      productNavSlider.slidePrev();
-                      setBeginning(productMainSlider.isBeginning);
-                      setEnd(productMainSlider.isEnd);
+                      productMainSlider.slidePrev();
                     }}
                   >
                     <img src={up} alt="up" />
@@ -154,9 +147,7 @@ const ProductBody = ({ productType, data, goods }) => {
                   <div
                     className="images-navslider__down"
                     onClick={() => {
-                      productNavSlider.slideNext();
-                      setBeginning(productMainSlider.isBeginning);
-                      setEnd(productMainSlider.isEnd);
+                      productMainSlider.slideNext();
                     }}
                   >
                     <img src={down} alt="down" />
@@ -164,13 +155,14 @@ const ProductBody = ({ productType, data, goods }) => {
                 </div>
 
                 <Swiper
-                  onSwiper={setImagesNavSlider}
-                  onInit={(ev) => {
-                    setProductNavSlider(ev);
-                  }}
+                  onSwiper={setProductNavSlider}
+                  direction="vertical"
                   spaceBetween={18}
                   slidesPerView={4}
-                  direction="vertical"
+                  navigation={{
+                    nextEl: ".images-navslider__down",
+                    prevEl: ".images-navslider__up",
+                  }}
                   className="images-navslider__slides"
                   modules={[Navigation, Thumbs]}
                 >
@@ -190,48 +182,23 @@ const ProductBody = ({ productType, data, goods }) => {
               </div>
               <div className="product-images__mainslider images-mainslider">
                 <Swiper
+                  onSwiper={setProductMainSlider}
+                  thumbs={{ swiper: productNavSlider }}
+                  observer={true}
+                  direction="horizontal"
+                  slidesPerView={1}
                   data-test-id="product-slider"
                   className="images-mainslider__slides"
-                  slidesPerView={1}
-                  direction="horizontal"
-                  thumbs={{ swiper: imagesNavSlider }}
-                  onInit={(ev) => {
-                    setProductMainSlider(ev);
-                  }}
                   navigation={{
-                    nextEl: ".images-navslider__down",
-                    prevEl: ".images-navslider__up ",
+                    nextEl: ".images-mainslider__next",
+                    prevEl: ".images-mainslider__prev",
                   }}
                   modules={[Navigation, Thumbs]}
                 >
-                  <div
-                    className={
-                      isBeginning
-                        ? `images-mainslider__prev swiper-button-disabled`
-                        : `images-mainslider__prev `
-                    }
-                    onClick={() => {
-                      productMainSlider.slidePrev();
-                      productNavSlider.slidePrev();
-                      setBeginning(productMainSlider.isBeginning);
-                      setEnd(productMainSlider.isEnd);
-                    }}
-                  >
+                  <div className="images-mainslider__prev">
                     <img src={prev} alt="prev" />
                   </div>
-                  <div
-                    className={
-                      isEnd
-                        ? `images-mainslider__next swiper-button-disabled`
-                        : `images-mainslider__next `
-                    }
-                    onClick={() => {
-                      productMainSlider.slideNext();
-                      productNavSlider.slideNext();
-                      setBeginning(productMainSlider.isBeginning);
-                      setEnd(productMainSlider.isEnd);
-                    }}
-                  >
+                  <div className="images-mainslider__next">
                     <img src={next} alt="next" />
                   </div>
                   {product.images.map((e) => {
