@@ -12,16 +12,14 @@ const ProductSliders = ({product}) => {
 
    const [imagesNavSlider, setImagesNavSlider] = useState(null);
 
+   
    const [productMainSlider, setProductMainSlider] = useState({});
-   const [productNavSlider, setProductNavSlider] = useState({});
+   
 
    const [isBeginning, setBeginning] = useState();
   const [isEnd, setEnd] = useState();
 
-   const SlideTo = () => {
-      
-   }
-
+ 
 
   useEffect(() => {
    setBeginning(productMainSlider.isBeginning);
