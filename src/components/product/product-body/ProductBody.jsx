@@ -106,6 +106,10 @@ const ProductBody = ({ productType, data, goods }) => {
 
   console.log(product);
 
+
+
+
+
   const filteredColors = (array, propertyName) => {
     return array.filter(
       (e, i) =>
@@ -197,6 +201,7 @@ const ProductBody = ({ productType, data, goods }) => {
                   thumbs={{ swiper: imagesNavSlider }}
                   onInit={(ev) => {
                     setProductMainSlider(ev);
+                    console.log("!!!!!!!");
                   }}
                   navigation={{
                     nextEl: ".images-navslider__down",
