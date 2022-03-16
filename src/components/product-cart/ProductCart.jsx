@@ -47,13 +47,13 @@ const ProductCart = ({ setShow, isShow }) => {
     <>
       <div
         className={
-          isShow ? `product-cart-overlay show` : `product-cart-overlay`
+          isShow ? `product-cart-overlay visible` : `product-cart-overlay`
         }
         onClick={setShowHandler}
       ></div>
       <div
         data-test-id="cart"
-        className={isShow ? `product-cart cart show` : `product-cart cart`}
+        className={isShow ? `product-cart cart visible` : `product-cart cart`}
         onClick={(e) => {
           e.stopPropagation();
         }}
@@ -108,7 +108,7 @@ const ProductCart = ({ setShow, isShow }) => {
                               {quantity}
                             </div>
                             <button
-                              data-tst-id="plus-product"
+                              data-test-id="plus-product"
                               className="item-quantity__increase"
                               onClick={() => {
                                 increaseOrder(id);
