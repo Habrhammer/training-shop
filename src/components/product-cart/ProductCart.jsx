@@ -118,7 +118,7 @@ const ProductCart = ({ setShow, isShow }) => {
                             </button>
                           </div>
                           <div className="cart-item__price">
-                            ${price * quantity}
+                            ${(price * quantity).toFixed(2)}
                           </div>
                           <button
                             data-test-id="remove-product"
@@ -143,7 +143,7 @@ const ProductCart = ({ setShow, isShow }) => {
             <>
               <div className="cart__total">
                 <span>Total:</span>
-                <span>${sumPrice}</span>
+                <span>${sumPrice.toFixed(2)}</span>
               </div>
               <div className="cart__buttons">
                 <button>FURTHER</button>
