@@ -8,7 +8,7 @@
   transform: translateX(100%);
   background: rgba(18, 18, 18, 0.4);
 }
-.product-cart-overlay.show {
+.product-cart-overlay.visible {
   transform: translate(0%);
 }
 
@@ -28,7 +28,7 @@
     width: 100%;
   }
 }
-.product-cart.show {
+.product-cart.visible {
   transform: translateX(0%);
 }
 
