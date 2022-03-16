@@ -30,6 +30,8 @@ import american_express from "../../../assets/images/product-options/checkout/am
 import annotation from "../../../assets/images/product-options/checkout/annotation.svg";
 
 import StarRating from "../../rating/StarRating";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../../redux/reducers/cartReducer";
 
 const checkout = [
   {
@@ -63,14 +65,12 @@ const checkout = [
 ];
 
 const ProductBody = ({ productType, data, goods }) => {
+
+
   const { id } = useParams();
 
   const [productNavSlider, setProductNavSlider] = useState(null);
   const [productMainSlider, setProductMainSlider] = useState(null);
-
-  useEffect(()=>{
-    productMainSlider && productMainSlider.update()
-  },[productMainSlider])
 
   const [product, setProduct] = useState({
     name: "",
@@ -107,18 +107,48 @@ const ProductBody = ({ productType, data, goods }) => {
     );
   }, [goods, id, productType, product]);
 
-  console.log(product);
-
   const filteredColors = (array, propertyName) => {
     return array.filter(
       (e, i) =>
         array.findIndex((a) => a[propertyName] === e[propertyName]) === i
     );
   };
+
   let [color = filteredColors(product.images, "color")[0].color, setColor] =
     useState();
 
+  let [urlImage = filteredColors(product.images, "color")[0].url, setUrlImage] =
+    useState();
+
   let [size, setSize] = useState();
+
+  const dispatch = useDispatch();
+  const productsInCart = useSelector(({ cart }) => {
+    return cart.order;
+  });
+
+  let orderId = `${product.id}_${color}_${size}`;
+
+  const addOrder = (order) => {
+    dispatch(addToCart(order));
+  };
+
+  const removeOrder = (id) => {
+    dispatch(removeFromCart(id))
+  }
+
+ 
+
+  const isProductInCart = productsInCart
+    .map((e) => {
+      return e.id;
+    })
+    .includes(`${product.id}_${color}_${size}`);
+
+   
+
+
+  console.log(isProductInCart);
 
   useEffect(() => {
     setSize(product.sizes[0]);
@@ -235,6 +265,7 @@ const ProductBody = ({ productType, data, goods }) => {
                             id={e.id}
                             onClick={() => {
                               setColor(e.color);
+                              setUrlImage(e.url);
                             }}
                           />
                           <img
@@ -279,7 +310,24 @@ const ProductBody = ({ productType, data, goods }) => {
                 <hr />
                 <div className="product-actions__pay product-pay">
                   <div className="product-pay__price">$ {product.price}</div>
-                  <button className="product-pay__btn">ADD TO CARD</button>
+                  <button
+                    data-test-id='add-cart-button'
+                    className="product-pay__btn"
+                    onClick={() => {
+                      isProductInCart ? removeOrder(orderId) : addOrder({
+                        id: orderId,
+                        name: product.name,
+                        color: color,
+                        image: urlImage,
+                        size: size,
+                        price: product.price,
+                        quantity: 1,
+                      })
+
+                    }}
+                  >
+                    {isProductInCart ? "REMOVE TO CARD" : "ADD TO CARD"}
+                  </button>
                   <button className="product-pay__favorite">
                     <img src={heart} alt="heart" />
                   </button>
