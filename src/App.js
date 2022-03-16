@@ -5,10 +5,10 @@ import Footer from "./components/footer/Footer";
 import MainPage from "./views/main/MainPage";
 import ProductPage from "./views/product/ProductPage";
 import CategoryPage from "./views/category/CategoryPage";
+// import { useState } from "react";
 
 function App({ data, goods }) {
-  // console.log(data);
-  // console.log(goods);
+  // const [isShow, setShow] = useState(false)
   return (
     <div className="app" data-test-id="app">
       <Header headerData={data.header} />

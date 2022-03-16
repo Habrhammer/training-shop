@@ -1,0 +1,242 @@
+@use "src" as *;
+
+.product-cart-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 400;
+  transform: translateX(100%);
+  background: rgba(18, 18, 18, 0.4);
+}
+.product-cart-overlay.show {
+  transform: translate(0%);
+}
+
+.product-cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 388px;
+  z-index: 500;
+  transform: translateX(100%);
+  transition: 0.2s ease-in-out;
+  @media(max-width:($md3 + px)){
+    width: 100%;
+  }
+}
+.product-cart.show {
+  transform: translateX(0%);
+}
+
+.cart {
+  &__header {
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px;
+    height: 100%;
+  }
+  &__tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  &__tab {
+  }
+
+  &__container {
+    overflow: auto;
+    flex: 0 1 100vh;
+  }
+
+  &__container::-webkit-scrollbar {
+    width: 3px;
+    background-color: #E6E6E6;
+  }
+  
+  &__container::-webkit-scrollbar-thumb {
+ 
+    background-color: #8D8B8B;
+  }
+  
+  &__container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    background-color: #E6E6E6;
+  }
+  
+
+  &__message {
+    font-family: "Spartan-SemiBold";
+    font-size: 26px;
+    line-height: 150%;
+    text-align: center;
+  }
+
+  &__item {
+    padding: 13px 5px 13px 0;
+    border-bottom: 2px solid #e6e6e6;
+  }
+
+  &__total {
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span:first-child {
+      font-family: "Spartan-Regular";
+      font-size: 14px;
+      line-height: 22px;
+      color: #121212;
+    }
+
+    span:last-child {
+      font-family: "Spartan-SemiBold";
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #121212;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 0 1 25%;
+    button {
+      // flex: 1 0 100%;
+    
+      padding: 17px 0;
+      font-family: "Spartan-Medium";
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    button:nth-child(1){
+      background: #121212;
+      color: #fff;
+      opacity: 0.9;
+    }
+    button:nth-child(2) {
+      background: #f8f8f8;
+      color: #121212;
+    }
+  }
+}
+.cart-header {
+  background: #121212;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 24px;
+  &__title {
+    font-family: "Spartan-Bold";
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  &__button {
+    cursor: pointer;
+  }
+}
+
+.cart-item {
+  display: flex;
+  gap: 16px;
+  &__image {
+    width: 83px;
+    height: 120px;
+
+    img {
+    }
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1;
+  }
+
+  &__title {
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+    opacity: 0.6;
+  }
+
+  &__spec {
+    font-family: "Spartan-Bold";
+    font-size: 12px;
+    line-height: 18px;
+    color: #121212;
+    margin: 0 0 auto;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__quantity {
+  }
+
+  &__price {
+    font-family: "Spartan-Bold";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    /* identical to box height, or 157% */
+
+    /* dark */
+
+    color: #121212;
+  }
+
+  &__delete {
+  }
+}
+.item-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: #f8f8f8;
+  padding: 6px 0;
+  min-width: 81px;
+  &__decrease {
+    cursor: pointer;
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+  }
+
+  &__count {
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+  }
+
+  &__increase {
+    cursor: pointer;
+    font-family: "Spartan-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: #121212;
+  }
+}
