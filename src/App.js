@@ -5,9 +5,21 @@ import Footer from "./components/footer/Footer";
 import MainPage from "./views/main/MainPage";
 import ProductPage from "./views/product/ProductPage";
 import CategoryPage from "./views/category/CategoryPage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { requestProducts } from "./redux/reducers/productsReducer";
 // import { useState } from "react";
 
-function App({ data, goods }) {
+function App({ data }) {
+  const goods = useSelector(({ products }) => {
+    return products;
+  });
+ 
+  let dispatch = useDispatch();
+  useEffect(()=>{
+    
+    dispatch(requestProducts())
+  },[dispatch])
   // const [isShow, setShow] = useState(false)
   return (
     <div className="app" data-test-id="app">

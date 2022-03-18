@@ -7,7 +7,7 @@ const ClothesBody = ({ particularGoods, productType }) => {
   return (
     <div className="clothes__body _container">
       <div className="clothes__cards cards">
-        {particularGoods.map(
+        {particularGoods && particularGoods.map(
           ({ id, images, name, price, rating, discount }) => {
             return (
               <div className="cards__column" key={id}>

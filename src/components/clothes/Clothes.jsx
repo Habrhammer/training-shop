@@ -21,7 +21,7 @@ const Clothes = ({ productType, goods, data }) => {
     setParticular(value);
   };
 
-  const particularGoods = goods[productType].filter((n) => {
+  const particularGoods = goods.products[productType] && goods.products[productType].filter((n) => {
     return n.particulars[particular];
   });
 
