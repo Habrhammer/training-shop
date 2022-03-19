@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { requestProducts } from "./redux/reducers/productsReducer";
 import Loader from "./components/loader/Loader";
-import Error from "./components/error/error";
+import Error from "./components/error/Error";
 // import { useState } from "react";
 
 function App({ data }) {
