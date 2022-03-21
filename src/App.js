@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { requestProducts } from "./redux/reducers/productsReducer";
 import Loader from "./components/loader/Loader";
-import Error from "./components/error/Error";
+// import Error from "./components/error/Error";
 // import { useState } from "react";
 
 function App({ data }) {
@@ -26,7 +26,7 @@ function App({ data }) {
     <div className="app" data-test-id="app">
       {goods.isLoading && <Loader data-test-id="loader"/>}
       <Header headerData={data.header} />
-      {goods.isError && <Error data-test-id="error" statusError={goods.statusError}/>}
+      {/* {goods.isError && <Error data-test-id="error" statusError={goods.statusError}/>} */}
       <Switch>
         <Route
           exact
