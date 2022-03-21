@@ -17,8 +17,6 @@ const Header = ({ headerData }) => {
     return cart.order;
   });
 
-  console.log(productsInCart.length);
-
   const [isShow, setShow] = useState(false);
 
   const [blockScroll, allowScroll] = useScrollBlock();
