@@ -6,10 +6,11 @@ import CategoryHeader from "../category-header/CategoryHeader";
 import "./CategoryBlock.scss";
 
 const CategoryBlock = ({ productType, goods }) => {
+
   const colors = useMemo(
     () => [
       ...new Set(
-        goods[productType]
+        goods.products && goods.products[productType]
           .map((n) => {
             return n.images.map((e) => {
               return e.color;
@@ -20,11 +21,13 @@ const CategoryBlock = ({ productType, goods }) => {
     ],
     [goods, productType]
   );
+ 
+  
 
   const sizes = useMemo(
     () => [
       ...new Set(
-        goods[productType]
+        goods.products && goods.products[productType]
           .map((n) => {
             return n.sizes;
           })
@@ -37,7 +40,7 @@ const CategoryBlock = ({ productType, goods }) => {
   const brands = useMemo(
     () => [
       ...new Set(
-        goods[productType].map((n, i) => {
+        goods.products && goods.products[productType].map((n, i) => {
           return n.brand;
         })
       ),
@@ -99,7 +102,7 @@ const CategoryBlock = ({ productType, goods }) => {
     );
   };
 
-  const filteredGoods = goods[productType].filter((n) => {
+  const filteredGoods = goods.products && goods.products[productType].filter((n) => {
     return (
       (!color.length ||
         n.images
@@ -214,7 +217,7 @@ const CategoryBlock = ({ productType, goods }) => {
 
       <div className="category__body _container">
         <div className="category__cards cards">
-          {filteredGoods.map(({ id, images, name, price, rating, discount }) => {
+          {filteredGoods && filteredGoods.map(({ id, images, name, price, rating, discount }) => {
             return (
               <div className="cards__column" key={id}>
                 <Link

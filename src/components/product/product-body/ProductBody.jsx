@@ -32,6 +32,7 @@ import annotation from "../../../assets/images/product-options/checkout/annotati
 import StarRating from "../../rating/StarRating";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../../redux/reducers/cartReducer";
+import { requestProduct } from "../../../redux/reducers/productReducer";
 
 const checkout = [
   {
@@ -64,65 +65,28 @@ const checkout = [
   },
 ];
 
-const ProductBody = ({ productType, data, goods }) => {
-
-
+const ProductBody = ({ productType, goods }) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const [productNavSlider, setProductNavSlider] = useState(null);
   const [productMainSlider, setProductMainSlider] = useState(null);
 
-  const [product, setProduct] = useState({
-    name: "",
-    category: "",
-    brand: "",
-    material: "",
-    rating: null,
-    price: null,
-    sizes: [""],
-    discount: null,
-    reviews: [
-      {
-        name: "",
-        text: "",
-        rating: null,
-        id: "",
-      },
-    ],
-    images: [
-      {
-        color: "",
-        url: "",
-        id: "",
-      },
-    ],
-    id: "",
+  const { product } = useSelector(({ product }) => {
+    return product;
   });
 
-  useEffect(() => {
-    setProduct(
-      ...goods[productType].filter((prod) => {
-        return prod.id === id;
-      })
-    );
-  }, [goods, id, productType, product]);
-
-  const filteredColors = (array, propertyName) => {
+  const filteredColors = (array = [], propertyName) => {
     return array.filter(
       (e, i) =>
         array.findIndex((a) => a[propertyName] === e[propertyName]) === i
     );
   };
 
-  let [color = filteredColors(product.images, "color")[0].color, setColor] =
-    useState();
-
-  let [urlImage = filteredColors(product.images, "color")[0].url, setUrlImage] =
-    useState();
-
+  let [color, setColor] = useState();
+  let [urlImage, setUrlImage] = useState();
   let [size, setSize] = useState();
 
-  const dispatch = useDispatch();
   const productsInCart = useSelector(({ cart }) => {
     return cart.order;
   });
@@ -134,10 +98,14 @@ const ProductBody = ({ productType, data, goods }) => {
   };
 
   const removeOrder = (id) => {
-    dispatch(removeFromCart(id))
-  }
+    dispatch(removeFromCart(id));
+  };
 
- 
+  useEffect(() => {
+    dispatch(requestProduct(id));
+  }, [dispatch, id]);
+
+
 
   const isProductInCart = productsInCart
     .map((e) => {
@@ -145,14 +113,15 @@ const ProductBody = ({ productType, data, goods }) => {
     })
     .includes(`${product.id}_${color}_${size}`);
 
-   
 
-
-  console.log(isProductInCart);
 
   useEffect(() => {
-    setSize(product.sizes[0]);
-  }, [product]);
+    product.images &&
+      setColor(filteredColors(product.images, "color")[0].color);
+    product.sizes && setSize(product.sizes[0]);
+    product.images &&
+      setUrlImage(filteredColors(product.images, "color")[0].url);
+  }, [product.images, product.sizes]);
 
   return (
     <section
@@ -196,18 +165,19 @@ const ProductBody = ({ productType, data, goods }) => {
                   className="images-navslider__slides"
                   modules={[Navigation, Thumbs]}
                 >
-                  {product.images.map((e) => {
-                    return (
-                      <SwiperSlide key={e.id}>
-                        <div className="images-navslider__slide _ibg">
-                          <img
-                            src={`https://training.cleverland.by/shop${e.url}`}
-                            alt={""}
-                          />
-                        </div>
-                      </SwiperSlide>
-                    );
-                  })}
+                  {product.images &&
+                    product.images.map((e) => {
+                      return (
+                        <SwiperSlide key={e.id}>
+                          <div className="images-navslider__slide _ibg">
+                            <img
+                              src={`https://training.cleverland.by/shop${e.url}`}
+                              alt={""}
+                            />
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
                 </Swiper>
               </div>
               <div className="product-images__mainslider images-mainslider">
@@ -231,18 +201,19 @@ const ProductBody = ({ productType, data, goods }) => {
                   <div className="images-mainslider__next">
                     <img src={next} alt="next" />
                   </div>
-                  {product.images.map((e) => {
-                    return (
-                      <SwiperSlide key={e.id}>
-                        <div className="images-mainslider__slide">
-                          <img
-                            src={`https://training.cleverland.by/shop${e.url}`}
-                            alt={""}
-                          />
-                        </div>
-                      </SwiperSlide>
-                    );
-                  })}
+                  {product.images &&
+                    product.images.map((e) => {
+                      return (
+                        <SwiperSlide key={e.id}>
+                          <div className="images-mainslider__slide">
+                            <img
+                              src={`https://training.cleverland.by/shop${e.url}`}
+                              alt={""}
+                            />
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
                 </Swiper>
               </div>
             </div>
@@ -283,23 +254,24 @@ const ProductBody = ({ productType, data, goods }) => {
                     <span>{size}</span>
                   </div>
                   <div className="product-size__body size-option">
-                    {product.sizes.map((e, i) => {
-                      return (
-                        <label className="size-option__item" key={i + id}>
-                          <input
-                            type="radio"
-                            defaultChecked={i === 0}
-                            value={e}
-                            name="size"
-                            onClick={() => {
-                              setSize(e);
-                            }}
-                          />
+                    {product.sizes &&
+                      product.sizes.map((e, i) => {
+                        return (
+                          <label className="size-option__item" key={i + id}>
+                            <input
+                              type="radio"
+                              defaultChecked={i === 0}
+                              value={e}
+                              name="size"
+                              onClick={() => {
+                                setSize(e);
+                              }}
+                            />
 
-                          <span>{e}</span>
-                        </label>
-                      );
-                    })}
+                            <span>{e}</span>
+                          </label>
+                        );
+                      })}
                   </div>
                   <div className="product-size__guide">
                     <img src={clothes_hanger} alt="" />
@@ -311,19 +283,20 @@ const ProductBody = ({ productType, data, goods }) => {
                 <div className="product-actions__pay product-pay">
                   <div className="product-pay__price">$ {product.price}</div>
                   <button
-                    data-test-id='add-cart-button'
+                    data-test-id="add-cart-button"
                     className="product-pay__btn"
                     onClick={() => {
-                      isProductInCart ? removeOrder(orderId) : addOrder({
-                        id: orderId,
-                        name: product.name,
-                        color: color,
-                        image: urlImage,
-                        size: size,
-                        price: product.price,
-                        quantity: 1,
-                      })
-
+                      isProductInCart
+                        ? removeOrder(orderId)
+                        : addOrder({
+                            id: orderId,
+                            name: product.name,
+                            color: color,
+                            image: urlImage,
+                            size: size,
+                            price: product.price,
+                            quantity: 1,
+                          });
                     }}
                   >
                     {isProductInCart ? "REMOVE TO CARD" : "ADD TO CARD"}
@@ -386,12 +359,20 @@ const ProductBody = ({ productType, data, goods }) => {
                         <p>
                           <span>Color: </span>
                           <span>
-                            {new Set(product.images.map((e) => `${e.color}, `))}
+                            {
+                              new Set(
+                                product.images &&
+                                  product.images.map((e) => `${e.color}, `)
+                              )
+                            }
                           </span>
                         </p>
                         <p>
                           <span>Size: </span>
-                          <span>{product.sizes.map((e) => `${e}, `)}</span>
+                          <span>
+                            {product.sizes &&
+                              product.sizes.map((e) => `${e}, `)}
+                          </span>
                         </p>
                         <p>
                           <span>Material: </span>
@@ -415,7 +396,9 @@ const ProductBody = ({ productType, data, goods }) => {
                           />
                         </span>
 
-                        <span>{product.reviews.length} Reviews</span>
+                        <span>
+                          {product.reviews && product.reviews.length} Reviews
+                        </span>
                       </div>
                       <button className="product-reviews__write">
                         <img src={annotation} alt="" />
@@ -424,30 +407,33 @@ const ProductBody = ({ productType, data, goods }) => {
                     </div>
                   </div>
                   <div className="product-reviews__body">
-                    {product.reviews.map((e) => {
-                      return (
-                        <div
-                          className="product-reviews__item reviews-item"
-                          key={e.id}
-                        >
-                          <div className="reviews-item__header">
-                            <div className="reviews-item__author">{e.name}</div>
-                            <div className="reviews-item__info">
-                              <div className="reviews-item__date">
-                                3 months ago
+                    {product.reviews &&
+                      product.reviews.map((e) => {
+                        return (
+                          <div
+                            className="product-reviews__item reviews-item"
+                            key={e.id}
+                          >
+                            <div className="reviews-item__header">
+                              <div className="reviews-item__author">
+                                {e.name}
                               </div>
-                              <div className="reviews-item__rating">
-                                <StarRating
-                                  ratingCount={e.rating}
-                                  isChange={false}
-                                />
+                              <div className="reviews-item__info">
+                                <div className="reviews-item__date">
+                                  3 months ago
+                                </div>
+                                <div className="reviews-item__rating">
+                                  <StarRating
+                                    ratingCount={e.rating}
+                                    isChange={false}
+                                  />
+                                </div>
                               </div>
                             </div>
+                            <div className="reviews-item__text">{e.text}</div>
                           </div>
-                          <div className="reviews-item__text">{e.text}</div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
                   </div>
                 </div>
                 <hr />
@@ -495,43 +481,44 @@ const ProductBody = ({ productType, data, goods }) => {
                     },
                   }}
                 >
-                  {goods[productType].map(
-                    ({ id, images, name, price, rating }) => {
-                      return (
-                        <SwiperSlide key={id}>
-                          <div className="cards__column">
-                            <Link
-                              to={`${id}`}
-                              onClick={() => {
-                                productMainSlider.slideTo(0, false);
-                                productNavSlider.slideTo(0, false);
-                              }}
-                              className="cards__item cards-item"
-                              data-test-id={`clothes-card-${productType}`}
-                            >
-                              <div className="cards-item__image">
-                                <img
-                                  src={`https://training.cleverland.by/shop${images[0].url}`}
-                                  alt={name}
-                                />
-                              </div>
-                              <div className="cards-item__title">{name}</div>
-
-                              <div className="cards-item__info">
-                                <div className="cards-item__price">{`${price} $`}</div>
-                                <div className="cards-item__rating">
-                                  <StarRating
-                                    ratingCount={rating}
-                                    isChange={false}
+                  {goods.products[productType] &&
+                    goods.products[productType].map(
+                      ({ id, images, name, price, rating }) => {
+                        return (
+                          <SwiperSlide key={id}>
+                            <div className="cards__column">
+                              <Link
+                                to={`${id}`}
+                                onClick={() => {
+                                  productMainSlider.slideTo(0, false);
+                                  productNavSlider.slideTo(0, false);
+                                }}
+                                className="cards__item cards-item"
+                                data-test-id={`clothes-card-${productType}`}
+                              >
+                                <div className="cards-item__image">
+                                  <img
+                                    src={`https://training.cleverland.by/shop${images[0].url}`}
+                                    alt={name}
                                   />
                                 </div>
-                              </div>
-                            </Link>
-                          </div>
-                        </SwiperSlide>
-                      );
-                    }
-                  )}
+                                <div className="cards-item__title">{name}</div>
+
+                                <div className="cards-item__info">
+                                  <div className="cards-item__price">{`${price} $`}</div>
+                                  <div className="cards-item__rating">
+                                    <StarRating
+                                      ratingCount={rating}
+                                      isChange={false}
+                                    />
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          </SwiperSlide>
+                        );
+                      }
+                    )}
                 </Swiper>
               </div>
             </div>

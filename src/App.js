@@ -5,13 +5,28 @@ import Footer from "./components/footer/Footer";
 import MainPage from "./views/main/MainPage";
 import ProductPage from "./views/product/ProductPage";
 import CategoryPage from "./views/category/CategoryPage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { requestProducts } from "./redux/reducers/productsReducer";
+import Loader from "./components/loader/Loader";
+import Error from "./components/error/Error";
 // import { useState } from "react";
 
-function App({ data, goods }) {
+function App({ data }) {
+  const goods = useSelector(({ products }) => {
+    return products;
+  });
+
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(requestProducts());
+  }, [dispatch]);
   // const [isShow, setShow] = useState(false)
   return (
     <div className="app" data-test-id="app">
+      {goods.isLoading && <Loader data-test-id="loader"/>}
       <Header headerData={data.header} />
+      {goods.isError && <Error data-test-id="error" statusError={goods.statusError}/>}
       <Switch>
         <Route
           exact

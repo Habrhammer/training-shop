@@ -40,19 +40,41 @@
     display: flex;
     flex-direction: column;
     padding: 16px 24px;
-    height: 100%;
+    height: calc(100% - 50px);
   }
   &__tabs {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 30px;
   }
+
+ 
   &__tab {
+
+    display: flex;
+    cursor: pointer;
+    color: #E6E6E6;
+ 
+  }
+  &__tab.active {
+    color: #121212
+  }
+
+
+  &__tab:after {
+    content: "/";
+    margin: 0 20px;
+    color: #E6E6E6;
+  }
+ 
+  &__tab:last-child:after {
+    content: "";
+    margin: 0 0;
   }
 
   &__container {
     overflow: auto;
-    flex: 0 1 100vh;
+    flex: 1 1;
   }
 
   &__container::-webkit-scrollbar {
@@ -107,7 +129,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    flex: 0 1 25%;
+    // flex: 0 1 25%;
     button {
       // flex: 1 0 100%;
 

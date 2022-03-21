@@ -66,10 +66,10 @@ const ProductCart = ({ setShow, isShow }) => {
         </div>
         <div className="cart__body">
           <div className="cart__tabs">
-            <div className="cart__tab">Item in cart</div>
-            <div className="cart__separator">/</div>
+            <div className="cart__tab active">Item in cart</div>
+        
             <div className="cart__tab">Delivery Info</div>
-            <div className="cart__separator">/</div>
+     
             <div className="cart__tab">Payment</div>
           </div>
           <div className="cart__container">
