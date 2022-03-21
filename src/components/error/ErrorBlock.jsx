@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Error.scss";
+import "./ErrorBlock.scss";
 
 const ErrorBlock = ({statusError}) => {
    return (
