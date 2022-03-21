@@ -32,7 +32,6 @@ console.log(product);
  export const requestProduct = (id) => {
    return async (dispatch) => {
      let data = await productsAPI.getProduct(id);
-     console.log(data);
      dispatch(setProduct(data));
    };
  };

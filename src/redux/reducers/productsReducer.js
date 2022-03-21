@@ -68,8 +68,6 @@ export const requestProducts = () => {
   return async (dispatch) => {
     dispatch(toggleIsLoading(true));
     let data = await productsAPI.getProducts();
-    console.log(data);
-    console.log("!");
     data
       ? data.status >= 200 && data.status < 400
         ? dispatch(setProducts(data.data))
