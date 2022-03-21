@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Error.scss";
 
-const Error = ({statusError}) => {
+const ErrorBlock = ({statusError}) => {
    return (
       <div className='error _container'>
          <div className="error__text">Ошибка получения данных! {statusError && `Статус ошибки: ${statusError}`}</div>
@@ -9,4 +9,4 @@ const Error = ({statusError}) => {
    );
 };
 
-export default Error;
+export default ErrorBlock;
