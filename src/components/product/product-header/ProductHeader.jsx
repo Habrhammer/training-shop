@@ -24,8 +24,8 @@ const ProductHeader = ({ productType, product }) => {
               </Link>
               <img src={arrow} alt="" />
               <span>
-                {`${product.name}`.charAt(0).toUpperCase() +
-                  `${product.name}`.slice(1)}
+                {`${product && product.name}`.charAt(0).toUpperCase() +
+                  `${product && product.name}`.slice(1)}
               </span>
             </div>
           </div>
@@ -35,14 +35,14 @@ const ProductHeader = ({ productType, product }) => {
           </div>
         </div>
         <div className="product-header__title">
-          <h2>{product.name}</h2>
+          <h2>{product && product.name}</h2>
         </div>
         <div className="product-header__bottom">
           <div className="product-header__rating product-rating">
             <span>
-              <StarRating ratingCount={product.rating} isChange={false} />
+              <StarRating ratingCount={product && product.rating} isChange={false} />
             </span>
-            <span>{product.reviews ? product.reviews.length : ""} Reviews</span>
+            <span>{product && (product.reviews ? product.reviews.length : "")} Reviews</span>
           </div>
           <div className="product-header__accounting product-accounting">
             <div className="product-accounting__sku">

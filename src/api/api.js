@@ -19,6 +19,11 @@ export const productsAPI = {
       .get(`https://training.cleverland.by/shop/product/${id}`)
       .then((response) => {
         return response.data;
+      })
+      .catch((err) => {
+        if (err.response) {
+          return err.response;
+        }
       });
   },
 };
