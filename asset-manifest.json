@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/training-shop/static/css/main.70ac2ad0.css",
-    "main.js": "/training-shop/static/js/main.d1118f9d.js",
+    "main.js": "/training-shop/static/js/main.de4fffd9.js",
     "static/js/787.47ca6e30.chunk.js": "/training-shop/static/js/787.47ca6e30.chunk.js",
     "static/media/Inter-Regular.ttf": "/training-shop/static/media/Inter-Regular.2391725004ae05a27e8e.ttf",
     "static/media/woman.png": "/training-shop/static/media/woman.4152b783e591f01bafb6.png",
@@ -13,30 +13,14 @@
     "static/media/man.png": "/training-shop/static/media/man.5a7402230a574e8b3266.png",
     "static/media/wedding.jpg": "/training-shop/static/media/wedding.653a844b906171bd2ee2.jpg",
     "static/media/accessories.jpg": "/training-shop/static/media/accessories.ee7f09dd43e5a9912d95.jpg",
-    "static/media/gray_jumper.jpg": "/training-shop/static/media/gray_jumper.363e0e8c20844e94187f.jpg",
     "static/media/sale.jpg": "/training-shop/static/media/sale.6b1e286dc702ba60be57.jpg",
     "static/media/favorites.jpg": "/training-shop/static/media/favorites.5f7ce6ec287630e86bf9.jpg",
     "static/media/new_season.jpg": "/training-shop/static/media/new_season.50c6caf0e00920727596.jpg",
-    "static/media/gray_hat.jpg": "/training-shop/static/media/gray_hat.8854617b0951c08b172e.jpg",
-    "static/media/white_jumper.jpg": "/training-shop/static/media/white_jumper.0b8f41098b08d3def626.jpg",
-    "static/media/cardigan.jpg": "/training-shop/static/media/cardigan.5b0ad8d7935ef1133892.jpg",
-    "static/media/suit_with_trousers.jpg": "/training-shop/static/media/suit_with_trousers.e5b8870686f6058dc55f.jpg",
-    "static/media/gray_trousers.jpg": "/training-shop/static/media/gray_trousers.2fa1c18acd4a55081abc.jpg",
-    "static/media/denim_shirt.jpg": "/training-shop/static/media/denim_shirt.1adad684fb3d3decf0cd.jpg",
-    "static/media/light_t-shirt.jpg": "/training-shop/static/media/light_t-shirt.c54238646312eaa8b3c6.jpg",
     "static/media/women.jpg": "/training-shop/static/media/women.2e28690d1ff57477ec5d.jpg",
-    "static/media/white_joggers.jpg": "/training-shop/static/media/white_joggers.277fc01846cae27e5868.jpg",
-    "static/media/trousers_black.jpg": "/training-shop/static/media/trousers_black.28f8cc871006491fbe6f.jpg",
-    "static/media/track_pants.jpg": "/training-shop/static/media/track_pants.1a05b311f7288c6c0662.jpg",
-    "static/media/hoodie.jpg": "/training-shop/static/media/hoodie.440528fcb0af0208533a.jpg",
-    "static/media/oversized_t-shirt.jpg": "/training-shop/static/media/oversized_t-shirt.47ad6cd3ba7fe24ef0b8.jpg",
-    "static/media/pants.jpg": "/training-shop/static/media/pants.472f7f51d3eb884d5a3f.jpg",
     "static/media/Spartan-Bold.ttf": "/training-shop/static/media/Spartan-Bold.d6c5fa93ed88217dd681.ttf",
     "static/media/Spartan-SemiBold.ttf": "/training-shop/static/media/Spartan-SemiBold.ba401035df3e62de3732.ttf",
     "static/media/Spartan-Regular.ttf": "/training-shop/static/media/Spartan-Regular.79b370d147e62d01fb86.ttf",
     "static/media/Spartan-Medium.ttf": "/training-shop/static/media/Spartan-Medium.bb357670f208e482a8e7.ttf",
-    "static/media/sweatshirt.jpg": "/training-shop/static/media/sweatshirt.304a6854b9e470a023b3.jpg",
-    "static/media/white_suit.jpg": "/training-shop/static/media/white_suit.46d31ed37fb679717554.jpg",
     "static/media/men.jpg": "/training-shop/static/media/men.b6cd01c12e335cbef2a0.jpg",
     "static/media/discover.svg": "/training-shop/static/media/discover.8113d2f12f0d9f5c86bfa8308dc366a0.svg",
     "static/media/american-express.svg": "/training-shop/static/media/american-express.6d8a63c946f81915d75bb8febe8b3f33.svg",
@@ -83,11 +67,11 @@
     "static/media/arrow_right.svg": "/training-shop/static/media/arrow_right.6a871d585953b3e789bd0c0fea717ae1.svg",
     "static/media/arrow.svg": "/training-shop/static/media/arrow.9f4dd338b481a943c89e0ee673f34fe5.svg",
     "main.70ac2ad0.css.map": "/training-shop/static/css/main.70ac2ad0.css.map",
-    "main.d1118f9d.js.map": "/training-shop/static/js/main.d1118f9d.js.map",
+    "main.de4fffd9.js.map": "/training-shop/static/js/main.de4fffd9.js.map",
     "787.47ca6e30.chunk.js.map": "/training-shop/static/js/787.47ca6e30.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.70ac2ad0.css",
-    "static/js/main.d1118f9d.js"
+    "static/js/main.de4fffd9.js"
   ]
 }
