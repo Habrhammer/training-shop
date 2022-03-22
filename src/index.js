@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
 import data from "./data/data.js";
-import { PRODUCTS } from "./data/products.js";
 import reportWebVitals from "./reportWebVitals";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 import { Provider } from "react-redux";
@@ -15,7 +14,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
         <ScrollToTop>
-          <App data={data} goods={PRODUCTS} />
+          <App data={data}/>
         </ScrollToTop>
       </Router>
     </Provider>
