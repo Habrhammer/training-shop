@@ -24,9 +24,11 @@ function App({ data }) {
   // const [isShow, setShow] = useState(false)
   return (
     <div className="app" data-test-id="app">
-      {goods.isLoading && <Loader data-test-id="loader"/>}
+      {goods.isLoading && <Loader data-test-id="loader" />}
       <Header headerData={data.header} />
-      {goods.isError && <ErrorBlock data-test-id="error" statusError={goods.statusError}/>}
+      {goods.isError && (
+        <ErrorBlock data-test-id="error" statusError={goods.statusError} />
+      )}
       <Switch>
         <Route
           exact
@@ -36,42 +38,20 @@ function App({ data }) {
         <Route
           exact
           path="/women"
-          component={() => (
-            <CategoryPage
-              dataFilter={data.filter}
-              category="women"
-              data={data.mainPage}
-              goods={goods}
-            />
-          )}
+          component={() => <CategoryPage category="women" goods={goods} />}
         />
         <Route
           exact
           path="/men"
-          component={() => (
-            <CategoryPage
-              dataFilter={data.filter}
-              category="men"
-              data={data.mainPage}
-              goods={goods}
-            />
-          )}
+          component={() => <CategoryPage category="men" goods={goods} />}
         />
         <Route
           path="/women/:id"
-          component={() => (
-            <ProductPage
-              data={data.mainPage}
-              goods={goods}
-              productType="women"
-            />
-          )}
+          component={() => <ProductPage goods={goods} productType="women" />}
         />
         <Route
           path="/men/:id"
-          component={() => (
-            <ProductPage data={data.mainPage} goods={goods} productType="men" />
-          )}
+          component={() => <ProductPage goods={goods} productType="men" />}
         />
       </Switch>
       <Footer data={data.footer} />
