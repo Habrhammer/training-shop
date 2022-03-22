@@ -11,24 +11,6 @@ import shippingImg from "./../assets/images/advantages_section/shipping.svg";
 import returnImg from "./../assets/images/advantages_section/return.svg";
 import supportImg from "./../assets/images/advantages_section/support.svg";
 
-import suit_with_trousers from "./../assets/images/clothes_section/suit_with_trousers.jpg";
-import light_t_shirt from "./../assets/images/clothes_section/light_t-shirt.jpg";
-import white_jumper from "./../assets/images/clothes_section/white_jumper.jpg";
-import white_suit from "./../assets/images/clothes_section/white_suit.jpg";
-import gray_jumper from "./../assets/images/clothes_section/gray_jumper.jpg";
-import trousers_black from "./../assets/images/clothes_section/trousers_black.jpg";
-import track_pants from "./../assets/images/clothes_section/track_pants.jpg";
-import oversized_t_shirt from "./../assets/images/clothes_section/oversized_t-shirt.jpg";
-
-import hoodie from "./../assets/images/clothes_section/hoodie.jpg";
-import pants from "./../assets/images/clothes_section/pants.jpg";
-import cardigan from "./../assets/images/clothes_section/cardigan.jpg";
-import gray_hat from "./../assets/images/clothes_section/gray_hat.jpg";
-import sweatshirt from "./../assets/images/clothes_section/sweatshirt.jpg";
-import denim_shirt from "./../assets/images/clothes_section/denim_shirt.jpg";
-import white_joggers from "./../assets/images/clothes_section/white_joggers.jpg";
-import gray_trousers from "./../assets/images/clothes_section/gray_trousers.jpg";
-
 import way from "./../assets/images/blog_section/way.jpg";
 import wedding from "./../assets/images/blog_section/wedding.jpg";
 import favorites from "./../assets/images/blog_section/favorites.jpg";
