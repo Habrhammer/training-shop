@@ -14,14 +14,15 @@ const clothesMenu = [
   { particularName: "isFeatured", name: "FEATURED PRODUCTS" },
 ];
 
-const Clothes = ({ productType, goods, data }) => {
+const Clothes = ({ productType, goods }) => {
   const [particular, setParticular] = useState("isNewArrivals");
+  
 
   const onParticularChange = ({ target: { checked, value } }) => {
     setParticular(value);
   };
 
-  const particularGoods = goods.products && goods.products[productType].filter((n) => {
+  const particularGoods = goods.products[productType].filter((n) => {
     return n.particulars[particular];
   });
 

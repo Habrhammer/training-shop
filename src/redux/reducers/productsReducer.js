@@ -1,7 +1,5 @@
-import { productsAPI } from "../../api/api";
-
 const SET_PRODUCTS = "SET_PRODUCTS";
-const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
+export const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 const SET_ERROR = "SET_ERROR";
 
 let initialState = {
@@ -16,21 +14,23 @@ let initialState = {
 
 export const productsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case TOGGLE_IS_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
     case SET_PRODUCTS: {
       return {
         ...state,
         products: action.products,
-      };
-    }
-    case TOGGLE_IS_LOADING: {
-      return {
-        ...state,
-        isLoading: action.isLoading,
+        isLoading: false,
       };
     }
     case SET_ERROR: {
       return {
         ...state,
+        isLoading: false,
         isError: action.isError,
         statusError: action.statusError,
       };
@@ -48,15 +48,13 @@ export const setProducts = (products) => {
   };
 };
 
-export const toggleIsLoading = (isLoading) => {
+export const toggleIsLoading = () => {
   return {
     type: TOGGLE_IS_LOADING,
-    isLoading,
   };
 };
 
 export const setError = (isError, statusError = null) => {
-  console.log(statusError);
   return {
     type: SET_ERROR,
     isError,
@@ -64,7 +62,13 @@ export const setError = (isError, statusError = null) => {
   };
 };
 
-export const requestProducts = () => {
+
+
+export const requestProducts = () => (dispatch) => {
+  dispatch(toggleIsLoading());
+};
+
+/* export const requestProducts = () => {
   return async (dispatch) => {
     dispatch(toggleIsLoading(true));
     let data = await productsAPI.getProducts();
@@ -75,4 +79,4 @@ export const requestProducts = () => {
       : dispatch(setError(true));
     dispatch(toggleIsLoading(false));
   };
-};
+}; */
