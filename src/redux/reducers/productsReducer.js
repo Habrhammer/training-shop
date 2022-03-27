@@ -8,8 +8,7 @@ let initialState = {
     women: [],
   },
   isLoading: false,
-  isError: false,
-  statusError: null,
+  isError: null,
 };
 
 export const productsReducer = (state = initialState, action) => {
@@ -25,14 +24,14 @@ export const productsReducer = (state = initialState, action) => {
         ...state,
         products: action.products,
         isLoading: false,
+        isError: null
       };
     }
     case SET_ERROR: {
       return {
         ...state,
         isLoading: false,
-        isError: action.isError,
-        statusError: action.statusError,
+        isError: action.payload,
       };
     }
     default: {
@@ -54,29 +53,17 @@ export const toggleIsLoading = () => {
   };
 };
 
-export const setError = (isError, statusError = null) => {
+export const setError = (error) => {
   return {
     type: SET_ERROR,
-    isError,
-    statusError,
+    payload: error
   };
 };
 
 
 
-export const requestProducts = () => (dispatch) => {
-  dispatch(toggleIsLoading());
+export const requestProducts = () => {
+  return toggleIsLoading();
 };
 
-/* export const requestProducts = () => {
-  return async (dispatch) => {
-    dispatch(toggleIsLoading(true));
-    let data = await productsAPI.getProducts();
-    data
-      ? data.status >= 200 && data.status < 400
-        ? dispatch(setProducts(data.data))
-        : dispatch(setError(true, data.status))
-      : dispatch(setError(true));
-    dispatch(toggleIsLoading(false));
-  };
-}; */
+

@@ -1,56 +1,58 @@
-import { productsAPI } from "../../api/api";
-
-const SET_PRODUCT = "SET_PRODUCT";
-const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
-const SET_ERROR = "SET_ERROR";
+export const LOAD_PRODUCT = "LOAD_PRODUCT";
+export const SET_PRODUCT = "SET_PRODUCT";
+export const SET_PRODUCT_ERROR = "SET_PRODUCT_ERROR";
 
 const initialState = {
-
-   product: {},
-   isLoading: false,
-   isError: false,
-   statusError: null,
-}
+  product: {},
+  isLoading: false,
+  isError: null,
+};
 
 export const productReducer = (state = initialState, action) => {
-   console.log(action.product);
-   switch (action.type) {
-     case SET_PRODUCT: {
-       return {
-         ...state, product: action.product
-       };
-     }
-     case TOGGLE_IS_LOADING: {
+  switch (action.type) {
+    case LOAD_PRODUCT: {
       return {
         ...state,
-        isLoading: action.isLoading,
+        isLoading: true,
       };
     }
-    case SET_ERROR: {
+
+    case SET_PRODUCT: {
       return {
         ...state,
-        isError: action.isError,
-        statusError: action.statusError,
+        product: action.product,
+        isLoading: false,
+        isError: null,
       };
     }
-     default: {
-       return state;
-   }
-   }
- };
 
- export const setProduct = (product) => {
-console.log(product);
-   return {
-     type: SET_PRODUCT,
-     product,
-   };
- };
+    case SET_PRODUCT_ERROR: {
+      return {
+        ...state,
+        isError: action.payload,
+        isLoading: false,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
 
- export const requestProduct = (id) => {
-   return async (dispatch) => {
-     let data = await productsAPI.getProduct(id);
-     dispatch(setProduct(data));
-   };
- };
 
+export const setProduct = (product) => {
+  return {
+    type: SET_PRODUCT,
+    product
+  }
+}
+
+export const setProductError = (error) => {
+  return { type: SET_PRODUCT_ERROR, payload: error }
+}
+
+
+
+export const getProduct = (id) => {
+  return { type: LOAD_PRODUCT, payload: { id } };
+};
