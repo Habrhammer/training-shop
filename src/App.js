@@ -10,12 +10,12 @@ import { useEffect } from "react";
 import { requestProducts } from "./redux/reducers/productsReducer";
 import Loader from "./components/loader/Loader";
 import ErrorBlock from "./components/error/ErrorBlock";
-// import { useState } from "react";
 
 function App({ data }) {
   const goods = useSelector(({ products }) => {
     return products;
   });
+
 
   let dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +27,7 @@ function App({ data }) {
       {goods.isLoading && <Loader data-test-id="loader" />}
       <Header headerData={data.header} />
       {goods.isError && (
-        <ErrorBlock data-test-id="error" statusError={goods.statusError} />
+        <ErrorBlock data-test-id="error" statusError={goods.isError} />
       )}
       <Switch>
         <Route

@@ -32,7 +32,7 @@ import annotation from "../../../assets/images/product-options/checkout/annotati
 import StarRating from "../../rating/StarRating";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../../redux/reducers/cartReducer";
-import { requestProduct } from "../../../redux/reducers/productReducer";
+import { getProduct } from "../../../redux/reducers/productReducer";
 import Loader from "../../loader/Loader";
 import ErrorBlock from "../../error/ErrorBlock";
 
@@ -74,9 +74,10 @@ const ProductBody = ({ productType, goods }) => {
   const [productNavSlider, setProductNavSlider] = useState(null);
   const [productMainSlider, setProductMainSlider] = useState(null);
 
-  const { product } = useSelector(({ product }) => {
+  const {product, isLoading, isError} = useSelector(({ product }) => {
     return product;
   });
+  console.log(product,isError);
 
   const filteredColors = (array = [], propertyName) => {
     return array.filter(
@@ -104,7 +105,8 @@ const ProductBody = ({ productType, goods }) => {
   };
 
   useEffect(() => {
-    dispatch(requestProduct(id));
+    dispatch(getProduct(id));
+    console.log('1');
   }, [dispatch, id]);
 
   const isProductInCart = productsInCart
@@ -124,8 +126,8 @@ const ProductBody = ({ productType, goods }) => {
 
   return (
     <>
-      {product && (product.isLoading && <Loader data-test-id="loader"/>)}
-      {product && (product.isError && <ErrorBlock data-test-id="error" statusError={product && product.statusError}/>)}
+      {(isLoading && <Loader data-test-id="loader"/>)}
+      {isError && <ErrorBlock data-test-id="error" statusError={isError}/>}
       <section
         className="product product-page"
         data-test-id={`product-page-${productType}`}

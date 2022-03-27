@@ -32,8 +32,6 @@ const ProductCart = ({ setShow, isShow }) => {
     return acc + current.price * current.quantity;
   }, 0);
 
-  console.log(productsInCart);
-
   const [blockScroll, allowScroll] = useScrollBlock();
   useEffect(() => {
     isShow ? blockScroll() : allowScroll();
