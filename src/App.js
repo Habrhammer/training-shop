@@ -54,7 +54,7 @@ function App({ data }) {
           component={() => <ProductPage goods={goods} productType="men" />}
         />
       </Switch>
-      <Footer data={data.footer} />
+      <Footer data={data.footer} footerFormId="footerSubscribeForm" />
     </div>
   );
 }

@@ -1,21 +1,102 @@
+import React, { useEffect } from "react";
+import { Formik, Form, Field, useFormikContext } from "formik";
+import * as Yup from "yup";
+import { POST_FORM_REQUESTED } from "../../redux/reducers/subscribeReducer";
+import SubscribeLoader from "../subscribe/subscribe-loader/SubscribeLoader";
+import { useDispatch, useSelector } from "react-redux";
 import NavColumn from "../footer-nav/NavColumn";
 import "./Footer.scss";
 
-const Footer = ({ data }) => {
-  let { navigation, socialLinks, payments } = data;
+const LoadingHandler = () => {
+  const { setSubmitting } = useFormikContext();
+  useEffect(
+    () => () => {
+      setSubmitting(false);
+    },
+    [setSubmitting]
+  );
+  return <SubscribeLoader />;
+};
+
+const Footer = ({
+  footerFormId,
+  data: { navigation, socialLinks, payments },
+}) => {
+  // console.log(formId);
+  const dispatch = useDispatch();
+  const { loading, data, formId } = useSelector((data) => {
+    console.log(11111, data);
+    return data.footerSubscribeForm;
+  });
+
   return (
     <footer className="footer" data-test-id="footer">
       <div className="footer__top footer-top">
         <div className="footer-top__body _container">
-          <form action="#" className="footer-top__form">
-            <div className="footer-top__title">BE IN TOUCH WITH US:</div>
-            <input
-              type="text"
-              className="footer-top__input"
-              placeholder="Enter your email"
-            />
-            <button className="footer-top__btn">Join Us</button>
-          </form>
+          <Formik
+            initialValues={{
+              email: "",
+            }}
+            validationSchema={Yup.object({
+              email: Yup.string().email("Неверный адрес электронной почты"),
+            })}
+            onSubmit={(values, actions) => {
+              dispatch({
+                type: POST_FORM_REQUESTED,
+                data: values,
+                formId: footerFormId,
+              });
+              actions.resetForm()
+            }}
+          >
+            {(formik) => (
+              <Form className="footer-top__form form-footer">
+                <Field name="email" type="text">
+                  {({ field, meta }) => (
+                    <>
+                      <div className="footer-top__title">
+                        BE IN TOUCH WITH US:
+                      </div>
+
+                      <div>
+                        {meta.error && (
+                          <div className="form-footer__error">{meta.error}</div>
+                        )}
+                        <input
+                          data-test-id="footer-mail-field"
+                          type="email"
+                          className="footer-top__input"
+                          placeholder="Enter your email"
+                          autoComplete="off"
+                          {...field}
+                        />
+                        {footerFormId === formId &&
+                          data?.status &&
+                          (data?.status >= 200 && data?.status < 400 ? (
+                            <div className="form-footer__success">
+                              Данные успешно отправлены!
+                            </div>
+                          ) : (
+                            <div className="form-footer__error-request">
+                              Ошибка отправки данных!
+                            </div>
+                          ))}
+                      </div>
+                    </>
+                  )}
+                </Field>
+                <button
+                  data-test-id="footer-subscribe-mail-button"
+                  disabled={
+                    formik.isSubmitting || !(formik.isValid && formik.dirty)
+                  }
+                  className="footer-top__btn"
+                >
+                  {loading && formik.isSubmitting && <LoadingHandler />}Join Us
+                </button>
+              </Form>
+            )}
+          </Formik>
           <div className="footer-top__social">
             {socialLinks.map(({ id, name, image, link }) => {
               return (

@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./ProductBody.scss";
 import ProductHeader from "../product-header/ProductHeader";
+import useScrollBlock from "../../../hooks/useScrollBlock";
 import up from "../../../assets/images/product-slider/arrow_up.svg";
 import down from "../../../assets/images/product-slider/arrow_down.svg";
 import prev from "../../../assets/images/product-slider/arrow_prev.svg";
@@ -35,6 +36,7 @@ import { addToCart, removeFromCart } from "../../../redux/reducers/cartReducer";
 import { getProduct } from "../../../redux/reducers/productReducer";
 import Loader from "../../loader/Loader";
 import ErrorBlock from "../../error/ErrorBlock";
+import ReviewForm from "../../review-form/ReviewForm";
 
 const checkout = [
   {
@@ -68,16 +70,21 @@ const checkout = [
 ];
 
 const ProductBody = ({ productType, goods }) => {
+
+  const lastReview = useSelector((data)=>{
+    // return data.reviewForm.data.reviews;
+  })
+  console.log(999,lastReview);
+
   const dispatch = useDispatch();
   const { id } = useParams();
 
   const [productNavSlider, setProductNavSlider] = useState(null);
   const [productMainSlider, setProductMainSlider] = useState(null);
 
-  const {product, isLoading, isError} = useSelector(({ product }) => {
+  const { product, isLoading, isError } = useSelector(({ product }) => {
     return product;
   });
-  console.log(product,isError);
 
   const filteredColors = (array = [], propertyName) => {
     return array.filter(
@@ -94,7 +101,7 @@ const ProductBody = ({ productType, goods }) => {
     return cart.order;
   });
 
-  let orderId = `${product && product.id}_${color}_${size}`;
+  let orderId = `${product?.id}_${color}_${size}`;
 
   const addOrder = (order) => {
     dispatch(addToCart(order));
@@ -106,28 +113,31 @@ const ProductBody = ({ productType, goods }) => {
 
   useEffect(() => {
     dispatch(getProduct(id));
-    console.log('1');
   }, [dispatch, id]);
 
   const isProductInCart = productsInCart
     .map((e) => {
       return e.id;
     })
-    .includes(`${product && product.id}_${color}_${size}`);
+    .includes(`${product?.id}_${color}_${size}`);
 
   useEffect(() => {
-    product && (product.images &&
-      setColor(filteredColors(product.images, "color")[0].color));
-    product && (product.sizes && setSize(product.sizes[0]));
-    product && (product.images &&
-      setUrlImage(filteredColors(product.images, "color")[0].url));
+    setColor(filteredColors(product?.images, "color")[0]?.color);
+    product?.sizes && setSize(product.sizes[0]);
+    setUrlImage(filteredColors(product?.images, "color")[0]?.url);
   }, [product, product?.images, product?.sizes]);
 
+  const [blockScroll, allowScroll] = useScrollBlock();
+  let [showPopup, setShowPopup] = useState(false);
+  useEffect(() => {
+    showPopup ? blockScroll() : allowScroll();
+  }, [showPopup, blockScroll, allowScroll]);
 
   return (
     <>
-      {(isLoading && <Loader data-test-id="loader"/>)}
-      {isError && <ErrorBlock data-test-id="error" statusError={isError}/>}
+      {isLoading && <Loader data-test-id="loader" />}
+      {isError && <ErrorBlock data-test-id="error" statusError={isError} />}
+      {showPopup && <ReviewForm setShow={setShowPopup} />}
       <section
         className="product product-page"
         data-test-id={`product-page-${productType}`}
@@ -169,19 +179,18 @@ const ProductBody = ({ productType, goods }) => {
                     className="images-navslider__slides"
                     modules={[Navigation, Thumbs]}
                   >
-                    {product && (product.images &&
-                      product.images.map((e) => {
-                        return (
-                          <SwiperSlide key={e.id}>
-                            <div className="images-navslider__slide _ibg">
-                              <img
-                                src={`https://training.cleverland.by/shop${e.url}`}
-                                alt={""}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        );
-                      }))}
+                    {product?.images?.map((e) => {
+                      return (
+                        <SwiperSlide key={e.id}>
+                          <div className="images-navslider__slide _ibg">
+                            <img
+                              src={`https://training.cleverland.by/shop${e.url}`}
+                              alt={""}
+                            />
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
                   </Swiper>
                 </div>
                 <div className="product-images__mainslider images-mainslider">
@@ -205,19 +214,18 @@ const ProductBody = ({ productType, goods }) => {
                     <div className="images-mainslider__next">
                       <img src={next} alt="next" />
                     </div>
-                    {product && (product.images &&
-                      product.images.map((e) => {
-                        return (
-                          <SwiperSlide key={e.id}>
-                            <div className="images-mainslider__slide">
-                              <img
-                                src={`https://training.cleverland.by/shop${e.url}`}
-                                alt={""}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        );
-                      }))}
+                    {product?.images?.map((e) => {
+                      return (
+                        <SwiperSlide key={e.id}>
+                          <div className="images-mainslider__slide">
+                            <img
+                              src={`https://training.cleverland.by/shop${e.url}`}
+                              alt={""}
+                            />
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
                   </Swiper>
                 </div>
               </div>
@@ -229,7 +237,7 @@ const ProductBody = ({ productType, goods }) => {
                       <span>{color}</span>
                     </div>
                     <div className="product-color__body color-option">
-                      {product && filteredColors(product.images, "color").map((e, i) => {
+                      {filteredColors(product?.images, "color").map((e, i) => {
                         return (
                           <label className="color-option__item _ibg" key={e.id}>
                             <input
@@ -258,24 +266,23 @@ const ProductBody = ({ productType, goods }) => {
                       <span>{size}</span>
                     </div>
                     <div className="product-size__body size-option">
-                      {product && (product.sizes &&
-                        product.sizes.map((e, i) => {
-                          return (
-                            <label className="size-option__item" key={i + id}>
-                              <input
-                                type="radio"
-                                defaultChecked={i === 0}
-                                value={e}
-                                name="size"
-                                onClick={() => {
-                                  setSize(e);
-                                }}
-                              />
+                      {product?.sizes?.map((e, i) => {
+                        return (
+                          <label className="size-option__item" key={i + id}>
+                            <input
+                              type="radio"
+                              defaultChecked={i === 0}
+                              value={e}
+                              name="size"
+                              onClick={() => {
+                                setSize(e);
+                              }}
+                            />
 
-                              <span>{e}</span>
-                            </label>
-                          );
-                        }))}
+                            <span>{e}</span>
+                          </label>
+                        );
+                      })}
                     </div>
                     <div className="product-size__guide">
                       <img src={clothes_hanger} alt="" />
@@ -285,7 +292,9 @@ const ProductBody = ({ productType, goods }) => {
 
                   <hr />
                   <div className="product-actions__pay product-pay">
-                    <div className="product-pay__price">$ {product && product.price}</div>
+                    <div className="product-pay__price">
+                      $ {product && product.price}
+                    </div>
                     <button
                       data-test-id="add-cart-button"
                       className="product-pay__btn"
@@ -365,22 +374,18 @@ const ProductBody = ({ productType, goods }) => {
                             <span>
                               {
                                 new Set(
-                                  product && (product.images &&
-                                    product.images.map((e) => `${e.color}, `))
+                                  product?.images?.map((e) => `${e.color}, `)
                                 )
                               }
                             </span>
                           </p>
                           <p>
                             <span>Size: </span>
-                            <span>
-                              {product && (product.sizes &&
-                                product.sizes.map((e) => `${e}, `))}
-                            </span>
+                            <span>{product?.sizes?.map((e) => `${e}, `)}</span>
                           </p>
                           <p>
                             <span>Material: </span>
-                            <span>{product && product.material}</span>
+                            <span>{product?.material}</span>
                           </p>
                         </div>
                       </div>
@@ -395,49 +400,52 @@ const ProductBody = ({ productType, goods }) => {
                         <div className="product-reviews__rating">
                           <span>
                             <StarRating
-                              ratingCount={product && product.rating}
+                              ratingCount={product?.rating}
                               isChange={false}
                             />
                           </span>
 
-                          <span>
-                            {product && (product.reviews && product.reviews.length)} Reviews
-                          </span>
+                          <span>{product?.reviews?.length} Reviews</span>
                         </div>
-                        <button className="product-reviews__write">
+                        <button
+                          data-test-id="review-button"
+                          onClick={() => {
+                            setShowPopup(!showPopup);
+                          }}
+                          className="product-reviews__write"
+                        >
                           <img src={annotation} alt="" />
-                          <span>Write a review</span>
+                          Write a review
                         </button>
                       </div>
                     </div>
                     <div className="product-reviews__body">
-                      {product && (product.reviews &&
-                        product.reviews.map((e) => {
-                          return (
-                            <div
-                              className="product-reviews__item reviews-item"
-                              key={e.id}
-                            >
-                              <div className="reviews-item__header">
-                                <div className="reviews-item__author">
-                                  {e.name}
+                      {product?.reviews?.map((e) => {
+                        return (
+                          <div
+                            className="product-reviews__item reviews-item"
+                            key={e.id}
+                          >
+                            <div className="reviews-item__header">
+                              <div className="reviews-item__author">
+                                {e.name}
+                              </div>
+                              <div className="reviews-item__info">
+                                <div className="reviews-item__date">
+                                  3 months ago
                                 </div>
-                                <div className="reviews-item__info">
-                                  <div className="reviews-item__date">
-                                    3 months ago
-                                  </div>
-                                  <div className="reviews-item__rating">
-                                    <StarRating
-                                      ratingCount={e.rating}
-                                      isChange={false}
-                                    />
-                                  </div>
+                                <div className="reviews-item__rating">
+                                  <StarRating
+                                    ratingCount={e.rating}
+                                    isChange={false}
+                                  />
                                 </div>
                               </div>
-                              <div className="reviews-item__text">{e.text}</div>
                             </div>
-                          );
-                        }))}
+                            <div className="reviews-item__text">{e.text}</div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                   <hr />
