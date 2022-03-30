@@ -60,18 +60,20 @@
     background-color: #414141;
     margin-right: 12px;
     width: 400px;
-    @include adaptiv-value("width",400,300,1);
-    @media (max-width:($md2+px)) {
+    @include adaptiv-value("width", 400, 300, 1);
+    @media (max-width: ($md2+px)) {
       margin-right: 0;
     }
   }
 
   &__btn {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: "Spartan-SemiBold";
     font-size: 12px;
+    height: 100%;
     // line-height: 18px;
     text-align: center;
     letter-spacing: 0.06em;
@@ -79,7 +81,34 @@
     color: #ffffff;
     opacity: 0.9;
     border: 1px solid #ffffff;
-    padding: 8px 24px;
+    padding: 8px 35px;
+    .LoadingMessage {
+      position: absolute;
+      top: 50%;
+      margin-top: -8px;
+      left: 9px;
+      width: 16px;
+      height: 16px;
+      text-align: center;
+    }
+    .LoadingMessage__ring {
+      margin: 0 auto;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      opacity: 0.2;
+      justify-content: center;
+      align-items: center;
+      div {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &__btn:disabled {
+    background-color: #464646;
   }
 
   &__social {
@@ -89,13 +118,25 @@
   }
 }
 
+.form-footer {
+  &__success {
+    color: #fff;
+  }
+  &__error {
+    color: #e91e63;
+  }
+  &__error-request {
+    color: #e91e63;
+  }
+}
+
 .footer-menu {
   display: flex;
   justify-content: space-between;
   gap: 30px;
   padding: 20px 15px;
   flex-wrap: wrap;
-  @media(max-width:($md3+px)){
+  @media (max-width: ($md3+px)) {
     justify-content: center;
   }
   &__column {
@@ -107,16 +148,15 @@
       margin-right: 8px;
       margin-bottom: 2px;
     }
-    @media(max-width:($md3+px)){
+    @media (max-width: ($md3+px)) {
       flex: 1 0 40%;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    @media(max-width:($md4+px)){
+    @media (max-width: ($md4+px)) {
       flex: 1 0 100%;
     }
-
   }
 
   &__title {
@@ -144,7 +184,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media(max-width:($md3+px)){
+    @media (max-width: ($md3+px)) {
       flex-direction: column;
       gap: 10px;
     }

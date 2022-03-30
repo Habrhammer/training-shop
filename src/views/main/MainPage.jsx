@@ -15,7 +15,7 @@ const MainPage = ({ data,goods }) => {
       <Clothes productType="women" goods={goods} data={data} />
       <Clothes productType="men" goods={goods} data={data} />
       <News/>
-      <Subscribe/>
+      <Subscribe subscribeFormId="subscribeForm"/>
       <Blog data={data}/>
     </main>
   );
