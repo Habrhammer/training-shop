@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Formik, Form, Field, useFormikContext } from "formik";
+import React, { useEffect, useRef } from "react";
+import { Formik, Form, Field} from "formik";
 import * as Yup from "yup";
 import { POST_FORM_REQUESTED } from "../../redux/reducers/subscribeReducer";
 import SubscribeLoader from "../subscribe/subscribe-loader/SubscribeLoader";
@@ -7,16 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import NavColumn from "../footer-nav/NavColumn";
 import "./Footer.scss";
 
-const LoadingHandler = () => {
-  const { setSubmitting } = useFormikContext();
-  useEffect(
-    () => () => {
-      setSubmitting(false);
-    },
-    [setSubmitting]
-  );
-  return <SubscribeLoader />;
-};
 
 const Footer = ({
   footerFormId,
@@ -29,16 +19,27 @@ const Footer = ({
     return data.footerSubscribeForm;
   });
 
+  let form = useRef();
+  
+console.log(form);
+  useEffect(() => {
+    data?.status >= 200 && data?.status < 400 && form.current.setValues({"email": ""});
+  }, [data?.status]);
+
   return (
     <footer className="footer" data-test-id="footer">
       <div className="footer__top footer-top">
         <div className="footer-top__body _container">
           <Formik
+            innerRef={form}
             initialValues={{
               email: "",
             }}
             validationSchema={Yup.object({
-              email: Yup.string().email("Неверный адрес электронной почты"),
+              email: Yup.string().matches(
+                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/,
+                "Неверный адрес электронной почты"
+              ),
             })}
             onSubmit={(values, actions) => {
               dispatch({
@@ -46,7 +47,7 @@ const Footer = ({
                 data: values,
                 formId: footerFormId,
               });
-              actions.resetForm()
+              // actions.resetForm();
             }}
           >
             {(formik) => (
@@ -59,7 +60,7 @@ const Footer = ({
                       </div>
 
                       <div>
-                        {meta.error && (
+                        {(meta.touched && meta.error) && (
                           <div className="form-footer__error">{meta.error}</div>
                         )}
                         <input
@@ -88,11 +89,11 @@ const Footer = ({
                 <button
                   data-test-id="footer-subscribe-mail-button"
                   disabled={
-                    formik.isSubmitting || !(formik.isValid && formik.dirty)
+                    (loading && formik.isSubmitting) || !(formik.isValid && formik.dirty)
                   }
                   className="footer-top__btn"
                 >
-                  {loading && formik.isSubmitting && <LoadingHandler />}Join Us
+                  {loading && formik.isSubmitting && <SubscribeLoader />}Join Us
                 </button>
               </Form>
             )}

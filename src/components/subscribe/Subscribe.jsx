@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Formik, Form, Field, useFormikContext } from "formik";
+import React, { useEffect, useRef } from "react";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { POST_FORM_REQUESTED } from "../../redux/reducers/subscribeReducer";
 import SubscribeLoader from "../subscribe/subscribe-loader/SubscribeLoader";
@@ -9,25 +9,19 @@ import man from "./../../assets/images/subscribe_section/man.png";
 import woman from "./../../assets/images/subscribe_section/woman.png";
 import { useDispatch, useSelector } from "react-redux";
 
-const LoadingHandler = () => {
-  const { setSubmitting } = useFormikContext();
-
-  // resets the form state on unmount
-  useEffect(
-    () => () => {
-      setSubmitting(false);
-    },
-    [setSubmitting]
-  );
-  return <SubscribeLoader />;
-};
-
 const Subscribe = ({ subscribeFormId }) => {
   const dispatch = useDispatch();
   const { loading, data, formId } = useSelector((data) => {
     return data.subscribeForm;
   });
-  console.log(subscribeFormId);
+
+  let form = useRef();
+
+  useEffect(() => {
+    data?.status >= 200 &&
+      data?.status < 400 &&
+      form.current.setValues({ email: "" });
+  }, [data?.status]);
 
   return (
     <section className="subscribe">
@@ -39,11 +33,15 @@ const Subscribe = ({ subscribeFormId }) => {
             <br /> And <span>Get 10% Off</span>
           </div>
           <Formik
+            innerRef={form}
             initialValues={{
               email: "",
             }}
             validationSchema={Yup.object({
-              email: Yup.string().email("Неверный адрес электронной почты"),
+              email: Yup.string().matches(
+                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/,
+                "Неверный адрес электронной почты"
+              ),
             })}
             onSubmit={(values, actions) => {
               dispatch({
@@ -51,11 +49,11 @@ const Subscribe = ({ subscribeFormId }) => {
                 data: values,
                 formId: subscribeFormId,
               });
-              actions.resetForm()
+              // actions.resetForm()
             }}
           >
             {(formik) => (
-              <Form className="subscribe__form subscribe-form">
+              <Form ref={form} className="subscribe__form subscribe-form">
                 <Field name="email" type="text">
                   {({ field, meta }) => (
                     <>
@@ -67,7 +65,7 @@ const Subscribe = ({ subscribeFormId }) => {
                         autoComplete="off"
                         {...field}
                       />
-                      {meta.error && (
+                      {meta.touched && meta.error && (
                         <div className="subscribe-form__error">
                           {meta.error}
                         </div>
@@ -79,13 +77,16 @@ const Subscribe = ({ subscribeFormId }) => {
                 <button
                   data-test-id="main-subscribe-mail-button"
                   disabled={
-                    formik.isSubmitting || !(formik.isValid && formik.dirty)
+                    (loading && formik.isSubmitting) ||
+                    !(formik.isValid && formik.dirty)
                   }
                   type="submit"
                   className="subscribe-form__btn"
                 >
-                  {loading && formik.isSubmitting && <LoadingHandler />}Subcribe
+                  {loading && formik.isSubmitting && <SubscribeLoader />}
+                  Subcribe
                 </button>
+                {console.log(data?.status)}
                 {formId === subscribeFormId &&
                   data?.status &&
                   (data?.status >= 200 && data?.status < 400 ? (

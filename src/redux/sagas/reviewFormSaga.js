@@ -26,8 +26,7 @@ function* postForm(action) {
     yield put({ type: "REVIEW_FORM_SUCCESS", data: null });
   } catch (e) {
     yield put({ type: "REVIEW_FORM_FAILED", error: e.response });
-    yield call(delay, 1500);
-    yield put({ type: "REVIEW_FORM_FAILED", error: null });
+   
   }
 }
 

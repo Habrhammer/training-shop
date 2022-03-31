@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ReviewForm.scss";
-import { Formik, Form, Field, useFormikContext } from "formik";
+import { Formik, Form, Field } from "formik";
 import { REVIEW_FORM_REQUESTED } from "../../redux/reducers/reviewFormReducer";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import StarRating from "../rating/StarRating";
 import SubscribeLoader from "../subscribe/subscribe-loader/SubscribeLoader";
-
-const LoadingHandler = () => {
-  const { setSubmitting } = useFormikContext();
-  useEffect(
-    () => () => {
-      setSubmitting(false);
-    },
-    [setSubmitting]
-  );
-  return <SubscribeLoader />;
-};
 
 const ReviewForm = ({ setShow }) => {
   const dispatch = useDispatch();
@@ -29,6 +18,15 @@ const ReviewForm = ({ setShow }) => {
   let setShowPopupHandler = () => {
     setShow(false);
   };
+
+  let reviewForm = useRef();
+  useEffect(() => {
+    data?.status >= 200 &&
+      data?.status < 400 &&
+      setTimeout(() => {
+        setShow(false);
+      }, 1000);
+  }, [data?.status, setShow]);
 
   let [rating, setRating] = useState(1);
 
@@ -43,6 +41,7 @@ const ReviewForm = ({ setShow }) => {
       >
         <div className="form-popup__body">
           <Formik
+            innerRef={reviewForm}
             initialValues={{
               name: "",
               review: "",
@@ -59,7 +58,6 @@ const ReviewForm = ({ setShow }) => {
                 type: REVIEW_FORM_REQUESTED,
                 data: values,
               });
-              actions.resetForm();
             }}
           >
             {(formik) => (
@@ -79,7 +77,9 @@ const ReviewForm = ({ setShow }) => {
                         placeholder="Имя"
                         {...field}
                       />
-                      {meta.error && <div className="error">{meta.error}</div>}
+                      {meta.touched && meta.error && (
+                        <div className="error">{meta.error}</div>
+                      )}
                     </div>
                   )}
                 </Field>
@@ -94,7 +94,10 @@ const ReviewForm = ({ setShow }) => {
                         autoComplete="off"
                         {...field}
                       />
-                      {meta.error && <div className="error">{meta.error}</div>}
+                      {meta.touched && meta.error && (
+                        <div className="error">{meta.error}</div>
+                      )}
+                      {console.log(meta)}
                     </div>
                   )}
                 </Field>
@@ -103,9 +106,12 @@ const ReviewForm = ({ setShow }) => {
                     data-test-id="review-submit-button"
                     type="submit"
                     className="review-form__button"
-                    disabled={loading || !(formik.isValid && formik.dirty)}
+                    disabled={
+                      (loading && formik.isSubmitting) ||
+                      !(formik.isValid && formik.dirty)
+                    }
                   >
-                    {loading && formik.isSubmitting && <LoadingHandler />}
+                    {loading && formik.isSubmitting && <SubscribeLoader />}
                     Send
                   </button>
                 </div>
