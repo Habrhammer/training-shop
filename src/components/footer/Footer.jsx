@@ -12,10 +12,9 @@ const Footer = ({
   footerFormId,
   data: { navigation, socialLinks, payments },
 }) => {
-  // console.log(formId);
+
   const dispatch = useDispatch();
   const { loading, data, formId } = useSelector((data) => {
-    console.log(11111, data);
     return data.footerSubscribeForm;
   });
 
