@@ -15,7 +15,7 @@ export const formsReducer = (state = initialState, action) => {
     case POST_FORM_SUCCESS:
       return { ...state, data: action.data, loading: false, formId: action.formId };
     case POST_FORM_FAILED:
-      return { ...state, data: action.error, loading: false };
+      return { ...state, data: action.error, loading: false, formId: action.formId };
     default:
       return state;
   }
