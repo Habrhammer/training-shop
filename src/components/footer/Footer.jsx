@@ -87,14 +87,6 @@ console.log(form);
                 </Field>
                 <button
                   data-test-id="footer-subscribe-mail-button"
-                  onSubmit={(values, actions) => {
-                    dispatch({
-                      type: POST_FORM_REQUESTED,
-                      data: values,
-                      formId: footerFormId,
-                    });
-                    // actions.resetForm();
-                  }}
                   disabled={
                     (loading && formik.isSubmitting) || !(formik.isValid && formik.dirty)
                   }
