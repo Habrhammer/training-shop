@@ -12,10 +12,9 @@ const Footer = ({
   footerFormId,
   data: { navigation, socialLinks, payments },
 }) => {
-  // console.log(formId);
+
   const dispatch = useDispatch();
   const { loading, data, formId } = useSelector((data) => {
-    console.log(11111, data);
     return data.footerSubscribeForm;
   });
 
@@ -88,6 +87,14 @@ console.log(form);
                 </Field>
                 <button
                   data-test-id="footer-subscribe-mail-button"
+                  onSubmit={(values, actions) => {
+                    dispatch({
+                      type: POST_FORM_REQUESTED,
+                      data: values,
+                      formId: footerFormId,
+                    });
+                    // actions.resetForm();
+                  }}
                   disabled={
                     (loading && formik.isSubmitting) || !(formik.isValid && formik.dirty)
                   }
