@@ -11,7 +11,7 @@ import SubscribeLoader from "../subscribe/subscribe-loader/SubscribeLoader";
 const ReviewForm = ({ setShow }) => {
   const dispatch = useDispatch();
   let { id } = useParams();
-  let { loading, data } = useSelector((forms) => {
+  let { loading, data, error } = useSelector((forms) => {
     return forms.reviewForm;
   });
 
@@ -21,12 +21,10 @@ const ReviewForm = ({ setShow }) => {
 
   let reviewForm = useRef();
   useEffect(() => {
-    data?.status >= 200 &&
-      data?.status < 400 &&
-      setTimeout(() => {
-        setShow(false);
-      }, 1000);
-  }, [data?.status, setShow]);
+    data?.status >= 200 && data?.status < 400 && setShow(false);
+    dispatch({ type: "REVIEW_FORM_SUCCESS", data: {} });
+    dispatch({ type: "REVIEW_FORM_FAILED", error: false });
+  }, [data?.status, setShow, dispatch]);
 
   let [rating, setRating] = useState(1);
 
@@ -97,7 +95,6 @@ const ReviewForm = ({ setShow }) => {
                       {meta.touched && meta.error && (
                         <div className="error">{meta.error}</div>
                       )}
-                      {console.log(meta)}
                     </div>
                   )}
                 </Field>
@@ -115,16 +112,19 @@ const ReviewForm = ({ setShow }) => {
                     Send
                   </button>
                 </div>
-                {data?.status &&
-                  (data?.status >= 200 && data?.status < 400 ? (
+                {console.log("=", data?.status)}
+                {data?.status || !error ? (
+                  data?.status >= 200 &&
+                  data?.status < 400 && (
                     <div className="review-form__success">
                       <div>Данные успешно отправлены!</div>
                     </div>
-                  ) : (
-                    <div className="review-form__error-request">
-                      <div>Ошибка отправки данных!</div>
-                    </div>
-                  ))}
+                  )
+                ) : (
+                  <div className="review-form__error-request">
+                    <div>Ошибка отправки данных!</div>
+                  </div>
+                )}
               </Form>
             )}
           </Formik>

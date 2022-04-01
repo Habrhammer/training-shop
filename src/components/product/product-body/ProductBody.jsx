@@ -71,10 +71,10 @@ const checkout = [
 
 const ProductBody = ({ productType, goods }) => {
 
-  const lastReview = useSelector((data)=>{
-    // return data.reviewForm.data.reviews;
-  })
-  console.log(999,lastReview);
+  // const lastReview = useSelector((data)=>{
+  //   // return data.reviewForm.data.reviews;
+  // })
+
 
   const dispatch = useDispatch();
   const { id } = useParams();
