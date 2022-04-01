@@ -11,17 +11,31 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Subscribe = ({ subscribeFormId }) => {
   const dispatch = useDispatch();
-  const { loading, data, formId } = useSelector((data) => {
+  const { loading, data, formId, error } = useSelector((data) => {
     return data.subscribeForm;
   });
 
   let form = useRef();
 
   useEffect(() => {
-    data?.status >= 200 &&
-      data?.status < 400 &&
-      form.current.setValues({ email: "" });
-  }, [data?.status]);
+    if(data?.status >= 200 &&
+      data?.status < 400 ){
+        form.current.setValues({ email: "" });
+        dispatch({
+          type: "POST_FORM_FAILED",
+          error: false,
+          formId: formId,
+          loading: false
+        })
+    }
+    // data?.status >= 200 &&
+    //   data?.status < 400 &&
+    //   form.current.setValues({ email: "" });
+    //   dispatch({
+    //     type: "POST_FORM_FAILED",
+    //     error: false,
+    //   })
+  }, [data?.status,dispatch,formId]);
 
   return (
     <section className="subscribe">
@@ -87,13 +101,24 @@ const Subscribe = ({ subscribeFormId }) => {
                   Subcribe
                 </button>
                 {console.log(data?.status)}
-                {formId === subscribeFormId &&
+                {/* {formId === subscribeFormId &&
                   data?.status &&
                   (data?.status >= 200 && data?.status < 400 ? (
                     <div className="subscribe-form__success">
                       Данные успешно отправлены!
                     </div>
                   ) : (
+                    <div className="subscribe-form__error-request">
+                      Ошибка отправки данных!
+                    </div>
+                  ))} */}
+                {formId === subscribeFormId &&
+                  (data?.status || !error ? (
+                  data?.status >= 200 && data?.status < 400 && (
+                    <div className="subscribe-form__success">
+                      Данные успешно отправлены!
+                    </div>
+                  )) : (
                     <div className="subscribe-form__error-request">
                       Ошибка отправки данных!
                     </div>

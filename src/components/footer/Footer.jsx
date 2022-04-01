@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Formik, Form, Field} from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { POST_FORM_REQUESTED } from "../../redux/reducers/subscribeReducer";
 import SubscribeLoader from "../subscribe/subscribe-loader/SubscribeLoader";
@@ -7,23 +7,30 @@ import { useDispatch, useSelector } from "react-redux";
 import NavColumn from "../footer-nav/NavColumn";
 import "./Footer.scss";
 
-
 const Footer = ({
   footerFormId,
   data: { navigation, socialLinks, payments },
 }) => {
-
   const dispatch = useDispatch();
-  const { loading, data, formId } = useSelector((data) => {
+  const { loading, data, formId, error } = useSelector((data) => {
     return data.footerSubscribeForm;
   });
 
   let form = useRef();
-  
-console.log(form);
+
+  console.log(form);
   useEffect(() => {
-    data?.status >= 200 && data?.status < 400 && form.current.setValues({"email": ""});
-  }, [data?.status]);
+    // data?.status >= 200 && data?.status < 400 && form.current.setValues({"email": ""});
+    if (data?.status >= 200 && data?.status < 400) {
+      form.current.setValues({ email: "" });
+      dispatch({
+        type: "POST_FORM_FAILED",
+        error: false,
+        formId: formId,
+        loading: false
+      });
+    }
+  }, [data?.status, dispatch,formId]);
 
   return (
     <footer className="footer" data-test-id="footer">
@@ -59,7 +66,7 @@ console.log(form);
                       </div>
 
                       <div>
-                        {(meta.touched && meta.error) && (
+                        {meta.touched && meta.error && (
                           <div className="form-footer__error">{meta.error}</div>
                         )}
                         <input
@@ -70,7 +77,7 @@ console.log(form);
                           autoComplete="off"
                           {...field}
                         />
-                        {footerFormId === formId &&
+                        {/* {footerFormId === formId &&
                           data?.status &&
                           (data?.status >= 200 && data?.status < 400 ? (
                             <div className="form-footer__success">
@@ -80,7 +87,20 @@ console.log(form);
                             <div className="form-footer__error-request">
                               Ошибка отправки данных!
                             </div>
-                          ))}
+                          ))} */}
+                        {formId === footerFormId && (data?.status ||
+                        !error ? (
+                          data?.status >= 200 &&
+                          data?.status < 400 && (
+                            <div className="form-footer__success">
+                              Данные успешно отправлены!
+                            </div>
+                          )
+                        ) : (
+                          <div className="form-footer__error-request">
+                            Ошибка отправки данных!
+                          </div>
+                        ))}
                       </div>
                     </>
                   )}
@@ -88,7 +108,8 @@ console.log(form);
                 <button
                   data-test-id="footer-subscribe-mail-button"
                   disabled={
-                    (loading && formik.isSubmitting) || !(formik.isValid && formik.dirty)
+                    (loading && formik.isSubmitting) ||
+                    !(formik.isValid && formik.dirty)
                   }
                   className="footer-top__btn"
                 >

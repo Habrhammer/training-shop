@@ -5,7 +5,7 @@ export const POST_FORM_SUCCESS = "POST_FORM_SUCCESS";
 let initialState = {
   data: null,
   loading: false,
-  formId: null
+  formId: null, error: false
 };
 
 export const formsReducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ export const formsReducer = (state = initialState, action) => {
     case POST_FORM_SUCCESS:
       return { ...state, data: action.data, loading: false, formId: action.formId };
     case POST_FORM_FAILED:
-      return { ...state, data: action.error, loading: false, formId: action.formId };
+      return { ...state, error: action.error, loading: false, formId: action.formId };
     default:
       return state;
   }

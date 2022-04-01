@@ -23,9 +23,14 @@ function* postForm(action) {
     yield put({ type: "POST_FORM_SUCCESS", data: null, formId: action.formId });
   } catch (e) {
     console.log(e.response);
+    // yield put({
+    //   type: "POST_FORM_FAILED",
+    //   error: e.response,
+    //   formId: action.formId,
+    // });
     yield put({
       type: "POST_FORM_FAILED",
-      error: e.response,
+      error: true,
       formId: action.formId,
     });
   }

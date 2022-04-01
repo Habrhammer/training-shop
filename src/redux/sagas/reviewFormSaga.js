@@ -15,17 +15,19 @@ const apiConnection = async (data) => {
     });
 };
 
-const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
+// const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
 function* postForm(action) {
   try {
     const data = yield call(apiConnection, action.data);
     yield put(setProduct(data.data));
     yield put({ type: "REVIEW_FORM_SUCCESS", data: data });
-    yield call(delay, 1500);
-    yield put({ type: "REVIEW_FORM_SUCCESS", data: null });
+    // yield call(delay, 1500);
+    // yield put({ type: "REVIEW_FORM_SUCCESS", data: {} });
   } catch (e) {
-    yield put({ type: "REVIEW_FORM_FAILED", error: e.response });
+
+    // yield put({ type: "REVIEW_FORM_FAILED", error: e.response });
+    yield put({ type: "REVIEW_FORM_FAILED", error: true });
    
   }
 }
