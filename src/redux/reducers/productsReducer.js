@@ -60,8 +60,6 @@ export const setError = (error) => {
   };
 };
 
-
-
 export const requestProducts = () => {
   return toggleIsLoading();
 };
