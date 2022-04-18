@@ -94,7 +94,6 @@ const ProductCart = ({ setShow, isShow }) => {
   useEffect(() => {
    
     if((!isShow && message?.message === "success") || (!isShow && error)){
-      console.log('!');
       dispatch(cartReset())
       setActiveStep(0);
       deliveryForm?.current?.resetForm({});

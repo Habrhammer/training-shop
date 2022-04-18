@@ -7,7 +7,6 @@ import Subscribe from "../../components/subscribe/Subscribe";
 
 const MainPage = ({ data,goods }) => {
   let { advantages } = data;
-  console.log(data);
   return (
     <main className="page">
       <MainBlock />

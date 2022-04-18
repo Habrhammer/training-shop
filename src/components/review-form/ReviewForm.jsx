@@ -49,7 +49,6 @@ const ReviewForm = ({ setShow }) => {
               review: Yup.string().required("Введите отзыв"),
             })}
             onSubmit={(values, actions) => {
-              console.log(actions);
               values.id = id;
               values.rating = rating;
               dispatch({
@@ -112,7 +111,6 @@ const ReviewForm = ({ setShow }) => {
                     Send
                   </button>
                 </div>
-                {console.log("=", data?.status)}
                 {data?.status || !error ? (
                   data?.status >= 200 &&
                   data?.status < 400 && (

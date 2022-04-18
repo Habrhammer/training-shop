@@ -237,7 +237,6 @@ export const requestCountries = () => {
 };
 
 export const requestCities = (searchParam) => {
-  console.log(0, searchParam);
   return { type: CITIES_IS_LOADING, payload: searchParam };
 };
 

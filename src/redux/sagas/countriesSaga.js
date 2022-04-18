@@ -6,7 +6,6 @@ const apiConnection = async () => {
   return await axios
     .get("https://training.cleverland.by/shop/countries")
     .then((response) => {
-      console.log(response);
       return response;
     });
 };

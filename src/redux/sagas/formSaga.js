@@ -21,7 +21,6 @@ function* postForm(action) {
     yield call(delay, 2000);
     yield put({ type: "POST_FORM_SUCCESS", data: null, formId: action.formId });
   } catch (e) {
-    console.log(e.response);
     // yield put({
     //   type: "POST_FORM_FAILED",
     //   error: e.response,

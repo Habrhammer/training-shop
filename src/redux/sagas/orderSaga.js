@@ -8,19 +8,15 @@ const apiConnection = async (data) => {
       ...data,
     })
     .then((response) => {
-      console.log(response);
       return response;
     });
 };
 
 function* postOrder({ payload }) {
-  console.log("searchParams", payload);
   try {
     const { data } = yield call(apiConnection, payload);
-    console.log("postOrder", data);
     yield put(setRequestSuccess(data));
   } catch (error) {
-     console.log(error)
     yield put(setRequestError(error));
   }
 }
