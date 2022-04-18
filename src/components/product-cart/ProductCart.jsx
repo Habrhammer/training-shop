@@ -1,19 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { Formik, Form } from "formik";
 import "./ProductCart.scss";
-import trash from "../../assets/images/product-cart/trash.svg";
 import close from "../../assets/images/product-cart/close.svg";
 import useScrollBlock from "../../hooks/useScrollBlock";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  cartReset,
   decreaseQuantity,
   increaseQuantity,
+  postOrderRequest,
   removeFromCart,
+  setRequestError,
 } from "../../redux/reducers/cartReducer";
+import DeliveryForm from "./Delivery/DeliveryForm";
+import PaymentForm from "./Payment/PaymentForm";
+import Cart from "./Cart/Cart";
+import validationSchema from "./FormModel/validationSchema.js";
+import initialValues from "./FormModel/initialValues";
+
+const steps = ["Item in cart", "Delivery Info", "Payment"];
 
 const ProductCart = ({ setShow, isShow }) => {
   const dispatch = useDispatch();
-  const productsInCart = useSelector(({ cart }) => {
-    return cart.order;
+  const { order, error, message } = useSelector(({ cart }) => {
+    return cart;
   });
 
   const removeOrder = (id) => {
@@ -28,7 +38,51 @@ const ProductCart = ({ setShow, isShow }) => {
     return dispatch(decreaseQuantity(id));
   };
 
-  const sumPrice = productsInCart.reduce((acc, current) => {
+  function _submitForm(values, actions) {
+    let products = order?.map((product) => {
+      return {
+        name: product.name,
+        size: product.size,
+        color: product.color,
+        quantity: product.quantity,
+      };
+    });
+
+    values.products = products;
+    values.totalPrice = sumPrice.toFixed(2);
+    dispatch(postOrderRequest(values));
+    actions.setSubmitting(false);
+    setActiveStep(activeStep + 1);
+  }
+
+  const [activeStep, setActiveStep] = useState(0);
+  const currentValidationSchema = validationSchema[activeStep - 1];
+  const isLastStep = activeStep === steps.length - 1;
+
+  let deliveryForm = useRef();
+  let [isCash, setCash] = useState(false);
+
+  function _renderStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <Cart
+            productsInCart={order}
+            removeOrder={removeOrder}
+            increaseOrder={increaseOrder}
+            decreaseOrder={decreaseOrder}
+          />
+        );
+      case 1:
+        return <DeliveryForm />;
+      case 2:
+        return <PaymentForm setCash={setCash} />;
+      default:
+        return;
+    }
+  }
+
+  const sumPrice = order?.reduce((acc, current) => {
     return acc + current.price * current.quantity;
   }, 0);
 
@@ -37,9 +91,35 @@ const ProductCart = ({ setShow, isShow }) => {
     isShow ? blockScroll() : allowScroll();
   });
 
+  useEffect(() => {
+   
+    if((!isShow && message?.message === "success") || (!isShow && error)){
+      console.log('!');
+      dispatch(cartReset())
+      setActiveStep(0);
+      deliveryForm?.current?.resetForm({});
+    }
+    !isShow && setActiveStep(0);
+    !isShow && deliveryForm?.current?.resetForm({});
+  }, [isShow, dispatch,error,message?.message]);
+
   const setShowHandler = () => {
     setShow(false);
   };
+
+  function _handleSubmit(values, actions) {
+    if (isLastStep) {
+      _submitForm(values, actions);
+    } else {
+      setActiveStep(activeStep + 1);
+      actions.setTouched({});
+      actions.setSubmitting(false);
+    }
+  }
+
+  function _handleBack() {
+    setActiveStep(activeStep - 1);
+  }
 
   return (
     <>
@@ -63,96 +143,146 @@ const ProductCart = ({ setShow, isShow }) => {
           </button>
         </div>
         <div className="cart__body">
-          <div className="cart__tabs">
-            <div className="cart__tab active">Item in cart</div>
-        
-            <div className="cart__tab">Delivery Info</div>
-     
-            <div className="cart__tab">Payment</div>
-          </div>
-          <div className="cart__container">
-            {productsInCart.length > 0 ? (
-              productsInCart.map(
-                ({ id, name, color, size, image, quantity, price }) => {
-                  return (
-                    <div
-                      data-test-id="cart-card"
-                      className="cart__item cart-item"
-                      key={id}
+          <Formik
+            innerRef={deliveryForm}
+            initialValues={initialValues}
+            validationSchema={currentValidationSchema}
+            onSubmit={_handleSubmit}
+          >
+            {message === null && error === null ? (
+              <>
+                {order.length > 0 && (
+                  <div className="cart__tabs">
+                    {steps.map((label, index) => {
+                      return (
+                        <div
+                          className={
+                            activeStep === index
+                              ? "cart__tab active"
+                              : "cart__tab"
+                          }
+                          key={index}
+                        >
+                          {label}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <div className="cart__container">
+                  {
+                    <Form id="deliveryForm" className="orderForm">
+                      {_renderStepContent(activeStep)}
+                    </Form>
+                  }
+                </div>
+                {order.length > 0 && (
+                  <div className="cart__total">
+                    <span>Total:</span>
+                    <span>${sumPrice.toFixed(2)}</span>
+                  </div>
+                )}
+
+                <div className="cart__buttons">
+                  {order.length === 0 ? (
+                    <button
+                      onClick={() => {
+                        setShowHandler();
+                        dispatch(cartReset());
+                      }}
                     >
-                      <div className="cart-item__image _ibg">
-                        <img
-                          src={`https://training.cleverland.by/shop${image}`}
-                          alt=""
-                        />
-                      </div>
-                      <div className="cart-item__description">
-                        <div className="cart-item__title">{name}</div>
-                        <div className="cart-item__spec">
-                          {color}, {size}
-                        </div>
-                        <div className="cart-item__actions">
-                          <div className="cart-item__quantity item-quantity">
-                            <button
-                              data-test-id="minus-product"
-                              className="item-quantity__decrease"
-                              onClick={() => {
-                                decreaseOrder(id);
-                              }}
-                            >
-                              -
-                            </button>
-                            <div className="item-quantity__count">
-                              {quantity}
-                            </div>
-                            <button
-                              data-test-id="plus-product"
-                              className="item-quantity__increase"
-                              onClick={() => {
-                                increaseOrder(id);
-                              }}
-                            >
-                              +
-                            </button>
-                          </div>
-                          <div className="cart-item__price">
-                            ${(price * quantity).toFixed(2)}
-                          </div>
-                          <button
-                            data-test-id="remove-product"
-                            onClick={() => {
-                              removeOrder(id);
-                            }}
-                            className="cart-item__delete"
-                          >
-                            <img src={trash} alt="trash" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-              )
+                      BACK TO SHOPPING
+                    </button>
+                  ) : activeStep === 0 ? (
+                    <button
+                      form="deliveryForm"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveStep(activeStep + 1);
+                      }}
+                    >
+                      FURTHER
+                    </button>
+                  ) : (
+                    <button
+                      form="deliveryForm"
+                      onClick={() => {
+                        !deliveryForm.current.isValid &&
+                          deliveryForm.current.setFieldValue("terms", false);
+                      }}
+                      disabled={deliveryForm.isSubmitting}
+                      type="submit"
+                    >
+                      {isLastStep
+                        ? isCash
+                          ? "Ready"
+                          : "Check Out"
+                        : "FURTHER"}
+                    </button>
+                  )}
+
+                  {activeStep !== 0 && (
+                    <button onClick={_handleBack}>VIEW CART</button>
+                  )}
+                </div>
+              </>
+            ) : message?.message === "success" && error === null ? (
+              <>
+                <div className="cart__container">
+                  <div className="cart__message">Thank you for your order</div>
+                  <div style={{ textAlign: "center", marginTop: "24px" }}>
+                    Information about your order will appear in your e-mail
+                  </div>
+                  <div style={{ textAlign: "center", marginTop: "24px" }}>
+                    Our manager will call you back
+                  </div>
+                </div>
+                <div className="cart__buttons">
+                  <button
+                    onClick={() => {
+                      setShowHandler();
+                      dispatch(cartReset());
+                    }}
+                  >
+                    BACK TO SHOPPING
+                  </button>
+                </div>
+              </>
             ) : (
-              <div className="cart__message">Sorry, your cart is empty</div>
+              <>
+                <div className="cart__container">
+                  <div className="cart__message">
+                    Sorry, your payment has not been processed.
+                  </div>
+                  <div style={{ marginTop: "24px", textAlign: "center" }}>
+                    {error?.response?.data?.message}
+                  </div>
+                </div>
+                <div className="cart__buttons">
+                  <button
+                    onClick={() => {
+                      dispatch(setRequestError(null));
+                      setActiveStep(2);
+                    }}
+                  >
+                    BACK TO PAYMENT
+                  </button>
+                  <button
+                    onClick={() => {
+                      dispatch(setRequestError(null));
+                      setActiveStep(0);
+                      deliveryForm?.current?.resetForm({});
+                    }}
+                  >
+                    VIEW CART
+                  </button>
+                </div>
+              </>
             )}
-          </div>
-          {productsInCart.length > 0 ? (
-            <>
-              <div className="cart__total">
-                <span>Total:</span>
-                <span>${sumPrice.toFixed(2)}</span>
-              </div>
-              <div className="cart__buttons">
-                <button>FURTHER</button>
-                <button onClick={setShowHandler}>VIEW CART</button>
-              </div>
-            </>
-          ) : (
-            <div className="cart__buttons">
-              <button onClick={setShowHandler}>BACK TO SHOPPING</button>
-            </div>
-          )}
+          </Formik>
+
+          {}
         </div>
       </div>
     </>
