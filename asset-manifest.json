@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/training-shop/static/css/main.06d68818.css",
-    "main.js": "/training-shop/static/js/main.62eb6209.js",
+    "main.css": "/training-shop/static/css/main.fa643f78.css",
+    "main.js": "/training-shop/static/js/main.41ca3149.js",
     "static/js/787.47ca6e30.chunk.js": "/training-shop/static/js/787.47ca6e30.chunk.js",
     "static/media/Inter-Regular.ttf": "/training-shop/static/media/Inter-Regular.2391725004ae05a27e8e.ttf",
     "static/media/woman.png": "/training-shop/static/media/woman.4152b783e591f01bafb6.png",
@@ -29,6 +29,8 @@
     "static/media/stripe.svg": "/training-shop/static/media/stripe.75b7030cc26b480ade316b4e91c29f75.svg",
     "static/media/visa.svg": "/training-shop/static/media/visa.68af7ae994c947cd3d719d00830d393f.svg",
     "static/media/mastercard.svg": "/training-shop/static/media/mastercard.0680f2aeeabae2b889756a576beeb553.svg",
+    "static/media/hide.svg": "/training-shop/static/media/hide.aeefc482d736ae1cd8f25a0320265193.svg",
+    "static/media/show.svg": "/training-shop/static/media/show.81a7bfb6596bcc8c1ab46cc31aa4f047.svg",
     "static/media/shipping.svg": "/training-shop/static/media/shipping.a8092486d5e34f0a5ef12728500e4bcb.svg",
     "static/media/view-grid.svg": "/training-shop/static/media/view-grid.e14ce47c52f142cd39827bdd8bc39b12.svg",
     "static/media/instagram.svg": "/training-shop/static/media/instagram.2a030663c04e39e407430b43aa937d84.svg",
@@ -66,12 +68,12 @@
     "static/media/arrow_next.svg": "/training-shop/static/media/arrow_next.6a871d585953b3e789bd0c0fea717ae1.svg",
     "static/media/arrow_right.svg": "/training-shop/static/media/arrow_right.6a871d585953b3e789bd0c0fea717ae1.svg",
     "static/media/arrow.svg": "/training-shop/static/media/arrow.9f4dd338b481a943c89e0ee673f34fe5.svg",
-    "main.06d68818.css.map": "/training-shop/static/css/main.06d68818.css.map",
-    "main.62eb6209.js.map": "/training-shop/static/js/main.62eb6209.js.map",
+    "main.fa643f78.css.map": "/training-shop/static/css/main.fa643f78.css.map",
+    "main.41ca3149.js.map": "/training-shop/static/js/main.41ca3149.js.map",
     "787.47ca6e30.chunk.js.map": "/training-shop/static/js/787.47ca6e30.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.06d68818.css",
-    "static/js/main.62eb6209.js"
+    "static/css/main.fa643f78.css",
+    "static/js/main.41ca3149.js"
   ]
 }
