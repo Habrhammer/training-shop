@@ -17,13 +17,16 @@ const deliveryMethods = [
 
 const DeliveryForm = () => {
   const dispatch = useDispatch();
-  const formContext = useFormikContext();
+  // const formContext = useFormikContext();
+  let {setFieldValue, values} = useFormikContext();
   const [activeCountry, setActiveCountry] = useState(null);
   let [citiesSearch, setCitiesSearch] = useState("");
 
   const cartData = useSelector((data) => {
     return data.cart;
   });
+
+  let country = cartData?.cities[0]?.country;
 
   const countryOptions = cartData.countries.map(({ name }) => {
     return {
@@ -38,9 +41,9 @@ const DeliveryForm = () => {
       : [];
 
   useEffect(() => {
-    formContext.values.deliveryMethod === "store pickup" &&
+    values.deliveryMethod === "store pickup" &&
       dispatch(requestCountries());
-  }, [formContext.values.deliveryMethod, dispatch]);
+  }, [values.deliveryMethod, dispatch]);
 
   useEffect(() => {
     let searchParams = {
@@ -52,14 +55,15 @@ const DeliveryForm = () => {
   }, [activeCountry, citiesSearch, dispatch]);
 
   useEffect(() => {
-    if (cartData?.cities[0]?.country !== formContext.values.country) {
+    if (country !== values.country) {
       // dispatch(setCities([]))
-      formContext.setFieldValue("storeAddress", "");
+      setFieldValue("storeAddress", "");
     }
   }, [
     activeCountry,
-    formContext.setFieldValue,
-    cartData?.cities[0]?.country,
+    setFieldValue,
+    values.country,
+    country,
     dispatch,
   ]);
 
@@ -138,7 +142,7 @@ const DeliveryForm = () => {
           </Field>
         </div>
       </div>
-      {formContext.values.deliveryMethod !== "store pickup" && (
+      {values.deliveryMethod !== "store pickup" && (
         <div className="orderForm__section">
           <div className="orderForm__name-section">ADRESS</div>
           <div className="orderForm__item">
@@ -231,7 +235,7 @@ const DeliveryForm = () => {
         </div>
       )}
 
-      {formContext.values.deliveryMethod === "pickup from post offices" && (
+      {values.deliveryMethod === "pickup from post offices" && (
         <div className="orderForm__section">
           <div className="orderForm__name-section">POSTCODE</div>
           <div className="orderForm__item">
@@ -244,7 +248,7 @@ const DeliveryForm = () => {
                     mask="_"
                     value={field.value}
                     onValueChange={(val) => {
-                      return formContext.setFieldValue(
+                      return setFieldValue(
                         "postcode",
                         val.floatValue || ""
                       );
@@ -260,7 +264,7 @@ const DeliveryForm = () => {
         </div>
       )}
 
-      {formContext.values.deliveryMethod === "store pickup" && (
+      {values.deliveryMethod === "store pickup" && (
         <div className="orderForm__section">
           <div className="orderForm__name-section">ADRESS OF STORE</div>
           <div
@@ -281,7 +285,7 @@ const DeliveryForm = () => {
                     placeholder="Country"
                     noOptionsMessage={() => "Store address not founded"}
                     onChange={({ value }) => {
-                      formContext.setFieldValue(field.name, value);
+                      setFieldValue(field.name, value);
                       setActiveCountry(value);
                       field.onChange(value);
                     }}
@@ -301,19 +305,19 @@ const DeliveryForm = () => {
               {({ field, meta }) => (
                 <>
                   <Select
-                    key={`${formContext.values.storeAddress}${formContext.values.country}`}
+                    key={`${values.storeAddress}${values.country}`}
                     // key={activeCountry}
                     className="orderForm__select orderForm-select"
                     classNamePrefix="orderForm-select"
                     defaultValue={
-                      formContext.values.storeAddress
+                      values.storeAddress
                         ? {
-                            label: formContext.values.storeAddress,
-                            value: formContext.values.storeAddress,
+                            label: values.storeAddress,
+                            value: values.storeAddress,
                           }
                         : null
                     }
-                    isDisabled={formContext.values.country === ""}
+                    isDisabled={values.country === ""}
                     options={citiesOptions}
                     {...field}
                     value={citiesOptions.find(({ value }) => {
@@ -322,7 +326,7 @@ const DeliveryForm = () => {
                     placeholder="Store address"
                     noOptionsMessage={() => "Store address not founded"}
                     onChange={({ value }) => {
-                      formContext.setFieldValue("storeAddress", value);
+                      setFieldValue("storeAddress", value);
                       field.onChange(value);
                     }}
                     onInputChange={(value) => setCitiesSearch(value)}
