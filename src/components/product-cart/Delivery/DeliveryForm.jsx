@@ -125,7 +125,7 @@ const DeliveryForm = () => {
       <div className="orderForm__section">
         <div className="orderForm__name-section">E-MAIL</div>
         <div className="orderForm__item">
-          <Field name="email" type="text">
+          <Field name="email" type="email">
             {({ field, meta }) => (
               <>
                 <input
