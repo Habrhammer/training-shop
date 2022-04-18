@@ -16,12 +16,11 @@ const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 function* postForm(action) {
 
   try {
-    const data = yield call(apiConnection, action.data.email);
+    const data = yield call(apiConnection, action.data.subscribeEmail);
     yield put({ type: "POST_FORM_SUCCESS", data, formId: action.formId });
     yield call(delay, 2000);
     yield put({ type: "POST_FORM_SUCCESS", data: null, formId: action.formId });
   } catch (e) {
-    console.log(e.response);
     // yield put({
     //   type: "POST_FORM_FAILED",
     //   error: e.response,

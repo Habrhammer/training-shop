@@ -8,7 +8,7 @@ import mastercardImg from "../assets/mastercard.png";
 import show from "../assets/show.svg";
 import hide from "../assets/hide.svg";
 
-const PaymentForm = ({setCash}) => {
+const PaymentForm = ({ setCash }) => {
   let methodsPayments = [
     { name: "paypal", image: paypalImg },
     { name: "visa", image: visaImg },
@@ -18,10 +18,9 @@ const PaymentForm = ({setCash}) => {
   let [showCVV, setShowCVV] = useState(false);
 
   const formContext = useFormikContext();
-  useEffect(()=>{
-    setCash(formContext.values.paymentMethod ==="cash")
-  },[formContext.values.paymentMethod,setCash])
-  
+  useEffect(() => {
+    setCash(formContext.values.paymentMethod === "cash");
+  }, [formContext.values.paymentMethod, setCash]);
 
   return (
     <>
@@ -62,15 +61,12 @@ const PaymentForm = ({setCash}) => {
               <Field name="card" type="text">
                 {({ field, meta }) => (
                   <>
-                    {console.log(field)}
                     <NumberFormat
                       format="#### #### #### ####"
                       placeholder="____ ____ ____ ____"
                       mask="_"
                       value={field.value}
                       onValueChange={(val) => {
-                        console.log(val.floatValue);
-
                         return formContext.setFieldValue(
                           "card",
                           val.floatValue || ""
@@ -85,8 +81,8 @@ const PaymentForm = ({setCash}) => {
                 )}
               </Field>
             </div>
-            <div style={{display: "flex", gap: "8px"}}>
-              <div className="orderForm__item" style={{width:"100%"}}>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <div className="orderForm__item" style={{ width: "100%" }}>
                 <Field name="cardDate" type="text">
                   {({ field, meta }) => (
                     <>
@@ -103,7 +99,10 @@ const PaymentForm = ({setCash}) => {
                   )}
                 </Field>
               </div>
-              <div className="orderForm__item orderForm__item_cvv" style={{width:"100%"}}>
+              <div
+                className="orderForm__item orderForm__item_cvv"
+                style={{ width: "100%" }}
+              >
                 <Field name="cardCVV">
                   {({ field, meta }) => (
                     <>
