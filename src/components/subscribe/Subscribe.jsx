@@ -63,7 +63,6 @@ const Subscribe = ({ subscribeFormId }) => {
                 data: values,
                 formId: subscribeFormId,
               });
-              // actions.resetForm()
             }}
           >
             {(formik) => (
@@ -100,18 +99,8 @@ const Subscribe = ({ subscribeFormId }) => {
                   {loading && formik.isSubmitting && <SubscribeLoader />}
                   Subcribe
                 </button>
-                {console.log(data?.status)}
-                {/* {formId === subscribeFormId &&
-                  data?.status &&
-                  (data?.status >= 200 && data?.status < 400 ? (
-                    <div className="subscribe-form__success">
-                      Данные успешно отправлены!
-                    </div>
-                  ) : (
-                    <div className="subscribe-form__error-request">
-                      Ошибка отправки данных!
-                    </div>
-                  ))} */}
+               
+           
                 {formId === subscribeFormId &&
                   (data?.status || !error ? (
                   data?.status >= 200 && data?.status < 400 && (
