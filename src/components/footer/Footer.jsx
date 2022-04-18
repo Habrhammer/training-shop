@@ -18,7 +18,6 @@ const Footer = ({
 
   let form = useRef();
 
-  console.log(form);
   useEffect(() => {
     // data?.status >= 200 && data?.status < 400 && form.current.setValues({"email": ""});
     if (data?.status >= 200 && data?.status < 400) {

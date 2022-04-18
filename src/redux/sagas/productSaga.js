@@ -31,4 +31,4 @@ export function* productSaga() {
   yield takeLatest("LOAD_PRODUCT", loadProduct);
 }
 
-export default productSaga;
+

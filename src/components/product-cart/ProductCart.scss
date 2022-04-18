@@ -48,25 +48,21 @@
     margin-bottom: 30px;
   }
 
- 
   &__tab {
-
     display: flex;
     cursor: pointer;
-    color: #E6E6E6;
- 
+    color: #e6e6e6;
   }
   &__tab.active {
-    color: #121212
+    color: #121212;
   }
-
 
   &__tab:after {
     content: "/";
     margin: 0 20px;
-    color: #E6E6E6;
+    color: #e6e6e6;
   }
- 
+
   &__tab:last-child:after {
     content: "";
     margin: 0 0;
@@ -254,5 +250,202 @@
     font-size: 14px;
     line-height: 22px;
     color: #121212;
+  }
+}
+
+.orderForm {
+  &__section {
+  }
+  &__item {
+    position: relative;
+  }
+
+  &__item_select {
+    .orderForm__error {
+      margin-top: 10px;
+      position: static;
+    }
+  }
+
+  &__item_terms {
+    padding: 16px 0 35px;
+    .orderForm__error {
+      position: static;
+    }
+    label {
+      user-select: none;
+      display: flex;
+      margin-bottom: 10px;
+    }
+  }
+  &__item_cvv {
+    position: relative;
+    display: flex;
+    height: 48px;
+    button {
+      position: absolute;
+      width: 20px;
+      z-index: 105;
+      right: 15px;
+      top: 14px;
+    }
+    input {
+      position: absolute;
+    }
+    .orderForm__error {
+      bottom: -20px;
+    }
+  }
+
+  &__name-section {
+    margin-bottom: 8px;
+    font-family: "Spartan-SemiBold";
+    font-size: 12px;
+    line-height: 16px;
+  }
+  input:not(input[type="radio"], input[type="checkbox"]) {
+    height: 48px;
+    width: 100%;
+    background: #f8f8f8;
+    margin-bottom: 35px;
+    padding: 0 16px;
+    font-family: "Spartan-Medium", sans-serif;
+    font-size: 14px;
+  }
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-right: 15px;
+  }
+
+  &__error {
+    position: absolute;
+    bottom: 15px;
+    z-index: 100;
+    color: #d61313;
+    font-family: "Spartan-Medium", sans-serif;
+    font-size: 11px;
+  }
+
+  input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    color: #121212;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #121212;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input[type="radio"]::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+  }
+
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+  .orderForm-select {
+    &__control {
+      background-color: #f8f8f8;
+      border: none;
+      box-shadow: none;
+      height: 46px;
+    }
+    &__value-container {
+      height: 100%;
+      padding: 0 12px;
+      font-family: "Spartan-Medium", sans-serif;
+      font-size: 15px;
+      color: #9c9c9c;
+    }
+    &__single-value {
+      font-family: "Spartan-Medium", sans-serif;
+      font-size: 15px;
+      color: #121212;
+    }
+    &__placeholder {
+      font-family: "Spartan-Medium", sans-serif;
+      font-size: 15px;
+      color: #9c9c9c;
+    }
+    &__input-container {
+      margin: 0;
+    }
+    &__input {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    &__indicators {
+    }
+    &__indicator-separator {
+      display: none;
+    }
+    &__indicator {
+    }
+    &__dropdown-indicator {
+    }
+
+    &__menu {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 0;
+      width: 100%;
+      padding: 0;
+      overflow: visible;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    &__menu-list {
+      padding: 0;
+      margin: 0;
+      // border: 1px solid #8d8b8b;
+      overflow: visible;
+      // box-shadow: 4px 10px 8px 0px rgba(34, 60, 80, 0.2);
+    }
+    &__option:nth-child(2n):not(&__option--is-selected) {
+      background-color: #f8f8f8;
+    }
+    &__option {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      font-family: "Spartan-Medium", sans-serif;
+      font-size: 15px;
+      color: #9c9c9c;
+      border: 1px solid transparent;
+      &--is-focused {
+        background-color: #fff;
+      }
+      &--is-focused:active:not(&__option--is-selected) {
+        color: #ffffff;
+        background-color: #9c9c9c;
+      }
+      &--is-selected {
+        background-color: #9c9c9c;
+        color: #ffffff;
+      }
+    }
+
+    &__option:hover {
+      border: 1px solid #9c9c9c;
+    }
+
+    &__group {
+      padding: 0;
+    }
   }
 }
