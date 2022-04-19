@@ -16,16 +16,15 @@ let validationSchema = [
         "Неверный адрес электронной почты"
       ),
     country: Yup.string()
-    // .when("deliveryMethod", {
-    //   is: (val) =>
-    //     val === "pickup from post offices" || val === "express delivery",
-    //   then: Yup.string().required("Поле должно быть заполнено"),
-    //   otherwise: Yup.string().notRequired(),
-    // })
-    .required("Поле должно быть заполнено"),
+      // .when("deliveryMethod", {
+      //   is: (val) =>
+      //     val === "pickup from post offices" || val === "express delivery",
+      //   then: Yup.string().required("Поле должно быть заполнено"),
+      //   otherwise: Yup.string().notRequired(),
+      // })
+      .required("Поле должно быть заполнено"),
     storeAddress: Yup.string().when("deliveryMethod", {
-      is: (val) =>
-        val === "store pickup",
+      is: (val) => val === "store pickup",
       then: Yup.string().required("Поле должно быть заполнено"),
       otherwise: Yup.string().notRequired(),
     }),
@@ -50,7 +49,9 @@ let validationSchema = [
     }),
     postcode: Yup.string().when("deliveryMethod", {
       is: (val) => val === "pickup from post offices",
-      then: Yup.string().min(6, "Поле должно содержать 6 символов").required("Поле должно быть заполнено"),
+      then: Yup.string()
+        .min(6, "Поле должно содержать 6 символов")
+        .required("Поле должно быть заполнено"),
       otherwise: Yup.string().notRequired(),
     }),
     terms: Yup.boolean().oneOf(
@@ -63,16 +64,22 @@ let validationSchema = [
     card: Yup.string().when("paymentMethod", {
       is: (val) => val === "visa" || val === "mastercard",
       then: Yup.string()
-            .min(16, "Поле должно содержать 16 символов").required("Поле должно быть заполнено"),
+        .min(16, "Поле должно содержать 16 символов")
+        .required("Поле должно быть заполнено"),
       otherwise: Yup.string().notRequired(),
     }),
     cardDate: Yup.string().when("paymentMethod", {
       is: (val) => val === "visa" || val === "mastercard",
       then: Yup.string()
         .required("Поле должно быть заполнено")
-        .matches(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/, "Укажите корректные данные"),
+        .matches(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/, "Укажите корректные данные")
+        .test("expired", "Срок действия карты истёк", function (date) {
+          const [month, year] = date?.split("/");
+          return new Date() < new Date(`${month}/01/${year}`);
+        }),
       otherwise: Yup.string().notRequired(),
     }),
+
     cardCVV: Yup.string().when("paymentMethod", {
       is: (val) => val === "visa" || val === "mastercard",
       then: Yup.string()
