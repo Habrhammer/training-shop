@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Formik, Form } from "formik";
+import cn from "classnames";
 import "./ProductCart.scss";
 import close from "../../assets/images/product-cart/close.svg";
 import useScrollBlock from "../../hooks/useScrollBlock";
@@ -22,9 +23,7 @@ const steps = ["Item in cart", "Delivery Info", "Payment"];
 
 const ProductCart = ({ setShow, isShow }) => {
   const dispatch = useDispatch();
-  const { order, error, message } = useSelector(({ cart }) => {
-    return cart;
-  });
+  const { order, error, message } = useSelector(({ cart }) => cart);
 
   const removeOrder = (id) => {
     return dispatch(removeFromCart(id));
@@ -38,15 +37,13 @@ const ProductCart = ({ setShow, isShow }) => {
     return dispatch(decreaseQuantity(id));
   };
 
-  function _submitForm(values, actions) {
-    let products = order?.map((product) => {
-      return {
-        name: product.name,
-        size: product.size,
-        color: product.color,
-        quantity: product.quantity,
-      };
-    });
+  function submitForm(values, actions) {
+    const products = order?.map((product) => ({
+      name: product.name,
+      size: product.size,
+      color: product.color,
+      quantity: product.quantity,
+    }));
 
     values.products = products;
     values.totalPrice = sumPrice.toFixed(2);
@@ -59,10 +56,10 @@ const ProductCart = ({ setShow, isShow }) => {
   const currentValidationSchema = validationSchema[activeStep - 1];
   const isLastStep = activeStep === steps.length - 1;
 
-  let deliveryForm = useRef();
-  let [isCash, setCash] = useState(false);
+  const deliveryForm = useRef();
+  const [isCash, setCash] = useState(false);
 
-  function _renderStepContent(step) {
+  function renderStepContent(step) {
     switch (step) {
       case 0:
         return (
@@ -82,9 +79,10 @@ const ProductCart = ({ setShow, isShow }) => {
     }
   }
 
-  const sumPrice = order?.reduce((acc, current) => {
-    return acc + current.price * current.quantity;
-  }, 0);
+  const sumPrice = order?.reduce(
+    (acc, current) => acc + current.price * current.quantity,
+    0
+  );
 
   const [blockScroll, allowScroll] = useScrollBlock();
   useEffect(() => {
@@ -92,23 +90,22 @@ const ProductCart = ({ setShow, isShow }) => {
   });
 
   useEffect(() => {
-   
-    if((!isShow && message?.message === "success") || (!isShow && error)){
-      dispatch(cartReset())
+    if ((!isShow && message?.message === "success") || (!isShow && error)) {
+      dispatch(cartReset());
       setActiveStep(0);
       deliveryForm?.current?.resetForm({});
     }
     !isShow && setActiveStep(0);
     !isShow && deliveryForm?.current?.resetForm({});
-  }, [isShow, dispatch,error,message?.message]);
+  }, [isShow, dispatch, error, message?.message]);
 
   const setShowHandler = () => {
     setShow(false);
   };
 
-  function _handleSubmit(values, actions) {
+  function handleSubmit(values, actions) {
     if (isLastStep) {
-      _submitForm(values, actions);
+      submitForm(values, actions);
     } else {
       setActiveStep(activeStep + 1);
       actions.setTouched({});
@@ -116,7 +113,7 @@ const ProductCart = ({ setShow, isShow }) => {
     }
   }
 
-  function _handleBack() {
+  function handleBack() {
     setActiveStep(activeStep - 1);
   }
 
@@ -146,20 +143,18 @@ const ProductCart = ({ setShow, isShow }) => {
             innerRef={deliveryForm}
             initialValues={initialValues}
             validationSchema={currentValidationSchema}
-            onSubmit={_handleSubmit}
+            onSubmit={handleSubmit}
           >
             {message === null && error === null ? (
               <>
-                {order.length > 0 && (
+                {!!order.length && (
                   <div className="cart__tabs">
                     {steps.map((label, index) => {
                       return (
                         <div
-                          className={
-                            activeStep === index
-                              ? "cart__tab active"
-                              : "cart__tab"
-                          }
+                          className={cn("cart__tab", {
+                            active: activeStep === index,
+                          })}
                           key={index}
                         >
                           {label}
@@ -170,13 +165,11 @@ const ProductCart = ({ setShow, isShow }) => {
                 )}
 
                 <div className="cart__container">
-                  {
-                    <Form id="deliveryForm" className="orderForm">
-                      {_renderStepContent(activeStep)}
-                    </Form>
-                  }
+                  <Form id="deliveryForm" className="orderForm">
+                    {renderStepContent(activeStep)}
+                  </Form>
                 </div>
-                {order.length > 0 && (
+                {!!order.length && (
                   <div className="cart__total">
                     <span>Total:</span>
                     <span>${sumPrice.toFixed(2)}</span>
@@ -186,6 +179,7 @@ const ProductCart = ({ setShow, isShow }) => {
                 <div className="cart__buttons">
                   {order.length === 0 ? (
                     <button
+                      type="button"
                       onClick={() => {
                         setShowHandler();
                         dispatch(cartReset());
@@ -195,6 +189,7 @@ const ProductCart = ({ setShow, isShow }) => {
                     </button>
                   ) : activeStep === 0 ? (
                     <button
+                      type="button"
                       form="deliveryForm"
                       onClick={(e) => {
                         e.preventDefault();
@@ -222,7 +217,9 @@ const ProductCart = ({ setShow, isShow }) => {
                   )}
 
                   {activeStep !== 0 && (
-                    <button onClick={_handleBack}>VIEW CART</button>
+                    <button type="button" onClick={handleBack}>
+                      VIEW CART
+                    </button>
                   )}
                 </div>
               </>
@@ -239,6 +236,7 @@ const ProductCart = ({ setShow, isShow }) => {
                 </div>
                 <div className="cart__buttons">
                   <button
+                    type="button"
                     onClick={() => {
                       setShowHandler();
                       dispatch(cartReset());
@@ -260,6 +258,7 @@ const ProductCart = ({ setShow, isShow }) => {
                 </div>
                 <div className="cart__buttons">
                   <button
+                    type="button"
                     onClick={() => {
                       dispatch(setRequestError(null));
                       setActiveStep(2);
@@ -280,8 +279,6 @@ const ProductCart = ({ setShow, isShow }) => {
               </>
             )}
           </Formik>
-
-          {}
         </div>
       </div>
     </>

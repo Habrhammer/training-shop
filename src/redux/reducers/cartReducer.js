@@ -3,12 +3,12 @@ const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 const INCREASE_QUANTITY = "INCREASE_QUANTITY";
 const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 const SET_COUNTRIES = "SET_COUNTRIES";
-const COUNTRIES_IS_LOADING = "COUNTRIES_IS_LOADING";
+export const COUNTRIES_IS_LOADING = "COUNTRIES_IS_LOADING";
 const SET_COUNTRIES_ERROR = "SET_COUNTRIES_ERROR";
-const CITIES_IS_LOADING = "CITIES_IS_LOADING";
+export const CITIES_IS_LOADING = "CITIES_IS_LOADING";
 const SET_CITIES = "SET_CITIES";
 const SET_CITIES_ERROR = "SET_CITIES_ERROR";
-const REQUEST_IS_SENDING = "REQUEST_IS_SENDING";
+export const REQUEST_IS_SENDING = "REQUEST_IS_SENDING";
 const SET_REQUEST_SUCCESS = "SET_REQUEST_SUCCESS";
 const SET_REQUEST_ERROR = "SET_REQUEST_ERROR";
 const CART_RESET = "CART_RESET";
@@ -101,7 +101,7 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: true,
-        error:action.payload,
+        error: action.payload,
         cities: [],
       };
     }
@@ -135,7 +135,7 @@ export const cartReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
         message: null,
-      }
+      };
     }
     default: {
       return state;
@@ -143,47 +143,35 @@ export const cartReducer = (state = initialState, action) => {
   }
 };
 
-export const addToCart = (product) => {
-  return {
-    type: ADD_PRODUCT_TO_CART,
-    product,
-  };
-};
+export const addToCart = (product) => ({
+  type: ADD_PRODUCT_TO_CART,
+  product,
+});
 
-export const removeFromCart = (id) => {
-  return {
-    type: REMOVE_PRODUCT_FROM_CART,
-    id,
-  };
-};
+export const removeFromCart = (id) => ({
+  type: REMOVE_PRODUCT_FROM_CART,
+  id,
+});
 
-export const increaseQuantity = (id, sum) => {
-  return {
-    type: INCREASE_QUANTITY,
-    id,
-    sum,
-  };
-};
+export const increaseQuantity = (id, sum) => ({
+  type: INCREASE_QUANTITY,
+  id,
+  sum,
+});
 
-export const decreaseQuantity = (id) => {
-  return {
-    type: DECREASE_QUANTITY,
-    id,
-  };
-};
+export const decreaseQuantity = (id) => ({
+  type: DECREASE_QUANTITY,
+  id,
+});
 
-export const setCountries = (countries) => {
-  return {
-    type: SET_COUNTRIES,
-    payload: countries,
-  };
-};
+export const setCountries = (countries) => ({
+  type: SET_COUNTRIES,
+  payload: countries,
+});
 
-export const countriesIsLoading = () => {
-  return {
-    type: COUNTRIES_IS_LOADING,
-  };
-};
+export const countriesIsLoading = () => ({
+  type: COUNTRIES_IS_LOADING,
+});
 
 export const setCountriesError = (error) => {
   return {
@@ -192,54 +180,42 @@ export const setCountriesError = (error) => {
   };
 };
 
-export const setCities = (cities) => {
-  return {
-    type: SET_CITIES,
-    payload: cities,
-  };
-};
+export const setCities = (cities) => ({
+  type: SET_CITIES,
+  payload: cities,
+});
 
-export const setCitiesError = (error) => {
-  return {
-    type: SET_CITIES_ERROR,
-    payload: error,
-  };
-};
+export const setCitiesError = (error) => ({
+  type: SET_CITIES_ERROR,
+  payload: error,
+});
 
-export const requestIsSending = () => {
-  return {
-    type: REQUEST_IS_SENDING,
-  };
-};
+export const requestIsSending = () => ({
+  type: REQUEST_IS_SENDING,
+});
 
-export const setRequestSuccess = (message) => {
-  return {
-    type: SET_REQUEST_SUCCESS,
-    payload: message,
-  };
-};
+export const setRequestSuccess = (message) => ({
+  type: SET_REQUEST_SUCCESS,
+  payload: message,
+});
 
-export const setRequestError = (error) => {
-  return {
-    type: SET_REQUEST_ERROR,
-    payload: error,
-  };
-};
+export const setRequestError = (error) => ({
+  type: SET_REQUEST_ERROR,
+  payload: error,
+});
 
-export const cartReset = () => {
-  return {
-    type: CART_RESET
-  }
-}
+export const cartReset = () => ({
+  type: CART_RESET,
+});
 
-export const requestCountries = () => {
-  return countriesIsLoading();
-};
+export const requestCountries = () => countriesIsLoading();
 
-export const requestCities = (searchParam) => {
-  return { type: CITIES_IS_LOADING, payload: searchParam };
-};
+export const requestCities = (searchParam) => ({
+  type: CITIES_IS_LOADING,
+  payload: searchParam,
+});
 
-export const postOrderRequest = (order) => {
-  return { type: REQUEST_IS_SENDING, payload: order };
-};
+export const postOrderRequest = (order) => ({
+  type: REQUEST_IS_SENDING,
+  payload: order,
+});
