@@ -61,6 +61,7 @@ const DeliveryForm = () => {
 
  
   useEffect(() => {
+    document?.querySelector(".orderForm-select-country .orderForm-select__input")?.setAttribute("placeholder", "Country");
     document?.querySelector(".orderForm-select-storeAddress .orderForm-select__input")?.setAttribute("name", "storeAddress");
   });
 
@@ -270,7 +271,7 @@ const DeliveryForm = () => {
               {({ field, meta }) => (
                 <>
                   <Select
-                    className="orderForm__select orderForm-select"
+                    className="orderForm__select orderForm-select orderForm-select-country"
                     classNamePrefix="orderForm-select"
                     options={countryOptions}
                     {...field}
