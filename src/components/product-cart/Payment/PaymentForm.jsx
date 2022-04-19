@@ -9,13 +9,13 @@ import show from "../assets/show.svg";
 import hide from "../assets/hide.svg";
 
 const PaymentForm = ({ setCash }) => {
-  let methodsPayments = [
+  const methodsPayments = [
     { name: "paypal", image: paypalImg },
     { name: "visa", image: visaImg },
     { name: "mastercard", image: mastercardImg },
     { name: "cash", image: null },
   ];
-  let [showCVV, setShowCVV] = useState(false);
+  const [showCVV, setShowCVV] = useState(false);
 
   const formContext = useFormikContext();
   useEffect(() => {
@@ -26,30 +26,19 @@ const PaymentForm = ({ setCash }) => {
     <>
       <div>
         <div className="orderForm__name-section">Method of payments</div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "28px",
-            padding: "27px 0 53px",
-          }}
-        >
-          {methodsPayments.map((e, i) => {
-            return (
-              <div key={i}>
-                <label
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Field type="radio" name="paymentMethod" value={e.name} />
-                  {e.image ? <img src={e.image} alt={e.name} /> : <>{e.name}</>}
-                </label>
-              </div>
-            );
-          })}
+        <div className="orderForm__items_paymentMethod">
+          {methodsPayments.map((element, index) => (
+            <div key={index}>
+              <label className="orderForm__label_paymentMethod">
+                <Field type="radio" name="paymentMethod" value={element.name} />
+                {element.image ? (
+                  <img src={element.image} alt={element.name} />
+                ) : (
+                  <span>{element.name}</span>
+                )}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -115,15 +104,15 @@ const PaymentForm = ({ setCash }) => {
                         {...field}
                       />
                       <button
-                        onClick={(e) => {
-                          e.preventDefault();
+                        type="button"
+                        onClick={() => {
                           setShowCVV(!showCVV);
                         }}
                       >
                         {showCVV ? (
-                          <img src={show} alt="" />
+                          <img src={show} alt="show" />
                         ) : (
-                          <img src={hide} alt="" />
+                          <img src={hide} alt="hide" />
                         )}
                       </button>
                       {meta.touched && meta.error && (

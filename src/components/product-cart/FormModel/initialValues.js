@@ -1,6 +1,6 @@
 
 
-let initialValues = {
+const initialValues = {
    deliveryMethod: "pickup from post offices",
    paymentMethod: "visa",
    terms: false,

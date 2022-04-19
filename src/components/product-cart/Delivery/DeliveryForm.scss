@@ -1,0 +1,50 @@
+.orderForm {
+  &__section {
+  }
+
+  &__name-section {
+  }
+
+  &__items {
+    &_deliveryMethod,
+    &_paymentMethod {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding: 27px 0 53px;
+    }
+    &_address {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  &__item {
+    &_select {
+      margin-bottom: 35px;
+    }
+
+    &_terms {
+    }
+  }
+
+  &__label {
+    &_deliveryMethod,&_paymentMethod {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+
+  &__error {
+  }
+
+  &__select {
+  }
+}
+.orderForm-select {
+}
+.orderForm-select-country {
+}
+.orderForm-select-storeAddress {
+}

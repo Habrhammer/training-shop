@@ -39,20 +39,14 @@ export const productReducer = (state = initialState, action) => {
   }
 };
 
+export const setProduct = (product) => ({
+  type: SET_PRODUCT,
+  product,
+});
 
-export const setProduct = (product) => {
-  return {
-    type: SET_PRODUCT,
-    product
-  }
-}
+export const setProductError = (error) => ({
+  type: SET_PRODUCT_ERROR,
+  payload: error,
+});
 
-export const setProductError = (error) => {
-  return { type: SET_PRODUCT_ERROR, payload: error }
-}
-
-
-
-export const getProduct = (id) => {
-  return { type: LOAD_PRODUCT, payload: { id } };
-};
+export const getProduct = (id) => ({ type: LOAD_PRODUCT, payload: { id } });

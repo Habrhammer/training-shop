@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Field, useFormikContext } from "formik";
 import NumberFormat from "react-number-format";
-import Select,{components} from "react-select";
+import Select, { components } from "react-select";
 import "./DeliveryForm.scss";
 import {
   requestCities,
@@ -17,24 +17,20 @@ const deliveryMethods = [
 
 const DeliveryForm = () => {
   const dispatch = useDispatch();
-  let { setFieldValue, values } = useFormikContext();
+  const { setFieldValue, values } = useFormikContext();
   const [activeCountry, setActiveCountry] = useState(null);
-  let [citiesSearch, setCitiesSearch] = useState("");
+  const [citiesSearch, setCitiesSearch] = useState("");
 
-  const cartData = useSelector((data) => {
-    return data.cart;
-  });
+  const cartData = useSelector((data) => data.cart);
 
-  let country = cartData?.cities[0]?.country;
+  const country = cartData?.cities[0]?.country;
 
-  const countryOptions = cartData.countries.map(({ name }) => {
-    return {
-      value: name,
-      label: name,
-    };
-  });
+  const countryOptions = cartData.countries.map(({ name }) => ({
+    value: name,
+    label: name,
+  }));
 
-  let citiesOptions =
+  const citiesOptions =
     citiesSearch.length >= 3
       ? cartData.cities.map(({ city }) => ({ value: city, label: city }))
       : [];
@@ -44,7 +40,7 @@ const DeliveryForm = () => {
   }, [values.deliveryMethod, dispatch]);
 
   useEffect(() => {
-    let searchParams = {
+    const searchParams = {
       city: citiesSearch,
       country: activeCountry,
     };
@@ -59,52 +55,40 @@ const DeliveryForm = () => {
     }
   }, [activeCountry, setFieldValue, values.country, country, dispatch]);
 
- 
   useEffect(() => {
-    activeCountry !==null && document?.querySelector(".orderForm-select-country .orderForm-select__input")?.setAttribute("value", activeCountry);
-    document?.querySelector(".orderForm-select-storeAddress .orderForm-select__input")?.setAttribute("name", "storeAddress");
+    activeCountry !== null &&
+      document
+        ?.querySelector(".orderForm-select-country .orderForm-select__input")
+        ?.setAttribute("value", activeCountry);
+    document
+      ?.querySelector(".orderForm-select-storeAddress .orderForm-select__input")
+      ?.setAttribute("name", "storeAddress");
   });
 
   const CustomInput = (props) => {
     const { placeholder } = props.selectProps;
     const inputProps = { ...props, placeholder };
-  console.log(props.selectProps);
     return <components.Input {...inputProps} />;
   };
 
-
   return (
     <>
-      <div className="orderForm__section ">
+      <div className="orderForm__section">
         <div className="orderForm__name-section">
           Choose the method of delivery of the items
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "28px",
-            padding: "27px 0 53px",
-          }}
-        >
-          {deliveryMethods.map((method, index) => {
-            return (
-              <div key={index}>
-                <label
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Field type="radio" name="deliveryMethod" value={method} />
-                  {[...method].map((e, i) => (i === 0 ? e.toUpperCase() : e))
-                    .join``}
-                </label>
-              </div>
-            );
-          })}
+        <div className="orderForm__items orderForm__items_deliveryMethod">
+          {deliveryMethods.map((method, index) => (
+            <div className="orderForm__item" key={index}>
+              <label className="orderForm__label_deliveryMethod">
+                <Field type="radio" name="deliveryMethod" value={method} />
+                {[...method].map((element, index) =>
+                  index === 0 ? element.toUpperCase() : element
+                ).join``}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
       <div className="orderForm__section">
@@ -202,8 +186,8 @@ const DeliveryForm = () => {
               )}
             </Field>
           </div>
-          <div style={{ display: "flex", gap: "8px" }}>
-            <div className="orderForm__item" style={{ width: "50%" }}>
+          <div className="orderForm__items orderForm__items_address">
+            <div className="orderForm__item">
               <Field name="house" type="text">
                 {({ field, meta }) => (
                   <>
@@ -220,7 +204,7 @@ const DeliveryForm = () => {
                 )}
               </Field>
             </div>
-            <div className="orderForm__item" style={{ width: "50%" }}>
+            <div className="orderForm__item">
               <Field name="apartment" type="text">
                 {({ field, meta }) => (
                   <>
@@ -255,7 +239,7 @@ const DeliveryForm = () => {
                     mask="_"
                     value={field.value}
                     onValueChange={(val) => {
-                      return setFieldValue("postcode", val.floatValue || "");
+                      setFieldValue("postcode", val.floatValue || "");
                     }}
                   />
                   {meta.touched && meta.error && (
@@ -271,10 +255,7 @@ const DeliveryForm = () => {
       {values.deliveryMethod === "store pickup" && (
         <div className="orderForm__section">
           <div className="orderForm__name-section">ADRESS OF STORE</div>
-          <div
-            className="orderForm__item orderForm__item_select"
-            style={{ marginBottom: "35px" }}
-          >
+          <div className="orderForm__item orderForm__item_select">
             <Field name="country" type="text">
               {({ field, meta }) => (
                 <>
@@ -291,7 +272,6 @@ const DeliveryForm = () => {
                     placeholder="Country"
                     noOptionsMessage={() => "Store address not founded"}
                     onChange={({ value }) => {
-                      console.log(value);
                       setFieldValue(field.name, value);
                       setActiveCountry(value);
                       field.onChange(value);
@@ -304,11 +284,7 @@ const DeliveryForm = () => {
               )}
             </Field>
           </div>
-          <div
-            className="orderForm__item orderForm__item_select"
-            style={{ marginBottom: "35px" }}
-          >
-
+          <div className="orderForm__item orderForm__item_select">
             <Field name="storeAddress" type="text">
               {({ field, meta }) => (
                 <>
@@ -329,14 +305,12 @@ const DeliveryForm = () => {
                     isDisabled={values.country === ""}
                     options={citiesOptions}
                     {...field}
-                    value={citiesOptions.find(({ value }) => {
-                      console.log(value);
-                      return value === field.value;
-                    })}
+                    value={citiesOptions.find(
+                      ({ value }) => value === field.value
+                    )}
                     placeholder="Store address"
                     noOptionsMessage={() => "Store address not founded"}
-                    onChange={({ value }, action) => {
-                      console.log(action);
+                    onChange={({ value }) => {
                       setFieldValue("storeAddress", value);
                       field.onChange(value);
                     }}
