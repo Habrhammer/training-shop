@@ -62,6 +62,7 @@ const PaymentForm = ({ setCash }) => {
                 {({ field, meta }) => (
                   <>
                     <NumberFormat
+                      name="card"
                       format="#### #### #### ####"
                       placeholder="____ ____ ____ ____"
                       mask="_"

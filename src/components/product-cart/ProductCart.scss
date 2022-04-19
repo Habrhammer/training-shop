@@ -447,5 +447,9 @@
     &__group {
       padding: 0;
     }
+
+    ::placeholder {
+      color: transparent;
+    }
   }
 }
