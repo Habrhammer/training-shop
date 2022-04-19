@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Field, useFormikContext } from "formik";
 import NumberFormat from "react-number-format";
-import Select from "react-select";
+import Select,{components} from "react-select";
 import "./DeliveryForm.scss";
 import {
   requestCities,
@@ -61,9 +61,16 @@ const DeliveryForm = () => {
 
  
   useEffect(() => {
-    document?.querySelector(".orderForm-select-country .orderForm-select__input")?.setAttribute("placeholder", "Country");
     document?.querySelector(".orderForm-select-storeAddress .orderForm-select__input")?.setAttribute("name", "storeAddress");
   });
+
+  const CustomInput = (props) => {
+    const { placeholder } = props.selectProps;
+    const inputProps = { ...props, placeholder };
+  console.log(props.selectProps);
+    return <components.Input {...inputProps} />;
+  };
+
 
   return (
     <>
@@ -273,14 +280,17 @@ const DeliveryForm = () => {
                   <Select
                     className="orderForm__select orderForm-select orderForm-select-country"
                     classNamePrefix="orderForm-select"
+                    components={{ Input: CustomInput }}
                     options={countryOptions}
                     {...field}
                     value={countryOptions.find(
                       ({ value }) => value === field.value
                     )}
+                    defaultInputValue={field.value}
                     placeholder="Country"
                     noOptionsMessage={() => "Store address not founded"}
                     onChange={({ value }) => {
+                      console.log(value);
                       setFieldValue(field.name, value);
                       setActiveCountry(value);
                       field.onChange(value);
@@ -319,6 +329,7 @@ const DeliveryForm = () => {
                     options={citiesOptions}
                     {...field}
                     value={citiesOptions.find(({ value }) => {
+                      console.log(value);
                       return value === field.value;
                     })}
                     placeholder="Store address"
