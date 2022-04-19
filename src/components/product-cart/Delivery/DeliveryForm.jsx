@@ -61,6 +61,7 @@ const DeliveryForm = () => {
 
  
   useEffect(() => {
+    activeCountry !==null && document?.querySelector(".orderForm-select-country .orderForm-select__input")?.setAttribute("value", activeCountry);
     document?.querySelector(".orderForm-select-storeAddress .orderForm-select__input")?.setAttribute("name", "storeAddress");
   });
 
