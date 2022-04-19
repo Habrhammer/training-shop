@@ -17,8 +17,7 @@ const deliveryMethods = [
 
 const DeliveryForm = () => {
   const dispatch = useDispatch();
-  // const formContext = useFormikContext();
-  let {setFieldValue, values} = useFormikContext();
+  let { setFieldValue, values } = useFormikContext();
   const [activeCountry, setActiveCountry] = useState(null);
   let [citiesSearch, setCitiesSearch] = useState("");
 
@@ -41,8 +40,7 @@ const DeliveryForm = () => {
       : [];
 
   useEffect(() => {
-    values.deliveryMethod === "store pickup" &&
-      dispatch(requestCountries());
+    values.deliveryMethod === "store pickup" && dispatch(requestCountries());
   }, [values.deliveryMethod, dispatch]);
 
   useEffect(() => {
@@ -59,13 +57,12 @@ const DeliveryForm = () => {
       // dispatch(setCities([]))
       setFieldValue("storeAddress", "");
     }
-  }, [
-    activeCountry,
-    setFieldValue,
-    values.country,
-    country,
-    dispatch,
-  ]);
+  }, [activeCountry, setFieldValue, values.country, country, dispatch]);
+
+ 
+  useEffect(() => {
+    document?.querySelector(".orderForm-select-storeAddress .orderForm-select__input")?.setAttribute("name", "storeAddress");
+  });
 
   return (
     <>
@@ -243,15 +240,13 @@ const DeliveryForm = () => {
               {({ field, meta }) => (
                 <>
                   <NumberFormat
+                    name="postcode"
                     format="BY######"
                     placeholder="BY______"
                     mask="_"
                     value={field.value}
                     onValueChange={(val) => {
-                      return setFieldValue(
-                        "postcode",
-                        val.floatValue || ""
-                      );
+                      return setFieldValue("postcode", val.floatValue || "");
                     }}
                   />
                   {meta.touched && meta.error && (
@@ -301,14 +296,16 @@ const DeliveryForm = () => {
             className="orderForm__item orderForm__item_select"
             style={{ marginBottom: "35px" }}
           >
-            <Field name="storeAddress">
+
+            <Field name="storeAddress" type="text">
               {({ field, meta }) => (
                 <>
                   <Select
                     key={`${values.storeAddress}${values.country}`}
                     // key={activeCountry}
-                    className="orderForm__select orderForm-select"
+                    className="orderForm__select orderForm-select orderForm-select-storeAddress"
                     classNamePrefix="orderForm-select"
+                    name="storeAddress"
                     defaultValue={
                       values.storeAddress
                         ? {
@@ -325,7 +322,8 @@ const DeliveryForm = () => {
                     })}
                     placeholder="Store address"
                     noOptionsMessage={() => "Store address not founded"}
-                    onChange={({ value }) => {
+                    onChange={({ value }, action) => {
+                      console.log(action);
                       setFieldValue("storeAddress", value);
                       field.onChange(value);
                     }}
