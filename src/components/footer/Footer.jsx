@@ -18,11 +18,9 @@ const Footer = ({
 
   let form = useRef();
 
-  console.log(form);
   useEffect(() => {
-    // data?.status >= 200 && data?.status < 400 && form.current.setValues({"email": ""});
     if (data?.status >= 200 && data?.status < 400) {
-      form.current.setValues({ email: "" });
+      form.current.setValues({ subscribeEmail: "" });
       dispatch({
         type: "POST_FORM_FAILED",
         error: false,
@@ -39,10 +37,10 @@ const Footer = ({
           <Formik
             innerRef={form}
             initialValues={{
-              email: "",
+              subscribeEmail: "",
             }}
             validationSchema={Yup.object({
-              email: Yup.string().matches(
+              subscribeEmail: Yup.string().matches(
                 /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/,
                 "Неверный адрес электронной почты"
               ),
@@ -58,7 +56,7 @@ const Footer = ({
           >
             {(formik) => (
               <Form className="footer-top__form form-footer">
-                <Field name="email" type="text">
+                <Field name="subscribeEmail" type="text">
                   {({ field, meta }) => (
                     <>
                       <div className="footer-top__title">

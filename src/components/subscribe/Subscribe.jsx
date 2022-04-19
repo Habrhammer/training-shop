@@ -18,24 +18,16 @@ const Subscribe = ({ subscribeFormId }) => {
   let form = useRef();
 
   useEffect(() => {
-    if(data?.status >= 200 &&
-      data?.status < 400 ){
-        form.current.setValues({ email: "" });
-        dispatch({
-          type: "POST_FORM_FAILED",
-          error: false,
-          formId: formId,
-          loading: false
-        })
+    if (data?.status >= 200 && data?.status < 400) {
+      form.current.setValues({ subscribeEmail: "" });
+      dispatch({
+        type: "POST_FORM_FAILED",
+        error: false,
+        formId: formId,
+        loading: false,
+      });
     }
-    // data?.status >= 200 &&
-    //   data?.status < 400 &&
-    //   form.current.setValues({ email: "" });
-    //   dispatch({
-    //     type: "POST_FORM_FAILED",
-    //     error: false,
-    //   })
-  }, [data?.status,dispatch,formId]);
+  }, [data?.status, dispatch, formId]);
 
   return (
     <section className="subscribe">
@@ -49,10 +41,10 @@ const Subscribe = ({ subscribeFormId }) => {
           <Formik
             innerRef={form}
             initialValues={{
-              email: "",
+              subscribeEmail: "",
             }}
             validationSchema={Yup.object({
-              email: Yup.string().matches(
+              subscribeEmail: Yup.string().matches(
                 /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/,
                 "Неверный адрес электронной почты"
               ),
@@ -63,12 +55,11 @@ const Subscribe = ({ subscribeFormId }) => {
                 data: values,
                 formId: subscribeFormId,
               });
-              // actions.resetForm()
             }}
           >
             {(formik) => (
               <Form ref={form} className="subscribe__form subscribe-form">
-                <Field name="email" type="text">
+                <Field name="subscribeEmail" type="text">
                   {({ field, meta }) => (
                     <>
                       <input
@@ -100,25 +91,16 @@ const Subscribe = ({ subscribeFormId }) => {
                   {loading && formik.isSubmitting && <SubscribeLoader />}
                   Subcribe
                 </button>
-                {console.log(data?.status)}
-                {/* {formId === subscribeFormId &&
-                  data?.status &&
-                  (data?.status >= 200 && data?.status < 400 ? (
-                    <div className="subscribe-form__success">
-                      Данные успешно отправлены!
-                    </div>
-                  ) : (
-                    <div className="subscribe-form__error-request">
-                      Ошибка отправки данных!
-                    </div>
-                  ))} */}
+
                 {formId === subscribeFormId &&
                   (data?.status || !error ? (
-                  data?.status >= 200 && data?.status < 400 && (
-                    <div className="subscribe-form__success">
-                      Данные успешно отправлены!
-                    </div>
-                  )) : (
+                    data?.status >= 200 &&
+                    data?.status < 400 && (
+                      <div className="subscribe-form__success">
+                        Данные успешно отправлены!
+                      </div>
+                    )
+                  ) : (
                     <div className="subscribe-form__error-request">
                       Ошибка отправки данных!
                     </div>

@@ -24,7 +24,7 @@ export const productsReducer = (state = initialState, action) => {
         ...state,
         products: action.products,
         isLoading: false,
-        isError: null
+        isError: null,
       };
     }
     case SET_ERROR: {
@@ -40,30 +40,18 @@ export const productsReducer = (state = initialState, action) => {
   }
 };
 
-export const setProducts = (products) => {
-  return {
-    type: SET_PRODUCTS,
-    products,
-  };
-};
+export const setProducts = (products) => ({
+  type: SET_PRODUCTS,
+  products,
+});
 
-export const toggleIsLoading = () => {
-  return {
-    type: TOGGLE_IS_LOADING,
-  };
-};
+export const toggleIsLoading = () => ({
+  type: TOGGLE_IS_LOADING,
+});
 
-export const setError = (error) => {
-  return {
-    type: SET_ERROR,
-    payload: error
-  };
-};
+export const setError = (error) => ({
+  type: SET_ERROR,
+  payload: error,
+});
 
-
-
-export const requestProducts = () => {
-  return toggleIsLoading();
-};
-
-
+export const requestProducts = () => toggleIsLoading();
